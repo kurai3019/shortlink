@@ -5,7 +5,15 @@
  */
 package com.shortlink.controllers;
 
+import com.shortlink.DAO.loginDAO;
+import com.shortlink.entities.Users;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -14,5 +22,32 @@ import org.springframework.stereotype.Controller;
 @Controller
 
 public class LoginController {
-    
+
+    @Autowired
+    loginDAO loginDAO;
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String addLink(@RequestParam("username") String username,
+            @RequestParam("password") String password,
+            HttpSession session,
+            ModelMap map) {
+        Users user = loginDAO.login(username, password);
+        if (user != null) {
+            session.setAttribute("username", user.getUserCode());
+            session.setAttribute("role", user.getRoleId());
+
+            return "shortLink";
+        } else {
+            map.addAttribute("error", "Sai tên tài khoản hoặc mật khẩu");
+            return "shortLink";
+        }
+
+    }
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+	public String logout(HttpSession session, ModelMap map) {
+		session.removeAttribute("username");
+                map.addAttribute("error", "Logout thành công");
+
+		return "shortLink";
+	}
 }
