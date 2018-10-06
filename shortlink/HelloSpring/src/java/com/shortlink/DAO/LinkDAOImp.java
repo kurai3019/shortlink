@@ -83,6 +83,30 @@ public class LinkDAOImp implements LinkDAO{
             e.printStackTrace();
         }
         return null;
+    };
+
+    @Override
+    public Boolean checkRandomKey(String RandomKey) {
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "select Link_Code from link where link_code = '"+RandomKey+"'";
+            
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            String link=null;
+            while(rs.next()){
+            return true;
+
+            }
+            return false;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
+
         
 }

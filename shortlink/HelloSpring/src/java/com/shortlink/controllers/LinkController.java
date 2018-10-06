@@ -28,7 +28,7 @@ public class LinkController {
 
 
     private static final Random random = new Random();
-private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890";
+    private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890";
 
 
 
@@ -45,6 +45,13 @@ private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRS
     }
     
         String tokenstring = token.toString();
+        boolean already = linkDAO.checkRandomKey(tokenstring);
+        if (already == true){
+               map.addAttribute("link","Hệ thống bị lỗi, bạn vui lòng rút gọn lại link");        
+
+                return "shortLink";
+
+        };
         linkDAO.getLink(url,tokenstring);
         map.addAttribute("link","Link của bạn:<a href="+"http://localhost:8084/"+ tokenstring+">http://localhost:8084/"+tokenstring+"</a>");        
         return "shortLink";
