@@ -58,6 +58,7 @@ private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRS
         if (link == null ){
         return "404";
         }
+        linkDAO.AddView(URL);
         map.addAttribute("link", link);        
         return "link";
     }     
