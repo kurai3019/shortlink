@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class DefaultController {
+public class LinkController {
     @Autowired
     LinkDAO linkDAO;
     
