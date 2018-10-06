@@ -37,12 +37,13 @@ public class loginDAOImp implements loginDAO{
             List<Users> result = new ArrayList<Users>();
 
             while(rs.next()){
+                int userid= rs.getInt("user_id");
                String usercode= rs.getString("user_code");
                String name=rs.getString("user_Name");
                String fullname=rs.getString("user_fullname");
                String mail=rs.getString("email");
                int role=rs.getInt("role_id");
-                Users user = new Users(usercode,name,fullname,mail,role);
+                Users user = new Users(userid,usercode,name,fullname,mail,role);
                 result.add(user);
                 
             }

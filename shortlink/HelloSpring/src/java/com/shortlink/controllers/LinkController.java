@@ -4,6 +4,7 @@ import com.shortlink.DAO.LinkDAO;
 import static java.lang.Math.random;
 import static java.lang.StrictMath.random;
 import java.util.Random;
+import javax.servlet.http.HttpSession;
 import static jdk.nashorn.internal.objects.NativeMath.random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class LinkController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addLink(@RequestParam(value = "url", required = false) String url,
-            ModelMap map) {
+            ModelMap map, HttpSession session) {
 
         StringBuilder token = new StringBuilder(5);
         for (int i = 0; i < 5; i++) {
@@ -45,7 +46,15 @@ public class LinkController {
             return "shortLink";
 
         };
-        linkDAO.getLink(url, tokenstring);
+        if(session.getAttribute("userid") == null){
+        linkDAO.getLink(url, tokenstring,null);
+        map.addAttribute("link", "Link của bạn:<a href=" + "http://localhost:8084/" + tokenstring + ">http://localhost:8084/" + tokenstring + "</a>");
+        return "shortLink";
+
+        }
+        String userid=session.getAttribute("userid").toString();
+        linkDAO.getLink(url, tokenstring,userid);
+
         map.addAttribute("link", "Link của bạn:<a href=" + "http://localhost:8084/" + tokenstring + ">http://localhost:8084/" + tokenstring + "</a>");
         return "shortLink";
     }

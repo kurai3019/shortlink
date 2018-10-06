@@ -10,7 +10,7 @@ package com.shortlink.DAO;
  * @author Administrator
  */
 public interface LinkDAO {
-    String getLink(String url,String randomkey);
+    String getLink(String url,String randomkey,String user);
     String loadURL(String URLa);
     String AddView(String URLa);
     Boolean checkRandomKey(String RandomKey);

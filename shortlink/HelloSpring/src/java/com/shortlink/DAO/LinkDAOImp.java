@@ -20,15 +20,16 @@ import org.springframework.stereotype.Repository;
 public class LinkDAOImp implements LinkDAO{
 
     @Override
-    public String getLink(String urla,String randomkey) {
+    public String getLink(String urla,String randomkey,String user) {
                 try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
             Connection con = DriverManager.getConnection(url, "sa", "123");
-            String sql = "insert into Link(Link_URL,Link_Code,Create_Date,Status,isCustomLink,Link_View) values(?,?,GetDate(),1,0,0)";
+            String sql = "insert into Link(Link_URL,Link_Code,Create_Date,Status,isCustomLink,Link_View,Create_User) values(?,?,GetDate(),1,0,0,?)";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, urla);
             stm.setString(2, randomkey);
+            stm.setString(3, user);
 
             int rs = stm.executeUpdate();
 

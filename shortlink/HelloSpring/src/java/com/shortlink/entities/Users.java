@@ -22,7 +22,8 @@ public class Users {
     Date createDate;
     Boolean status;
 
-       public Users(String username, String name, String fullname,String mail,int role) {
+       public Users(Integer userid,String username, String name, String fullname,String mail,int role) {
+        this.userId = userid;
         this.userCode = username;
         this.username = name;
         this.fullname = fullname;

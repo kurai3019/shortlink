@@ -35,6 +35,7 @@ public class LoginController {
         if (user != null) {
             session.setAttribute("username", user.getUserCode());
             session.setAttribute("role", user.getRoleId());
+            session.setAttribute("userid", user.getUserId());
 
             return "shortLink";
         } else {
@@ -46,6 +47,9 @@ public class LoginController {
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout(HttpSession session, ModelMap map) {
 		session.removeAttribute("username");
+                session.removeAttribute("role");
+		session.removeAttribute("userid");
+
                 map.addAttribute("error", "Logout thành công");
 
 		return "shortLink";
