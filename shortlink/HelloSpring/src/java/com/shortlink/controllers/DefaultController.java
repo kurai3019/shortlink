@@ -46,7 +46,7 @@ private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRS
     
         String tokenstring = token.toString();
         linkDAO.getLink(url,tokenstring);
-        map.addAttribute("link","Link của bạn:<a href="+"http://localhost:8084/ShortLinkDemo/"+ tokenstring+">ShortLinkDemo/"+tokenstring+"</a>");        
+        map.addAttribute("link","Link của bạn:<a href="+"http://localhost:8084/"+ tokenstring+">http://localhost:8084/"+tokenstring+"</a>");        
         return "shortLink";
     }    
 
