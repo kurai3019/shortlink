@@ -26,27 +26,20 @@ public class LinkController {
         return "shortLink";
     }
 
-
     private static final Random random = new Random();
-private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890";
-
-
-
-
-
+    private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890";
 
     @RequestMapping(value="/add", method=RequestMethod.GET)
     public String addLink(@RequestParam(value="url", required=false) String url,
             ModelMap map) {
-
+    
     StringBuilder token = new StringBuilder(5);
     for (int i = 0; i < 5; i++) {
         token.append(CHARS.charAt(random.nextInt(CHARS.length())));
     }
-    
         String tokenstring = token.toString();
         linkDAO.getLink(url,tokenstring);
-        map.addAttribute("link","Link của bạn:<a href="+"http://localhost:8084/"+ tokenstring+">http://localhost:8084/"+tokenstring+"</a>");        
+        map.addAttribute("link","<div id='link_bien_div'>Link của bạn:<a id='link_bien_a' href="+"http://localhost:8084/"+ tokenstring+">http://localhost:8084/"+tokenstring+"</a></div>");        
         return "shortLink";
     }    
 
