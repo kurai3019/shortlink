@@ -5,7 +5,9 @@
  */
 package com.shortlink.DAO;
 
+import com.shortlink.entities.Links;
 import com.shortlink.entities.Users;
+import java.util.List;
 
 /**
  *
@@ -14,4 +16,5 @@ import com.shortlink.entities.Users;
 public interface loginDAO {
 
     Users login(String username,String password);
+    List<Links> linkHistory(String username);
 }

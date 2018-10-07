@@ -6,7 +6,10 @@
 package com.shortlink.controllers;
 
 import com.shortlink.DAO.loginDAO;
+import com.shortlink.entities.Links;
 import com.shortlink.entities.Users;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +39,9 @@ public class LoginController {
             session.setAttribute("username", user.getUserCode());
             session.setAttribute("role", user.getRoleId());
             session.setAttribute("userid", user.getUserId());
+            session.setAttribute("fullname", user.getFullname());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("createdate", user.getStringDate());
 
             return "shortLink";
         } else {
@@ -49,9 +55,30 @@ public class LoginController {
 		session.removeAttribute("username");
                 session.removeAttribute("role");
 		session.removeAttribute("userid");
+		session.removeAttribute("email");
+		session.removeAttribute("fullname");
+		session.removeAttribute("createdate");
 
                 map.addAttribute("error", "Logout thành công");
 
 		return "shortLink";
 	}
+        @RequestMapping(value = "myprolife", method = RequestMethod.GET)
+	public String myprolife(HttpSession session, ModelMap map) {
+
+
+		return "myProlife";
+	}
+ 
+                @RequestMapping(value = "gethistory", method = RequestMethod.GET)
+	public String gethistory(HttpSession session, ModelMap map) {
+         String userid=session.getAttribute("userid").toString();
+        List<Links> list = loginDAO.linkHistory(userid);
+        map.addAttribute("listHistory", list);
+
+		return "history";
+	}
+        
+        
+
 }

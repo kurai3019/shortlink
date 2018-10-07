@@ -80,9 +80,9 @@
                
                     </form>
 <% } else {%>
-Welcome ${sessionScope.username }<br>
-                                <a href="${pageContext.request.contextPath }/logout">Thông tin cá nhân</a><br>
-                                <a href="${pageContext.request.contextPath }/logout">Lịch sử get Link</a><br>
+Welcome ${sessionScope.username}<br>
+                                <a href="${pageContext.request.contextPath }/myprolife">Thông tin cá nhân</a><br>
+                                <a href="${pageContext.request.contextPath }/gethistory">Lịch sử get Link</a><br>
                                 <%  if(session.getAttribute("role").equals(3)) {%>
                                
                                 <a href="${pageContext.request.contextPath }/logout">Tạo link</a><br>

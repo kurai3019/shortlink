@@ -20,17 +20,28 @@ public class Users {
     String password;
     Integer roleId;
     Date createDate;
+    String stringDate;
     Boolean status;
 
-       public Users(Integer userid,String username, String name, String fullname,String mail,int role) {
+       public Users(Integer userid,String username, String name, String fullname,String mail,int role,String stringDate) {
         this.userId = userid;
         this.userCode = username;
         this.username = name;
         this.fullname = fullname;
         this.email = mail;
         this.roleId = role;
+        this.stringDate = stringDate;
 
     }
+
+    public String getStringDate() {
+        return stringDate;
+    }
+
+    public void setStringDate(String stringDate) {
+        this.stringDate = stringDate;
+    }
+       
     public Integer getUserId() {
         return userId;
     }
