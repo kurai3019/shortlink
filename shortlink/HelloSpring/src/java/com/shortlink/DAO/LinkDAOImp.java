@@ -68,7 +68,7 @@ public class LinkDAOImp implements LinkDAO{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
             Connection con = DriverManager.getConnection(url, "sa", "123");
-            String sql = "select Link_URL from link where link_code = '"+URLa+"'";
+            String sql = "update Link set Link_View=Link_View + 1 where Link_Code = '"+URLa+"'";
             
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);

@@ -12,6 +12,7 @@ package com.shortlink.DAO;
 public interface LinkDAO {
     String getLink(String url,String randomkey);
     String loadURL(String URLa);
+    String AddView(String URLa);
 
     
 }
