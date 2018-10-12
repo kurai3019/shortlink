@@ -55,9 +55,17 @@ private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRS
             ModelMap map) {
         
         String link = linkDAO.loadURL(URL);
+        if (link == null ){
+        return "404";
+        }
         map.addAttribute("link", link);        
         return "link";
     }     
-
+    
+    
+    @RequestMapping(value="/admin/shorturlpage", method=RequestMethod.GET)
+    public String getAllShortLink() {
+        return "/admin/ShortURLpage";
+    }   
     
 }
