@@ -6,13 +6,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome to Spring Web MVC project</title>
-            <script type="text/javascript">
-    function load()
-    {
-    window.location.href = "${link}";
+        <script type="text/javascript">
+            function load()
+            {
+                window.location.href = "${link}";
 
-    }
-    </script>
+            }
+        </script>
     </head>
 
     <body onload="load()">

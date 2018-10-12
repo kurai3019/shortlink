@@ -4,10 +4,9 @@
 
 <html>
     <head>
-        
+
     </head>
-
-Lỗi 404 - Không tìm thấy trang
-
+    <body>
+        Lỗi 404 - Không tìm thấy trang
     </body>
 </html>

@@ -16,6 +16,8 @@
         Tên tài khoản:${sessionScope.username} <br>
         Email:${sessionScope.email}             <br>
         Tên đầy đủ:${sessionScope.fullname}     <br>
-        Quyền:<%  if(session.getAttribute("role").equals(3)) {%> Thành viên vip <%}  if(session.getAttribute("role").equals(1)) {%> Admin <%}  if(session.getAttribute("role").equals(2)) {%> Thành viên  <%} %> <br>
+        Quyền:<%  if (session.getAttribute("role").equals(3)) {%> Thành viên vip <%}
+            if (session.getAttribute("role").equals(1)) {%> Admin <%}
+            if (session.getAttribute("role").equals(2)) {%> Thành viên  <%}%> <br>
         Ngày tạo:${sessionScope.createdate}    <br>  </body>
 </html>

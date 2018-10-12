@@ -15,28 +15,27 @@
     <body>
         <h1>Lịch sử rút gọn link</h1>
         Xin chào,${sessionScope.username}
-            <table border="1">
-        <tr>
-            <td>Link rút gọn</td>
-            <td>URL</td>
-            <td>Ngày tạo</td>
-             <td>Lượt xem</td>
-           
-     
-        </tr>
-            <c:forEach var="his" items="${listHistory}">
+        <table border="1">
             <tr>
-                <td>http://localhost:8084/${his.code}</td>
-                <td>${his.url}</td>
-                <td>${his.datestring}</td>
-                <td>${his.view}</td>
+                <td>Link rút gọn</td>
+                <td>URL</td>
+                <td>Ngày tạo</td>
+                <td>Lượt xem</td>
+
 
             </tr>
+            <c:forEach var="his" items="${listHistory}">
+                <tr>
+                    <td>http://localhost:8084/${his.code}</td>
+                    <td>${his.url}</td>
+                    <td>${his.datestring}</td>
+                    <td>${his.view}</td>
 
-        </c:forEach>    
+                </tr>
 
-                
-    </table>
-        
+            </c:forEach>    
+
+        </table>
+
     </body>
 </html>
