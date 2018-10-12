@@ -71,5 +71,10 @@ public class LinkController {
         map.addAttribute("link", link);
         return "link";
     }
-
+    
+    @RequestMapping(value="/admin/shorturlpage", method=RequestMethod.GET)
+    public String getAllShortLink() {
+        return "/admin/ShortURLpage";
+    }   
+    
 }

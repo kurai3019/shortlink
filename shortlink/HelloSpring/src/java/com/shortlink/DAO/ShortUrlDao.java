@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.shortlink.controllers;
+package com.shortlink.DAO;
 
-import org.springframework.stereotype.Controller;
+import com.shortlink.model.shortlLink;
+import java.util.List;
 
 /**
  *
- * @author Administrator
+ * @author dell
  */
-@Controller
-public class StaffController {
+public interface ShortUrlDao {
+    
+    List<shortlLink> getListLink(String search);
     
 }
