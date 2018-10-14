@@ -36,7 +36,7 @@ public class LoginController {
             ModelMap map) {
         Users user = loginDAO.login(username, password);
         if (user != null) {
-            session.setAttribute("username", user.getUserCode());
+            session.setAttribute("username", user.getUsername());
             session.setAttribute("role", user.getRoleId());
             session.setAttribute("userid", user.getUserId());
             session.setAttribute("fullname", user.getFullname());

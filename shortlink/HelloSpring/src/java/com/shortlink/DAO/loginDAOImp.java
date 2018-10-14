@@ -34,7 +34,7 @@ public class loginDAOImp implements loginDAO{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
             Connection con = DriverManager.getConnection(url, "sa", "123");
-            String sql = "select * from Users where User_code='"+username+"' and User_PassWord='"+password+"' and status=1";
+            String sql = "select * from Users where User_Name = '"+username+"' and User_PassWord='"+password+"' and status=1";
             
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
@@ -44,7 +44,6 @@ public class loginDAOImp implements loginDAO{
 
             while(rs.next()){
                 int userid= rs.getInt("user_id");
-               String usercode= rs.getString("user_code");
                String name=rs.getString("user_Name");
                String fullname=rs.getString("user_fullname");
                String mail=rs.getString("email");
@@ -55,7 +54,7 @@ public class loginDAOImp implements loginDAO{
                if (createdate != null){
                 s = formatter.format(createdate);
                }
-                Users user = new Users(userid,usercode,name,fullname,mail,role,s);
+                Users user = new Users(userid,name,fullname,mail,role,s);
                 result.add(user);
                 
             }

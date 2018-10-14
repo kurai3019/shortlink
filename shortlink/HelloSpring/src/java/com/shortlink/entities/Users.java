@@ -13,7 +13,6 @@ import java.sql.Date;
  */
 public class Users {
     Integer userId;
-    String userCode;
     String username;
     String email;
     String fullname;
@@ -23,10 +22,9 @@ public class Users {
     String stringDate;
     Boolean status;
 
-       public Users(Integer userid,String username, String name, String fullname,String mail,int role,String stringDate) {
+       public Users(Integer userid,String username, String fullname,String mail,int role,String stringDate) {
         this.userId = userid;
-        this.userCode = username;
-        this.username = name;
+        this.username = username;
         this.fullname = fullname;
         this.email = mail;
         this.roleId = role;
@@ -48,14 +46,6 @@ public class Users {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
     }
 
     public String getUsername() {
