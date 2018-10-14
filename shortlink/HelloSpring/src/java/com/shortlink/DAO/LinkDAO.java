@@ -14,6 +14,7 @@ public interface LinkDAO {
     String loadURL(String URLa);
     String AddView(String URLa);
     Boolean checkRandomKey(String RandomKey);
+    Boolean checkBackList(String urlCut);
 
     
 }

@@ -3,6 +3,8 @@ package com.shortlink.controllers;
 import com.shortlink.DAO.LinkDAO;
 import static java.lang.Math.random;
 import static java.lang.StrictMath.random;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Random;
 import javax.servlet.http.HttpSession;
 import static jdk.nashorn.internal.objects.NativeMath.random;
@@ -31,8 +33,16 @@ public class LinkController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addLink(@RequestParam(value = "url", required = false) String url,
-            ModelMap map, HttpSession session) {
+            ModelMap map, HttpSession session) throws URISyntaxException {
+       URI urlC = new URI(url);
+        String urlCut = urlC.getHost();
+        boolean checkURLBack = linkDAO.checkBackList(urlCut);
+        if (checkURLBack == true) {
+            map.addAttribute("link", "Host này phải bị chặn");
 
+            return "shortLink";
+
+        };
         StringBuilder token = new StringBuilder(5);
         for (int i = 0; i < 5; i++) {
             token.append(CHARS.charAt(random.nextInt(CHARS.length())));

@@ -108,6 +108,29 @@ public class LinkDAOImp implements LinkDAO{
         }
         return false;
     }
+    
+    @Override
+    public Boolean checkBackList(String urlCut) {
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "select URL from BlackList where URL = '"+urlCut+"'";
+            
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            String link=null;
+            while(rs.next()){
+            return true;
+
+            }
+            return false;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 
         
 }
