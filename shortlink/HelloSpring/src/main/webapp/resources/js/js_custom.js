@@ -6,11 +6,13 @@
             if (str == "") {
                 document.getElementById('ErrMer').innerHTML = "Vui lòng nhập URL";
                 $('#hideLink').empty();
+                $('#hideLink1').empty();
                 return false;
             } else if (!regex.test(str)) {
                 document.getElementById('ErrMer').innerHTML = "URL này không tồn tại";
                 document.getElementById('lba').innerHTML = str;
                 $('#hideLink').empty();
+                $('#hideLink1').empty();
                 return false;
             } else {
                 debugger;
