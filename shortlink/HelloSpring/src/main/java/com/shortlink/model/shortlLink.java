@@ -19,7 +19,7 @@ public class shortlLink {
     private boolean Status;
     private int Link_View;
     private String Link_Title;
-    private boolean isCustomLink;
+    private int Link_type;
 
     public shortlLink() {
     }
@@ -28,7 +28,7 @@ public class shortlLink {
         return Link_Code;
     }
 
-    public shortlLink(int Link_ID, String Link_Code, String Link_URL, String Create_Date, int Create_User, boolean Status, int Link_View, String Link_Title, boolean isCustomLink) {
+    public shortlLink(int Link_ID, String Link_Code, String Link_URL, String Create_Date, int Create_User, boolean Status, int Link_View, String Link_Title, int Link_type) {
         this.Link_ID = Link_ID;
         this.Link_Code = Link_Code;
         this.Link_URL = Link_URL;
@@ -37,8 +37,10 @@ public class shortlLink {
         this.Status = Status;
         this.Link_View = Link_View;
         this.Link_Title = Link_Title;
-        this.isCustomLink = isCustomLink;
+        this.Link_type = Link_type;
     }
+
+
 
     public void setLink_Code(String Link_Code) {
         this.Link_Code = Link_Code;
@@ -100,12 +102,14 @@ public class shortlLink {
         this.Link_Title = Link_Title;
     }
 
-    public boolean isIsCustomLink() {
-        return isCustomLink;
+    public int getLink_type() {
+        return Link_type;
     }
 
-    public void setIsCustomLink(boolean isCustomLink) {
-        this.isCustomLink = isCustomLink;
+    public void setLink_type(int Link_type) {
+        this.Link_type = Link_type;
     }
+
+
 
 }

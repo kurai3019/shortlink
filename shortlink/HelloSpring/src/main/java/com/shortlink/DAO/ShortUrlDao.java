@@ -14,6 +14,9 @@ import java.util.List;
  */
 public interface ShortUrlDao {
     
-    List<shortlLink> getListLink(String search);
+    List<shortlLink> getListLink(int search);
+    Boolean updateLink(shortlLink sl);
+    Boolean deleteLink(int Link_ID);
+    Boolean insertLink(shortlLink sl);
     
 }
