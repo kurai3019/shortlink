@@ -1,17 +1,28 @@
 package com.shortlink.controllers;
 
 import com.shortlink.DAO.LinkDAO;
+import com.shortlink.DAO.ShortUrlDaoimpl;
+import com.shortlink.model.shortlLink;
+import java.io.IOException;
+import static java.lang.Math.random;
+import static java.lang.StrictMath.random;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Random;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import static jdk.nashorn.internal.objects.NativeMath.random;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LinkController {
@@ -79,9 +90,32 @@ public class LinkController {
         return "link";
     }
 
-    @RequestMapping(value = "/admin/shorturlpage", method = RequestMethod.GET)
-    public String getAllShortLink() {
-        return "/admin/ShortURLpage";
+    @RequestMapping(value = "/admin/shorturlpage")
+    public void getAllShortLink(HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        response.setStatus(200);
+        response.getWriter().print("{'concho':1}");
+
+    }
+
+    @RequestMapping(value = "/admin/test")
+    public String test(HttpServletResponse response) throws IOException {
+        return "/admin/newjsp";
+
+    }
+
+    @RequestMapping(value = "/hello")
+    public @ResponseBody
+    shortlLink LinkController() {
+        ShortUrlDaoimpl a = new ShortUrlDaoimpl();
+        shortlLink a1 = a.getListLink(-1).get(0);
+        return a1;
+    }
+
+    @RequestMapping(value = "/view")
+    public String deleteAllUsers() {
+        return "/admin/testwebgetjson";
     }
 
 }
