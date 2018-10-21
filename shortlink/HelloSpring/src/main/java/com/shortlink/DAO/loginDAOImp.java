@@ -101,4 +101,51 @@ public class loginDAOImp implements loginDAO{
         }
         return null;        
     };
+
+    @Override
+    public boolean checkVipEx(String username) {
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "select * from Users \n" +
+            "where user_name='"+username+"' and Role_Id = 3  and Expiry_Date_Vip < GETDATE()";
+            
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+
+            while(rs.next()){
+                return true;
+
+                
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+                return false;
+    }
+
+    @Override
+    public boolean changeEX(String username) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "update Users \n" +
+                        "set Role_Id = 2\n" +
+                        "where user_name='"+username+"' and Role_Id = 3  and Expiry_Date_Vip < GETDATE()";
+            PreparedStatement stm = con.prepareStatement(sql);
+            if (stm.executeUpdate() > 0) {
+                return true;
+            }
+            stm.close();
+            con.close();
+        } catch (Exception e1) {
+            System.out.println(e1);
+            return true;
+        }
+        return true;  
+    }
 }
