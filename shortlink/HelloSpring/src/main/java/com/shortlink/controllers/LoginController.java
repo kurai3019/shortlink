@@ -36,6 +36,13 @@ public class LoginController {
             ModelMap map) {
         Users user = loginDAO.login(username, password);
         if (user != null) {
+            if(user.getRoleId() == 3){
+               boolean a = loginDAO.checkVipEx(user.getUsername());
+               if (a == true ){
+                   loginDAO.changeEX(user.getUsername());
+                   user.setRoleId(2);
+               }
+            }
             session.setAttribute("username", user.getUsername());
             session.setAttribute("role", user.getRoleId());
             session.setAttribute("userid", user.getUserId());
@@ -65,10 +72,17 @@ public class LoginController {
 	}
         @RequestMapping(value = "myprolife", method = RequestMethod.GET)
 	public String myprolife(HttpSession session, ModelMap map) {
+        if ((int) session.getAttribute("role") == 3) {
+            boolean a = loginDAO.checkVipEx((String) session.getAttribute("username"));
+            if (a == true) {
+                loginDAO.changeEX((String) session.getAttribute("username"));
+                session.setAttribute("role", 2);
 
+            }
+        }
 
-		return "myProlife";
-	}
+        return "myProlife";
+    }
  
                 @RequestMapping(value = "gethistory", method = RequestMethod.GET)
 	public String gethistory(HttpSession session, ModelMap map) {
@@ -76,6 +90,15 @@ public class LoginController {
         List<Links> list = loginDAO.linkHistory(userid);
         map.addAttribute("listHistory", list);
 
+                    if ((int) session.getAttribute("role") == 3) {
+                        boolean a = loginDAO.checkVipEx((String) session.getAttribute("username"));
+                        if (a == true) {
+                            loginDAO.changeEX((String) session.getAttribute("username"));
+                            session.setAttribute("role", 2);
+
+                        }
+                    }
+        
 		return "history";
 	}
         

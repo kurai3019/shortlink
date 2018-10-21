@@ -17,4 +17,8 @@ public interface loginDAO {
 
     Users login(String username,String password);
     List<Links> linkHistory(String username);
+    boolean checkVipEx(String username);
+    boolean changeEX (String username);
+
+
 }
