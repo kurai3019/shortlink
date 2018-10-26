@@ -99,12 +99,6 @@ public class LinkController {
 
     }
 
-    @RequestMapping(value = "/admin/test")
-    public String test(HttpServletResponse response) throws IOException {
-        return "/admin/newjsp";
-
-    }
-
     @RequestMapping(value = "/hello")
     public @ResponseBody
     shortlLink LinkController() {
