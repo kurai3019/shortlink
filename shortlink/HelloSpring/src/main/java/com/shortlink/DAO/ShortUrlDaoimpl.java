@@ -204,6 +204,29 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         return false;
     }
 
+    public Boolean expiryDateVip(shortlLink sLink) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "update Link set"
+                    + " Expiry_Date= ?"
+                    + " where Link_ID= ?";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, sLink.getExpiry_Date());
+            stm.setInt(2, sLink.getLink_ID());
+            if (stm.executeUpdate() > 0) {
+                return true;
+            }
+            stm.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        return false;
+    }
+
     @Override
     public Boolean createLinkVip(shortlLink sLink) {
         try {
@@ -212,13 +235,20 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
             Connection con = DriverManager.getConnection(url, "sa", "123");
             String sql = "insert into Link(Link_Code,"
                     + "Link_URL, Create_Date,"
-                    + "Create_User, Link_Type) values(?,?,?,?,?)";
+                    + "Create_User, Expiry_Date, Status"
+                    + " , Link_View, Link_Type) values(?,?,?,?,"
+                    + "( SELECT top 1 "
+                    + "      [Expiry_Date_Vip] "
+                    + "  FROM [ShortLink].[dbo].[Users] where User_id =" + sLink.getCreate_User() + ")"
+                    + ",?,?,?)";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, sLink.getLink_Code());
             stm.setString(2, sLink.getLink_URL());
             stm.setString(3, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
             stm.setInt(4, sLink.getCreate_User());
             stm.setInt(5, 1);
+            stm.setInt(6, 0);
+            stm.setInt(7, 1);
             if (stm.executeUpdate() > 0) {
                 return true;
             }

@@ -27,19 +27,20 @@
         <style>
             body{
 
-                background-color: #e8e8e8;
+                background-color: #ffa256;
             }table td,th {
                 word-break: break-all;
-            }.jsgrid-grid-header,
+            }
+            .jsgrid-grid-header,
             .jsgrid-grid-body{
                 overflow: auto;
             }
         </style>
     </head>
     <body>
-    <center><p style="margin:35px 0px 0px 0px;color:white;background-color: black;font-size:50px;
+    <center><p style="margin:35px 0px 0px 0px;color:black;background-color: #b24915;font-size:50px;
                font-family: Courier New, Courier, monospace">
-            Management Blacklist - Admin</p>
+            Management Giftcode - Admin</p>
         <div id="jsGrid"></div>
 
         <div id="jsGrid"></div></center>
@@ -47,26 +48,28 @@
     <script>
         $('document').ready(function () {
             var linklist = [];
-            $.getJSON('/getlistBlist', function (listBlist) {
+            $.getJSON('/getgiftcode', function (listUser) {
                 var db = {
                     loadData: function (filter) {
 
-                        return $.grep(listBlist, function (client) {
+                        return $.grep(listUser, function (client) {
                             return (!filter.id || client.id.indexOf(filter.id) > -1)
-                                    && (!filter.url || client.url.indexOf(filter.url) > -1)
-                                    && (filter.create_User === undefined || client.create_User === filter.create_User)
-                                    && (!filter.create_Date || client.create_Date.indexOf(filter.create_Date) > -1)
-                                    && (!filter.update_User || client.update_User.indexOf(filter.update_User) > -1)
-                                    && (!filter.update_Date || client.update_Date.indexOf(filter.update_Date) > -1)
-                                    && (filter.status === undefined || client.status === filter.status);
+                                    && (!filter.gift_Code || client.gift_Code.indexOf(filter.gift_Code) > -1)
+                                    && (!filter.gift_Name || client.gift_Name.indexOf(filter.gift_Name) > -1)
+                                    && (filter.gift_Status === undefined || client.gift_Status === filter.gift_Status)
+                                    && (filter.gift_Date_Vip === undefined || client.gift_Date_Vip === filter.gift_Date_Vip);
                         });
                     },
                     insertItem: function (insertingClient) {
                         $.ajax({
                             type: "GET",
-                            url: "/insertBlist",
+                            url: "/insertgiftcode",
                             dataType: 'json',
-                            data: insertingClient
+                            data: insertingClient,
+                            error: function () {
+                                location.reload();
+                                alert('Empty Role');
+                            }
                         }).done(function (data) {
                             location.reload();
                             alert(data.result);
@@ -75,7 +78,7 @@
                     updateItem: function (updatingClient) {
                         $.ajax({
                             type: "GET",
-                            url: "/updateBlist",
+                            url: "/updategiftcode",
                             dataType: 'json',
                             data: updatingClient
                         }).done(function (data) {
@@ -86,7 +89,7 @@
                     deleteItem: function (deletingClient) {
                         $.ajax({
                             type: "GET",
-                            url: "/deleteBlist",
+                            url: "/deletegiftcode",
                             dataType: 'json',
                             data: {id: deletingClient.id}
                         }).done(function (data) {
@@ -96,7 +99,7 @@
                     }//end delete
                 };
                 $("#jsGrid").jsGrid({
-                    height: "55%",
+                    height: "auto",
                     width: "90%",
                     filtering: true,
                     editing: true,
@@ -105,24 +108,23 @@
                     paging: true,
                     selecting: true,
                     autoload: true,
-                    pageSize: 6,
+                    pageSize: 5,
                     pageButtonCount: 5,
                     deleteConfirm: "Do you really want to delete the client?",
-                    data: listBlist,
+                    data: listUser,
                     controller: db,
                     fields: [
-                        {name: "id", width: 10, title: "ID"},
-                        {name: "url", type: "text", width: 30, title: "URL"},
-                        {name: "create_User", type: "number", width: 30, title: "User tạo"},
-                        {name: "create_Date", type: "text", width: 30, title: "Ngày tạo"},
-                        {name: "update_User", type: "text", width: 20, title: "User update"},
-                        {name: "update_Date", type: "text", width: 5, title: "Ngày update"},
-                        {name: "status", type: "number", width: 2, title: "Status"},
+                        {name: "id", width: 10, title: "Id"},
+                        {name: "gift_Code", type: "text", width: 100, title: "Code"},
+                        {name: "gift_Name", type: "text", width: 100, title: "Name"},
+                        {name: "gift_Status", type: "checkbox", width: 3, title: "Status"},
+                        {name: "gift_Date_Vip", type: "number", width: 30, title: "Vip date"},
                         {type: "control", width: 10}
                     ]
                 });
             });
-        });
+        }
+        );
     </script>
 </body>
 </html>

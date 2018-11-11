@@ -17,7 +17,10 @@
             table td,th {
                 word-break: break-all;
             }
-
+            .jsgrid-grid-header,
+            .jsgrid-grid-body{
+                overflow: auto;
+            }
             :focus{outline: none;}
             /* Full-width input fields 
              border: 1px solid #a67c00;
@@ -271,7 +274,7 @@
                     <tr>
                         <td><img height="50" width="50" class="avatar" src="../../../resources/images/vip.jpg">
                             <a href="${rs.rows[0].Link_URL}" target="_blank">${rs.rows[0].Link_Code}</a></td>
-                        <td><a href="${rs.rows[0].Link_URL}" target="_blank">${rs.rows[0].Link_URL}</a></td>
+                        <td style="max-width: 800px;"><a href="${rs.rows[0].Link_URL}" target="_blank">${rs.rows[0].Link_URL}</a></td>
                         <td>
 
                             <button class="btn-4" onclick="VIPformChange()">Change</button>

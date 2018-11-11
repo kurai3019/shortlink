@@ -27,7 +27,7 @@
         <style>
             body{
 
-                background-color: #e8e8e8;
+                background-color: #c7ffaa;
             }table td,th {
                 word-break: break-all;
             }.jsgrid-grid-header,
@@ -37,9 +37,9 @@
         </style>
     </head>
     <body>
-    <center><p style="margin:35px 0px 0px 0px;color:white;background-color: black;font-size:50px;
+    <center><p style="margin:35px 0px 0px 0px;color:black;background-color: #9fce71;font-size:50px;
                font-family: Courier New, Courier, monospace">
-            Management Blacklist - Admin</p>
+            Management Config - Admin</p>
         <div id="jsGrid"></div>
 
         <div id="jsGrid"></div></center>
@@ -47,26 +47,26 @@
     <script>
         $('document').ready(function () {
             var linklist = [];
-            $.getJSON('/getlistBlist', function (listBlist) {
+            $.getJSON('/getconfig', function (listUser) {
                 var db = {
                     loadData: function (filter) {
 
-                        return $.grep(listBlist, function (client) {
+                        return $.grep(listUser, function (client) {
                             return (!filter.id || client.id.indexOf(filter.id) > -1)
-                                    && (!filter.url || client.url.indexOf(filter.url) > -1)
-                                    && (filter.create_User === undefined || client.create_User === filter.create_User)
-                                    && (!filter.create_Date || client.create_Date.indexOf(filter.create_Date) > -1)
-                                    && (!filter.update_User || client.update_User.indexOf(filter.update_User) > -1)
-                                    && (!filter.update_Date || client.update_Date.indexOf(filter.update_Date) > -1)
-                                    && (filter.status === undefined || client.status === filter.status);
+                                    && (!filter.config_Name || client.config_Name.indexOf(filter.config_Name) > -1)
+                                    && (filter.value === undefined || client.value === filter.value);
                         });
                     },
                     insertItem: function (insertingClient) {
                         $.ajax({
                             type: "GET",
-                            url: "/insertBlist",
+                            url: "/insertconfig",
                             dataType: 'json',
-                            data: insertingClient
+                            data: insertingClient,
+                            error: function () {
+                                location.reload();
+                                alert('Empty Role');
+                            }
                         }).done(function (data) {
                             location.reload();
                             alert(data.result);
@@ -75,7 +75,7 @@
                     updateItem: function (updatingClient) {
                         $.ajax({
                             type: "GET",
-                            url: "/updateBlist",
+                            url: "/updateconfig",
                             dataType: 'json',
                             data: updatingClient
                         }).done(function (data) {
@@ -86,7 +86,7 @@
                     deleteItem: function (deletingClient) {
                         $.ajax({
                             type: "GET",
-                            url: "/deleteBlist",
+                            url: "/deleteconfig",
                             dataType: 'json',
                             data: {id: deletingClient.id}
                         }).done(function (data) {
@@ -108,21 +108,18 @@
                     pageSize: 6,
                     pageButtonCount: 5,
                     deleteConfirm: "Do you really want to delete the client?",
-                    data: listBlist,
+                    data: listUser,
                     controller: db,
                     fields: [
-                        {name: "id", width: 10, title: "ID"},
-                        {name: "url", type: "text", width: 30, title: "URL"},
-                        {name: "create_User", type: "number", width: 30, title: "User tạo"},
-                        {name: "create_Date", type: "text", width: 30, title: "Ngày tạo"},
-                        {name: "update_User", type: "text", width: 20, title: "User update"},
-                        {name: "update_Date", type: "text", width: 5, title: "Ngày update"},
-                        {name: "status", type: "number", width: 2, title: "Status"},
+                        {name: "id", width: 10, title: "Mã ID"},
+                        {name: "config_Name", type: "text", width: 100, title: "Tên"},
+                        {name: "value", type: "number", width: 30, title: "Value"},
                         {type: "control", width: 10}
                     ]
                 });
             });
-        });
+        }
+        );
     </script>
 </body>
 </html>

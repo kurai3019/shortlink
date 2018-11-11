@@ -30,6 +30,9 @@
                 background-color: #eaf5ff;
             }table td,th {
                 word-break: break-all;
+            }.jsgrid-grid-header,
+            .jsgrid-grid-body{
+                overflow: auto;
             }
         </style>
     </head>
