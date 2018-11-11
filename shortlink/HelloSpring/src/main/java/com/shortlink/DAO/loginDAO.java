@@ -19,6 +19,13 @@ public interface loginDAO {
     List<Links> linkHistory(String username);
     boolean checkVipEx(String username);
     boolean changeEX (String username);
+    
+    String insertLoginByGoogle(String email, String userName, String userFullName);
+    boolean checkLoginByGoogle(String email);
+    Users loginByGoogle(String email);
+    
+    String insertRegisterByMaual(String userNameRegister, String userPassWordRegister, String userFullNameRegister, String emailRegister);
+    boolean checkRegisterByMaual(String userNameRegister, String userFullNameRegister,String emailRegister);
 
-
+    
 }
