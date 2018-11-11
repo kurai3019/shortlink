@@ -11,7 +11,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,26 +28,26 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
     public List<shortlLink> getListLink(int search) {
         String sql = "select * from Link";
         if (search != -1) {
-            sql += " where Link_ID= " + search;
+            sql += " where Link_ID=" + search;
         }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
             Connection con = DriverManager.getConnection(url, "sa", "123");
-            // + " or Link_ID =?"
-            // + " or Link_Code = 
-            // + " or Link_URL =?"
-            // + " or Create_Date=?"
-            // + " or Create_User=?"
-            // + " or Status=?"
-            // + " or Link_View=?"
-            // + " or Link_Title=?"
-            // + " or isCustomLink=?"
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                shortlLink std = new shortlLink(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getBoolean(6), rs.getInt(7), rs.getString(8), rs.getInt(9));
-                list.add(std);
+                list.add(new shortlLink(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getBoolean(7),
+                        rs.getInt(8),
+                        rs.getString(9),
+                        rs.getInt(10)));
             }
             stmt.close();
             con.close();
@@ -59,29 +61,31 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
     @Override
     public Boolean updateLink(shortlLink sLink) {
 
-        if (getListLink(sLink.getLink_ID()) == null) {
-            return false;
-        }
-
+        //if (getListLink(sLink.getLink_ID()) == null) {
+        //    return false;
+        //}
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
             Connection con = DriverManager.getConnection(url, "sa", "123");
-            String sql = "update Link set Link_Code= ?,"
-                    + "Link_URL= ?, Create_Date=?,"
-                    + "Create_User=?, Status=?, Link_View=?,"
-                    + "Link_Title=?, Link_Type=? "
-                    + "where Link_ID= ?";
+            String sql = "update Link set"
+                    + " Link_Code= ?,"
+                    + " Link_URL= ?, Create_Date=?,"
+                    + " Create_User=?, Expiry_Date=?,"
+                    + " Status=?, Link_View=?,"
+                    + " Link_Title=?, Link_Type=? "
+                    + " where Link_ID= ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, sLink.getLink_Code());
             stm.setString(2, sLink.getLink_URL());
             stm.setString(3, sLink.getCreate_Date());
             stm.setInt(4, sLink.getCreate_User());
-            stm.setBoolean(5, sLink.isStatus());
-            stm.setInt(6, sLink.getLink_View());
-            stm.setString(7, sLink.getLink_Title());
-            stm.setInt(8, sLink.getLink_type());
-            stm.setInt(9, sLink.getLink_ID());
+            stm.setString(5, sLink.getExpiry_Date());
+            stm.setInt(6, sLink.isStatus() ? 1 : 0);
+            stm.setInt(7, sLink.getLink_View());
+            stm.setString(8, sLink.getLink_Title());
+            stm.setInt(9, sLink.getLink_type());
+            stm.setInt(10, sLink.getLink_ID());
             if (stm.executeUpdate() > 0) {
                 return true;
             }
@@ -126,17 +130,95 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
             Connection con = DriverManager.getConnection(url, "sa", "123");
             String sql = "insert into Link(Link_Code,"
                     + "Link_URL, Create_Date,"
-                    + "Create_User, Status, Link_View,"
-                    + "Link_Title, Link_Type) values(?,?,?,?,?,?,?,?)";
+                    + "Create_User,Expiry_Date,Status, Link_View,"
+                    + "Link_Title, Link_Type) values(?,?,?,?,?,?,?,?,?)";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, sLink.getLink_Code());
             stm.setString(2, sLink.getLink_URL());
             stm.setString(3, sLink.getCreate_Date());
             stm.setInt(4, sLink.getCreate_User());
-            stm.setBoolean(5, sLink.isStatus());
-            stm.setInt(6, sLink.getLink_View());
-            stm.setString(7, sLink.getLink_Title());
-            stm.setInt(8, sLink.getLink_type());
+            stm.setString(5, sLink.getExpiry_Date());
+            stm.setInt(6, sLink.isStatus() ? 1 : 0);
+            stm.setInt(7, sLink.getLink_View());
+            stm.setString(8, sLink.getLink_Title());
+            stm.setInt(9, sLink.getLink_type());
+            if (stm.executeUpdate() > 0) {
+                return true;
+            }
+            stm.close();
+            con.close();
+        } catch (Exception e1) {
+            System.out.println(e1);
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public shortlLink getlinkVIP(int linkType, int createUser) {
+        String sql = "select Link_ID, Link_Code, Link_URL"
+                + " from Link where Link_Type=" + linkType + " and Create_User=" + createUser;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                return new shortlLink(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3));
+            }
+            stmt.close();
+            con.close();
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Boolean changeLinkVip(shortlLink sLink) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "update Link set"
+                    + " Link_Code= ?,"
+                    + " Link_URL= ? "
+                    + " where Link_ID= ?";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, sLink.getLink_Code());
+            stm.setString(2, sLink.getLink_URL());
+            stm.setInt(3, sLink.getLink_ID());
+            if (stm.executeUpdate() > 0) {
+                return true;
+            }
+            stm.close();
+            con.close();
+        } catch (Exception e1) {
+            System.out.println(e1);
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean createLinkVip(shortlLink sLink) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "insert into Link(Link_Code,"
+                    + "Link_URL, Create_Date,"
+                    + "Create_User, Link_Type) values(?,?,?,?,?)";
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, sLink.getLink_Code());
+            stm.setString(2, sLink.getLink_URL());
+            stm.setString(3, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+            stm.setInt(4, sLink.getCreate_User());
+            stm.setInt(5, 1);
             if (stm.executeUpdate() > 0) {
                 return true;
             }

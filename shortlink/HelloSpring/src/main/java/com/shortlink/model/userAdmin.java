@@ -9,8 +9,7 @@ package com.shortlink.model;
  *
  * @author dell
  */
-public class User {
-
+public class userAdmin {
     private int User_id;
     private String User_Name;
     private String Email;
@@ -21,20 +20,21 @@ public class User {
     private boolean Status;
     private String Expiry_Date_Vip;
 
-    public User() {
+    public userAdmin() {
     }
 
-    public User(String User_Name, String Email, String User_FullName, String User_PassWord, String Create_Date, boolean Status, String Expiry_Date_Vip) {
+    public userAdmin(String User_Name, String Email, String User_FullName, String User_PassWord, int Role_Id, String Create_Date, boolean Status, String Expiry_Date_Vip) {
         this.User_Name = User_Name;
         this.Email = Email;
         this.User_FullName = User_FullName;
         this.User_PassWord = User_PassWord;
+        this.Role_Id = Role_Id;
         this.Create_Date = Create_Date;
         this.Status = Status;
         this.Expiry_Date_Vip = Expiry_Date_Vip;
     }
 
-    public User(int User_id, String User_Name, String Email, String User_FullName, String User_PassWord, int Role_Id, String Create_Date, boolean Status, String Expiry_Date_Vip) {
+    public userAdmin(int User_id, String User_Name, String Email, String User_FullName, String User_PassWord, int Role_Id, String Create_Date, boolean Status, String Expiry_Date_Vip) {
         this.User_id = User_id;
         this.User_Name = User_Name;
         this.Email = Email;
@@ -118,4 +118,5 @@ public class User {
         this.Expiry_Date_Vip = Expiry_Date_Vip;
     }
 
-}//end class
+    
+}

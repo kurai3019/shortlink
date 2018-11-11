@@ -5,16 +5,20 @@
  */
 package com.shortlink.DAO;
 
-import com.shortlink.model.userAdmin;
+import com.shortlink.model.blackList;
 import java.util.List;
 
 /**
  *
  * @author dell
  */
-public interface UserDAO {
-    List<userAdmin> getListUser(int id);
-    Boolean updateUser(userAdmin user);
-    Boolean deleteUser(int id);
-    Boolean insertUser(userAdmin user);
+public interface BlackListDAO {
+
+    List<blackList> getBlacklist(int bl);
+
+    Boolean updateBl(blackList bl);
+
+    Boolean deleteBl(int bl);
+
+    Boolean insertBl(blackList bl);
 }
