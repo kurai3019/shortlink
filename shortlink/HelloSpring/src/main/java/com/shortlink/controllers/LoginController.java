@@ -66,7 +66,7 @@ public class LoginController {
             return "shortLink";
         } else {
             map.addAttribute("error", "Sai tài khoản hoặc mật khẫu");
-            return "shortLink";
+            return "login";
         }
 
     }
@@ -76,9 +76,9 @@ public class LoginController {
             HttpSession session,
             ModelMap map) {
         if ((session.getAttribute("username")) != null && (session.getAttribute("email") != null)) {
-            return "history";
-        } else {
             return "shortLink";
+        } else {
+            return "login";
 
         }
     }
@@ -94,7 +94,7 @@ public class LoginController {
 
         map.addAttribute("error", "Logout Thành công");
 
-        return "shortLink";
+        return "login";
     }
 
     @RequestMapping(value = "myprolife", method = RequestMethod.GET)
@@ -173,7 +173,7 @@ public class LoginController {
                 return "shortLink";
             } else {
                 map.addAttribute("error", "Sai tài khoản hoặc mật khẫu");
-                return "shortLink";
+                return "login";
             }
 
         } else {

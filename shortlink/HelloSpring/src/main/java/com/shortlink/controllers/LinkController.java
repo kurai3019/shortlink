@@ -31,10 +31,14 @@ public class LinkController {
     LinkDAO linkDAO;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap map) {
+    public String index(ModelMap map,HttpSession session) {
         map.addAttribute("hello", "Hello Spring from Netbeans!!");
-        return "shortLink";
-    }
+        if ((session.getAttribute("username")) != null && (session.getAttribute("email") != null)) {
+            return "shortLink";
+        } else {
+            return "login";
+
+        }    }
 
     private static final Random random = new Random();
     private static final String CHARS = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890";
