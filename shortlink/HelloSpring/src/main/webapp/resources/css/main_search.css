@@ -462,7 +462,7 @@ legend {
   -ms-flex-align: center;
       align-items: center;
   font-family: 'Poppins', sans-serif;
-  background: url("../../resources/img/Search_001.png");
+  background: url("../../resources/img/page-background.png");
   background-size: cover;
   background-position: center center;
   padding: 15px;
@@ -481,20 +481,24 @@ legend {
 }
 
 .s01 form .inner-form {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 50px 47px;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  -ms-flex-pack: justify;
-      justify-content: space-between;
-  -ms-flex-align: center;
-      align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px 47px;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
 }
 
 .s01 form .inner-form .input-field {
   margin-right: 30px;
   height: 68px;
+  
 }
 
 .s01 form .inner-form .input-field input {
@@ -506,6 +510,9 @@ legend {
   width: 100%;
   padding: 10px 32px;
   font-size: 20px;
+  -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
 }
 
 .s01 form .inner-form .input-field input.placeholder {
