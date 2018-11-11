@@ -5,8 +5,7 @@
  */
 package com.shortlink.DAO;
 
-
-import com.shortlink.model.userAdmin;
+import com.shortlink.model.blackList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,16 +18,16 @@ import java.util.List;
  *
  * @author dell
  */
-public class UserDAOimpl implements UserDAO {
+public class BlackListDAOimpl implements BlackListDAO {
 
-    private List<userAdmin> list= new ArrayList();
+    private List<blackList> list = new ArrayList();
 
     @Override
-    public List<userAdmin> getListUser(int id) {
-        String sql = "select * from Users";
+    public List<blackList> getBlacklist(int bl) {
+        String sql = "select * from BlackList";
         //if (id != -1) {
-          //  sql += " where User_id ='" + id + "'";
-       // }
+        //  sql += " where ID ='" + bl + "'";
+        // }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
@@ -36,15 +35,13 @@ public class UserDAOimpl implements UserDAO {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                list.add(new userAdmin(rs.getInt(1),
+                list.add(new blackList(rs.getInt(1),
                         rs.getString(2),
-                        rs.getString(3),
+                        rs.getInt(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getInt(6),
-                        rs.getString(7),
-                        rs.getBoolean(8),
-                        rs.getString(9)
+                        rs.getString(6),
+                        rs.getInt(7)
                 ));
             }
             stmt.close();
@@ -57,36 +54,25 @@ public class UserDAOimpl implements UserDAO {
     }
 
     @Override
-    public Boolean updateUser(userAdmin user) {
-
-       // if (getListUser(user.getUser_id()) == null) {
-       //     return false;
-       // }
-
+    public Boolean updateBl(blackList bl) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
             Connection con = DriverManager.getConnection(url, "sa", "123");
-            String sql = "update Users set"
-                    + "      User_Name=?, "
-                    + "      Email=?, "
-                    + "      User_FullName=?, "
-                    + "      User_PassWord=?, "
-                    + "      Role_Id=?, "
-                    + "      Create_Date=?, "
-                    + "      Status=?, "
-                    + "      Expiry_Date_Vip=? "
-                    + "     where User_id = ?";
+            String sql = "update BlackList set"
+                    + " URL=?,"
+                    + " Create_User=?, Create_Date=?,"
+                    + " Update_User=?, Update_Date=?,"
+                    + " Status=?"
+                    + "     where ID = ?";
             PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(1, user.getUser_Name());
-            stm.setString(2, user.getEmail());
-            stm.setString(3, user.getUser_FullName());
-            stm.setString(4, user.getUser_PassWord());
-            stm.setInt(5, user.getRole_Id());
-            stm.setString(6, user.getCreate_Date());
-            stm.setInt(7, user.isStatus()?1:0);
-            stm.setString(8, user.getExpiry_Date_Vip());
-            stm.setInt(9, user.getUser_id());
+            stm.setString(1, bl.getURL());
+            stm.setInt(2, bl.getCreate_User());
+            stm.setString(3, bl.getCreate_Date());
+            stm.setString(4, bl.getUpdate_User());
+            stm.setString(5, bl.getUpdate_Date());
+            stm.setInt(6, bl.getStatus());
+            stm.setInt(7, bl.getID());
             if (stm.executeUpdate() > 0) {
                 return true;
             }
@@ -100,15 +86,12 @@ public class UserDAOimpl implements UserDAO {
     }
 
     @Override
-    public Boolean deleteUser(int id) {
-        //if (getListUser(id) == null) {
-       //     return false;
-       // }
+    public Boolean deleteBl(int bl) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
             Connection con = DriverManager.getConnection(url, "sa", "123");
-            String sql = "delete Users where User_id=" + id;
+            String sql = "delete BlackList where ID=" + bl;
             Statement stmt = con.createStatement();
 //            ResultSet rs = stmt.executeQuery(sql);
 //            PreparedStatement stm = con.prepareStatement(sql);
@@ -126,30 +109,23 @@ public class UserDAOimpl implements UserDAO {
     }
 
     @Override
-    public Boolean insertUser(userAdmin user) {
+    public Boolean insertBl(blackList bl) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
             Connection con = DriverManager.getConnection(url, "sa", "123");
-            String sql = "insert into Users("
-                    + "      User_Name,"
-                    + "      Email,"
-                    + "      User_FullName,"
-                    + "      User_PassWord,"
-                    + "      Role_Id,"
-                    + "      Create_Date,"
-                    + "      Status,"
-                    + "      Expiry_Date_Vip)"
-                    + "      values(?,?,?,?,?,?,?,?)";
+            String sql = "insert into BlackList("
+                    + "URL,"
+                    + "Create_User, Create_Date,"
+                    + "Update_User,Update_Date,"
+                    + "Status) values(?,?,?,?,?,?)";
             PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(1, user.getUser_Name());
-            stm.setString(2, user.getEmail());
-            stm.setString(3, user.getUser_FullName());
-            stm.setString(4, user.getUser_PassWord());
-            stm.setInt(5, user.getRole_Id());
-            stm.setString(6, user.getCreate_Date());
-            stm.setInt(7, user.isStatus()?1:0);
-            stm.setString(8, user.getExpiry_Date_Vip());
+            stm.setString(1, bl.getURL());
+            stm.setInt(2, bl.getCreate_User());
+            stm.setString(3, bl.getCreate_Date());
+            stm.setString(4, bl.getUpdate_User());
+            stm.setString(5, bl.getUpdate_Date());
+            stm.setInt(6, bl.getStatus());
             if (stm.executeUpdate() > 0) {
                 return true;
             }
@@ -161,4 +137,5 @@ public class UserDAOimpl implements UserDAO {
         }
         return false;
     }
+
 }

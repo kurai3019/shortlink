@@ -5,13 +5,14 @@
  */
 package com.shortlink.controllers;
 
+import com.shortlink.DAO.BlackListDAOimpl;
 import com.shortlink.DAO.ShortUrlDaoimpl;
 import com.shortlink.DAO.UserDAOimpl;
-import com.shortlink.model.User;
+import com.shortlink.model.blackList;
 import com.shortlink.model.shortlLink;
+import com.shortlink.model.userAdmin;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -33,42 +34,65 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/deleteshtLink")
-    public void deleteshtLink(@RequestParam(value = "link_ID") int deleteLink) {
-        new ShortUrlDaoimpl().deleteLink(deleteLink);
+    public void deleteshtLink(@RequestParam(value = "link_ID") int deleteLink,
+            HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        out.println("{\"result\":\"" + (new ShortUrlDaoimpl().deleteLink(deleteLink) ? "Done." : "Fail.") + "\"}");
     }
 
     @RequestMapping(value = "/insertshtLink")
     public void insertshtLink(
-            @RequestParam(value = "link_Code") String link_Code,
-            @RequestParam(value = "link_URL") String link_URL,
-            @RequestParam(value = "create_Date") String create_Date,
-            @RequestParam(value = "create_User") int create_User,
-            @RequestParam(value = "status") boolean status,
-            @RequestParam(value = "link_View") int link_View,
-            @RequestParam(value = "link_Title") String link_Title,
-            @RequestParam(value = "link_type") int link_type,
+            @RequestParam(value = "link_Code", required = false) String link_Code,
+            @RequestParam(value = "link_URL", required = false) String link_URL,
+            @RequestParam(value = "create_Date", required = false) String create_Date,
+            @RequestParam(value = "create_User", required = false) int create_User,
+            @RequestParam(value = "expiry_Date", required = false) String expiry_Date,
+            @RequestParam(value = "status", required = false) boolean status,
+            @RequestParam(value = "link_View", required = false) int link_View,
+            @RequestParam(value = "link_Title", required = false) String link_Title,
+            @RequestParam(value = "link_type", required = false) int link_type,
             HttpServletResponse response
-    ) {
-        new ShortUrlDaoimpl().insertLink(new shortlLink());
-
+    ) throws IOException {
+        PrintWriter out = response.getWriter();
+        out.println("{\"result\":\""
+                + (new ShortUrlDaoimpl().insertLink(new shortlLink(
+                        link_Code,
+                        link_URL,
+                        create_Date,
+                        create_User,
+                        expiry_Date,
+                        status,
+                        link_View,
+                        link_Title,
+                        link_type)) ? "Done." : "Fail.") + "\"}");
     }
 
     @RequestMapping(value = "/updateshtLink")
     public void updateshtLink(@RequestParam(value = "link_ID") int link_ID,
-            @RequestParam(value = "link_Code") String link_Code,
-            @RequestParam(value = "link_URL") String link_URL,
-            @RequestParam(value = "create_Date") String create_Date,
-            @RequestParam(value = "create_User") int create_User,
-            @RequestParam(value = "status") boolean status,
-            @RequestParam(value = "link_View") int link_View,
-            @RequestParam(value = "link_Title") String link_Title,
-            @RequestParam(value = "link_type") int link_type,
+            @RequestParam(value = "link_Code", required = false) String link_Code,
+            @RequestParam(value = "link_URL", required = false) String link_URL,
+            @RequestParam(value = "create_Date", required = false) String create_Date,
+            @RequestParam(value = "create_User", required = false) int create_User,
+            @RequestParam(value = "expiry_Date", required = false) String expiry_Date,
+            @RequestParam(value = "status", required = false) boolean status,
+            @RequestParam(value = "link_View", required = false) int link_View,
+            @RequestParam(value = "link_Title", required = false) String link_Title,
+            @RequestParam(value = "link_type", required = false) int link_type,
             HttpServletResponse response
     ) throws IOException {
-        new ShortUrlDaoimpl().updateLink(new shortlLink(link_ID, link_Code, link_URL, create_Date, create_User, status, link_View, link_Title, link_type));
-        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        out.println("oke " + link_ID);
+        out.println("{\"result\":\""
+                + (new ShortUrlDaoimpl().updateLink(new shortlLink(
+                        link_ID,
+                        link_Code,
+                        link_URL,
+                        create_Date,
+                        create_User,
+                        expiry_Date,
+                        status,
+                        link_View,
+                        link_Title,
+                        link_type)) ? "Done." : "Fail.") + "\"}");
     }
 
     @RequestMapping(value = "/admin/shtlink")
@@ -78,52 +102,68 @@ public class AdminController {
 
     @RequestMapping(value = "/getlistUser")
     public @ResponseBody
-    List<User> getlistUser() {
-        List<User> list=new ArrayList<User>();
-        list.add((User) new UserDAOimpl().getListUser(-1));
-        list.add(new User(1234, "Hi", "Hi", "Hi", "Hi", 10, "Hi", true, "Hi"));
-        list.add(new User(4321, "Hi", "Hi", "Hi", "Hi", 11, "Hi", true, "Hi"));
-        list.add(new User(1324, "Hi", "Hi", "Hi", "Hi", 12, "Hi", true, "Hi"));
-        list.add(new User(2413, "Hi", "Hi", "Hi", "Hi", 13, "Hi", true, "Hi"));
-        return list;
+    List<userAdmin> getlistUser() {
+        return new UserDAOimpl().getListUser(-1);
     }
 
     @RequestMapping(value = "/deleteUser")
-    public void deleteshtUser(@RequestParam(value = "user_id") int userId) {
-        new UserDAOimpl().deleteUser(userId);
+    public void deleteshtUser(@RequestParam(value = "user_id") int userId,
+            HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        out.println("{\"result\":\"" + (new UserDAOimpl().deleteUser(userId) ? "Done." : "Fail.") + "\"}");
     }
 
     @RequestMapping(value = "/insertUser")
     public void insertUser(
-            @RequestParam(value = "user_id") int User_id,
-            @RequestParam(value = "user_Name") String User_Name,
-            @RequestParam(value = "email") String Email,
-            @RequestParam(value = "user_FullName") String User_FullName,
-            @RequestParam(value = "user_PassWord") String User_PassWord,
-            @RequestParam(value = "role_Id") int Role_Id,
-            @RequestParam(value = "create_Date") String Create_Date,
-            @RequestParam(value = "status") boolean Status,
-            @RequestParam(value = "expiry_Date_Vip") String Expiry_Date_Vip
-    ) {
-        new UserDAOimpl().insertUser(new User(User_id, User_Name, Email, User_FullName, User_PassWord, Role_Id, Create_Date, Status, Expiry_Date_Vip));
+            @RequestParam(value = "user_Name", required = false) String User_Name,
+            @RequestParam(value = "email", required = false) String Email,
+            @RequestParam(value = "user_FullName", required = false) String User_FullName,
+            @RequestParam(value = "user_PassWord", required = false) String User_PassWord,
+            @RequestParam(value = "role_Id", required = false) int Role_Id,
+            @RequestParam(value = "create_Date", required = false) String Create_Date,
+            @RequestParam(value = "status", required = false) boolean Status,
+            @RequestParam(value = "expiry_Date_Vip", required = false) String Expiry_Date_Vip,
+            HttpServletResponse response
+    ) throws IOException {
+        PrintWriter out = response.getWriter();
+        out.println("{\"result\":\""
+                + (new UserDAOimpl().insertUser(
+                        new userAdmin(User_Name,
+                                Email,
+                                User_FullName,
+                                User_PassWord,
+                                Role_Id,
+                                Create_Date,
+                                Status,
+                                Expiry_Date_Vip)) ? "Done" : "Fail") + "\"}");
     }
 
     @RequestMapping(value = "/updateUser")
     public void updateUser(
             @RequestParam(value = "user_id") int User_id,
-            @RequestParam(value = "user_Name") String User_Name,
-            @RequestParam(value = "email") String Email,
-            @RequestParam(value = "user_FullName") String User_FullName,
-            @RequestParam(value = "user_PassWord") String User_PassWord,
-            @RequestParam(value = "role_Id") int Role_Id,
-            @RequestParam(value = "create_Date") String Create_Date,
-            @RequestParam(value = "status") boolean Status,
-            @RequestParam(value = "expiry_Date_Vip") String Expiry_Date_Vip
+            @RequestParam(value = "user_Name", required = false) String User_Name,
+            @RequestParam(value = "email", required = false) String Email,
+            @RequestParam(value = "user_FullName", required = false) String User_FullName,
+            @RequestParam(value = "user_PassWord", required = false) String User_PassWord,
+            @RequestParam(value = "role_Id", required = false) int Role_Id,
+            @RequestParam(value = "create_Date", required = false) String Create_Date,
+            @RequestParam(value = "status", required = false) boolean Status,
+            @RequestParam(value = "expiry_Date_Vip", required = false) String Expiry_Date_Vip,
+            HttpServletResponse response
     ) throws IOException {
-        new UserDAOimpl().updateUser(new User(User_id, User_Name, Email, User_FullName, User_PassWord, Role_Id, Create_Date, Status, Expiry_Date_Vip));
-//        response.setCharacterEncoding("UTF-8");
-//        PrintWriter out = response.getWriter();
-//        out.println("oke " + link_ID);
+        PrintWriter out = response.getWriter();
+        out.println("{\"result\":\""
+                + (new UserDAOimpl().updateUser(
+                        new userAdmin(
+                                User_id,
+                                User_Name,
+                                Email,
+                                User_FullName,
+                                User_PassWord,
+                                Role_Id,
+                                Create_Date,
+                                Status,
+                                Expiry_Date_Vip)) ? "Done" : "Fail") + "\"}");
     }
 
     @RequestMapping(value = "/admin/user")
@@ -131,9 +171,76 @@ public class AdminController {
         return "/admin/MntUser";
     }
 
+    @RequestMapping(value = "/getlistBlist")
+    public @ResponseBody
+    List<blackList> getlistBlist() {
+        return new BlackListDAOimpl().getBlacklist(-1);
+    }
+
+    @RequestMapping(value = "/deleteBlist")
+    public void deleteBlist(@RequestParam(value = "id") int id,
+            HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+        out.println("{\"result\":\"" + (new BlackListDAOimpl().deleteBl(id) ? "Done." : "Fail.") + "\"}");
+    }
+
+    @RequestMapping(value = "/insertBlist")
+    public void insertBlist(
+            @RequestParam(value = "url", required = false) String url,
+            @RequestParam(value = "create_User", required = false) int create_User,
+            @RequestParam(value = "create_Date", required = false) String create_Date,
+            @RequestParam(value = "update_User", required = false) String update_User,
+            @RequestParam(value = "update_Date", required = false) String update_Date,
+            @RequestParam(value = "status", required = false) int status,
+            HttpServletResponse response
+    ) throws IOException {
+        PrintWriter out = response.getWriter();
+        out.println("{\"result\":\""
+                + (new BlackListDAOimpl().insertBl(
+                        new blackList(
+                                url,
+                                create_User,
+                                create_Date,
+                                update_User,
+                                update_Date,
+                                status)) ? "Done" : "Fail") + "\"}");
+    }
+
+    @RequestMapping(value = "/updateBlist")
+    public void updateBlist(
+            @RequestParam(value = "id") int User_id,
+            @RequestParam(value = "url", required = false) String url,
+            @RequestParam(value = "create_User", required = false) int create_User,
+            @RequestParam(value = "create_Date", required = false) String create_Date,
+            @RequestParam(value = "update_User", required = false) String update_User,
+            @RequestParam(value = "update_Date", required = false) String update_Date,
+            @RequestParam(value = "status", required = false) int status,
+            HttpServletResponse response
+    ) throws IOException {
+        PrintWriter out = response.getWriter();
+        out.println("{\"result\":\""
+                + (new BlackListDAOimpl().updateBl(
+                        new blackList(
+                                User_id,
+                                url,
+                                create_User,
+                                create_Date,
+                                update_User,
+                                update_Date,
+                                status)) ? "Done" : "Fail") + "\"}");
+    }
+
+    @RequestMapping(value = "/admin/blacklist")
+    public String adminBlklist() {
+        return "/admin/MntBlacklist";
+    }
+
     @RequestMapping(value = "/admin/test")
     public String test(HttpServletResponse response) throws IOException {
         return "/admin/newjsp";
     }
 
+    
+    
+    
 }

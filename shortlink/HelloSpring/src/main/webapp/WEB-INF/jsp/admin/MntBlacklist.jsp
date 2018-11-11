@@ -3,7 +3,6 @@
     <head>
         <base href="${pageContext.servletContext.contextPath}/">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <link href="../../../resources/css/demos.css" rel="stylesheet" type="text/css"/>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'>
 
@@ -28,45 +27,41 @@
         <style>
             body{
 
-                background-color: #fff2f2;
-            }
-            table td,th {
+                background-color: #e8e8e8;
+            }table td,th {
                 word-break: break-all;
             }
         </style>
     </head>
     <body>
-    <center>
-        <p style="margin:35px 0px 0px 0px;color:black;background-color: pink;font-size:50px;
-           font-family: Courier New, Courier, monospace">
-            Management ShortLink - Admin</p>
+    <center><p style="margin:35px 0px 0px 0px;color:white;background-color: black;font-size:50px;
+               font-family: Courier New, Courier, monospace">
+            Management Blacklist - Admin</p>
+        <div id="jsGrid"></div>
 
         <div id="jsGrid"></div></center>
 
     <script>
         $('document').ready(function () {
             var linklist = [];
-            $.getJSON('/getListshtLink', function (listLink) {
+            $.getJSON('/getlistBlist', function (listBlist) {
                 var db = {
                     loadData: function (filter) {
 
-                        return $.grep(listLink, function (client) {
-                            return (!filter.link_ID || client.link_ID.indexOf(filter.link_ID) > -1)
-                                    && (!filter.link_Code || client.link_Code.indexOf(filter.link_Code) > -1)
-                                    && (!filter.link_URL || client.link_URL.indexOf(filter.link_URL) > -1)
+                        return $.grep(listBlist, function (client) {
+                            return (!filter.id || client.id.indexOf(filter.id) > -1)
+                                    && (!filter.url || client.url.indexOf(filter.url) > -1)
+                                    && (filter.create_User === undefined || client.create_User === filter.create_User)
                                     && (!filter.create_Date || client.create_Date.indexOf(filter.create_Date) > -1)
-                                    && (!filter.create_User || client.create_User.indexOf(filter.create_User) > -1)
-                                    && (!filter.exprity_Date || client.exprity_Date.indexOf(filter.exprity_Date) > -1)
-                                    && (filter.status === undefined || client.status === filter.status)
-                                    && (filter.link_View === undefined || client.link_View === filter.link_View)
-                                    && (!filter.link_Title || client.link_Title.indexOf(filter.link_Title) > -1)
-                                    && (!filter.link_type || client.link_type === filter.link_type);
+                                    && (!filter.update_User || client.update_User.indexOf(filter.update_User) > -1)
+                                    && (!filter.update_Date || client.update_Date.indexOf(filter.update_Date) > -1)
+                                    && (filter.status === undefined || client.status === filter.status);
                         });
                     },
                     insertItem: function (insertingClient) {
                         $.ajax({
-                            type: "POST",
-                            url: "/insertshtLink",
+                            type: "GET",
+                            url: "/insertBlist",
                             dataType: 'json',
                             data: insertingClient
                         }).done(function (data) {
@@ -76,8 +71,8 @@
                     },
                     updateItem: function (updatingClient) {
                         $.ajax({
-                            type: "POST",
-                            url: "/updateshtLink",
+                            type: "GET",
+                            url: "/updateBlist",
                             dataType: 'json',
                             data: updatingClient
                         }).done(function (data) {
@@ -87,19 +82,19 @@
                     },
                     deleteItem: function (deletingClient) {
                         $.ajax({
-                            type: "POST",
-                            url: "/deleteshtLink",
+                            type: "GET",
+                            url: "/deleteBlist",
                             dataType: 'json',
-                            data: {link_ID: deletingClient.link_ID}
+                            data: {id: deletingClient.id}
                         }).done(function (data) {
                             location.reload();
                             alert(data.result);
                         });
-                    }
+                    }//end delete
                 };
                 $("#jsGrid").jsGrid({
-                    height: "75%",
-                    width: "100%",
+                    height: "55%",
+                    width: "90%",
                     filtering: true,
                     editing: true,
                     inserting: true,
@@ -107,23 +102,20 @@
                     paging: true,
                     selecting: true,
                     autoload: true,
-                    pageSize: 8,
-                    pageButtonCount: 10,
+                    pageSize: 6,
+                    pageButtonCount: 5,
                     deleteConfirm: "Do you really want to delete the client?",
-                    data: listLink,
+                    data: listBlist,
                     controller: db,
                     fields: [
-                        {name: "link_ID", width: 22, title: "Mã ID"},
-                        {name: "link_Code", type: "text", width: 22, title: "Code"},
-                        {name: "link_URL", type: "text", width: 70, title: "URL"},
+                        {name: "id", width: 10, title: "ID"},
+                        {name: "url", type: "text", width: 30, title: "URL"},
+                        {name: "create_User", type: "number", width: 30, title: "User tạo"},
                         {name: "create_Date", type: "text", width: 30, title: "Ngày tạo"},
-                        {name: "create_User", type: "text", width: 3, title: "User"},
-                        {name: "expiry_Date", type: "text", width: 30, title: "Expiry"},
-                        {name: "status", type: "checkbox", width: 2, title: "Status"},
-                        {name: "link_View", type: "number", width: 10, title: "View"},
-                        {name: "link_Title", type: "text", width: 40, title: "Title"},
-                        {name: "link_type", type: "number", width: 5, title: "Loại"},
-                        {type: "control", width: 20}
+                        {name: "update_User", type: "text", width: 20, title: "User update"},
+                        {name: "update_Date", type: "text", width: 5, title: "Ngày update"},
+                        {name: "status", type: "number", width: 2, title: "Status"},
+                        {type: "control", width: 10}
                     ]
                 });
             });

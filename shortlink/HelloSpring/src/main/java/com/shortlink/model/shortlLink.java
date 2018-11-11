@@ -16,6 +16,7 @@ public class shortlLink {
     private String Link_URL;
     private String Create_Date;
     private int Create_User;
+    private String Expiry_Date;
     private boolean Status;
     private int Link_View;
     private String Link_Title;
@@ -28,19 +29,42 @@ public class shortlLink {
         return Link_Code;
     }
 
-    public shortlLink(int Link_ID, String Link_Code, String Link_URL, String Create_Date, int Create_User, boolean Status, int Link_View, String Link_Title, int Link_type) {
+    public shortlLink(String Link_Code, String Link_URL, int Create_User) {
+        this.Link_Code = Link_Code;
+        this.Link_URL = Link_URL;
+        this.Create_User = Create_User;
+    }
+
+    public shortlLink(int Link_ID, String Link_Code, String Link_URL) {
         this.Link_ID = Link_ID;
+        this.Link_Code = Link_Code;
+        this.Link_URL = Link_URL;
+    }
+
+    public shortlLink(String Link_Code, String Link_URL, String Create_Date, int Create_User, String Expiry_Date, boolean Status, int Link_View, String Link_Title, int Link_type) {
         this.Link_Code = Link_Code;
         this.Link_URL = Link_URL;
         this.Create_Date = Create_Date;
         this.Create_User = Create_User;
+        this.Expiry_Date = Expiry_Date;
         this.Status = Status;
         this.Link_View = Link_View;
         this.Link_Title = Link_Title;
         this.Link_type = Link_type;
     }
 
-
+    public shortlLink(int Link_ID, String Link_Code, String Link_URL, String Create_Date, int Create_User, String Expiry_Date, boolean Status, int Link_View, String Link_Title, int Link_type) {
+        this.Link_ID = Link_ID;
+        this.Link_Code = Link_Code;
+        this.Link_URL = Link_URL;
+        this.Create_Date = Create_Date;
+        this.Create_User = Create_User;
+        this.Expiry_Date = Expiry_Date;
+        this.Status = Status;
+        this.Link_View = Link_View;
+        this.Link_Title = Link_Title;
+        this.Link_type = Link_type;
+    }
 
     public void setLink_Code(String Link_Code) {
         this.Link_Code = Link_Code;
@@ -48,6 +72,14 @@ public class shortlLink {
 
     public int getLink_ID() {
         return Link_ID;
+    }
+
+    public String getExpiry_Date() {
+        return Expiry_Date;
+    }
+
+    public void setExpiry_Date(String Expiry_Date) {
+        this.Expiry_Date = Expiry_Date;
     }
 
     public void setLink_ID(int Link_ID) {
@@ -109,7 +141,5 @@ public class shortlLink {
     public void setLink_type(int Link_type) {
         this.Link_type = Link_type;
     }
-
-
 
 }
