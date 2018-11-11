@@ -38,10 +38,10 @@
                             <div class="card bg-gradient-danger card-img-holder text-white">
                                 <div class="card-body">
                                     <img src="resources/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
-                                    <h4 class="font-weight-normal mb-3">View
+                                    <h4 class="font-weight-normal mb-3">Xếp hạng (tính theo view)
                                         <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                                     </h4>
-                                    <h2 class="mb-5"></h2>
+                                    <h2 class="mb-5">${kq} Thành viên</h2>
                                     <h6 class="card-text"></h6>
                                 </div>
                             </div>
@@ -50,11 +50,11 @@
                             <div class="card bg-gradient-info card-img-holder text-white">
                                 <div class="card-body">
                                     <img src="resources/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">                  
-                                    <h4 class="font-weight-normal mb-3">Weekly Orders
+                                    <h4 class="font-weight-normal mb-3">Tổng lượt view
                                         <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                                     </h4>
-                                    <h2 class="mb-5">45,6334</h2>
-                                    <h6 class="card-text">Decreased by 10%</h6>
+                                    <h2 class="mb-5">${sumview}</h2>
+<!--                                    <h6 class="card-text">Decreased by 10%</h6>-->
                                 </div>
                             </div>
                         </div>
@@ -62,11 +62,11 @@
                             <div class="card bg-gradient-success card-img-holder text-white">
                                 <div class="card-body">
                                     <img src="resources/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">                                    
-                                    <h4 class="font-weight-normal mb-3">Total link vip
+                                    <h4 class="font-weight-normal mb-3">Tổng link đã rút gọn
                                         <i class="mdi mdi-diamond mdi-24px float-right"></i>
                                     </h4>
-                                    <h2 class="mb-5">95,5741</h2>
-                                    <h6 class="card-text">Increased by 5%</h6>
+                                    <h2 class="mb-5">${sumlink}</h2>
+<!--                                    <h6 class="card-text">Increased by 5%</h6>-->
                                 </div>
                             </div>
                         </div>

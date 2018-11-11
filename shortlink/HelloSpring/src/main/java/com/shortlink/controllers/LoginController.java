@@ -5,6 +5,7 @@
  */
 package com.shortlink.controllers;
 
+import com.shortlink.DAO.LinkDAO;
 import com.shortlink.DAO.loginDAO;
 import com.shortlink.common.GooglePojo;
 import com.shortlink.common.GoogleUtils;
@@ -35,7 +36,10 @@ public class LoginController {
 
     @Autowired
     private loginDAO loginDAO;
-
+    
+    @Autowired
+    private LinkDAO linkDAO;
+    
     @Autowired
     private GoogleUtils googleUtils;
 
@@ -47,6 +51,20 @@ public class LoginController {
             @RequestParam("password") String password,
             HttpSession session,
             ModelMap map) {
+        for (int i = 1;i < username.length(); i++){
+            if (username.charAt(i) == '@' || username.charAt(i) == '"'){
+                map.addAttribute("error", "Tên tài khoản không được chứa ký tự đặc biệt");
+                return "login";
+            }
+        };
+        
+        for (int i = 1;i < password.length(); i++){
+            if (password.charAt(i) == '@' || password.charAt(i) == '"'){
+                map.addAttribute("error", "Tên tài khoản không được chứa ký tự đặc biệt");
+                return "login";
+            }
+        };
+        
         Users user = loginDAO.login(username, password);
         if (user != null) {
             if (user.getRoleId() == 3) {
@@ -56,12 +74,21 @@ public class LoginController {
                     user.setRoleId(2);
                 }
             }
+
             session.setAttribute("username", user.getUsername());
             session.setAttribute("role", user.getRoleId());
             session.setAttribute("userid", user.getUserId());
             session.setAttribute("fullname", user.getFullname());
             session.setAttribute("email", user.getEmail());
             session.setAttribute("createdate", user.getStringDate());
+            session.setAttribute("vipdate", user.getStringDatevip());
+            
+            int link = linkDAO.thongkeuserlink(user.getUserId());
+            int view = linkDAO.thongkeuserview(user.getUserId());
+            String kq = linkDAO.xephang(user.getUserId());
+            map.addAttribute("kq", kq);
+            map.addAttribute("sumview", view);
+            map.addAttribute("sumlink", link);
 
             return "shortLink";
         } else {
@@ -75,9 +102,21 @@ public class LoginController {
     public String home(
             HttpSession session,
             ModelMap map) {
-        if ((session.getAttribute("username")) != null && (session.getAttribute("email") != null)) {
+        if (((String) session.getAttribute("username")) != null) {
+            int link = linkDAO.thongkeuserlink((Integer) session.getAttribute("userid"));
+            int view = linkDAO.thongkeuserview((Integer) session.getAttribute("userid"));
+            String kq = linkDAO.xephang((Integer) session.getAttribute("userid"));
+            map.addAttribute("kq", kq);
+            map.addAttribute("sumview", view);
+            map.addAttribute("sumlink", link);
             return "shortLink";
         } else {
+        session.removeAttribute("username");
+        session.removeAttribute("role");
+        session.removeAttribute("userid");
+        session.removeAttribute("email");
+        session.removeAttribute("fullname");
+        session.removeAttribute("createdate");
             return "login";
 
         }
@@ -169,7 +208,14 @@ public class LoginController {
                 session.setAttribute("fullname", user.getFullname());
                 session.setAttribute("email", user.getEmail());
                 session.setAttribute("createdate", user.getStringDate());
+                session.setAttribute("vipdate", user.getStringDatevip());
 
+                int link = linkDAO.thongkeuserlink((Integer) session.getAttribute("userid"));
+                int view = linkDAO.thongkeuserview((Integer) session.getAttribute("userid"));
+                String kq = linkDAO.xephang((Integer) session.getAttribute("userid"));
+                map.addAttribute("kq", kq);
+                map.addAttribute("sumview", view);
+                map.addAttribute("sumlink", link);
                 return "shortLink";
             } else {
                 map.addAttribute("error", "Sai tài khoản hoặc mật khẫu");

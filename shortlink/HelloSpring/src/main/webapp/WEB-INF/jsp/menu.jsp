@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <% if (session.getAttribute("username") == null) { %>
 
 <div class="s01">
@@ -6,11 +8,11 @@
         <div class="inner-form">
 
             <div class="input-field first-wrap">
-                <input type="text" id="input_url" placeholder="Link c?n rút g?n" name="url">
+                <input type="text" id="input_url" placeholder="Link c?n rÃºt g?n" name="url">
             </div>
         </div>
         <div class="a" style="margin-top: 20px;">
-            <button type="submit" class="login100-form-btn">Rút g?n link</button>
+            <button type="submit" class="login100-form-btn">RÃºt g?n link</button>
         </div>
         <a id="lba"></a>
         <div id="ErrMer"></div>
@@ -33,7 +35,7 @@
             <div id='hideMe'> ${error}</div>
 
             <div class="wrap-input100 validate-input" data-validate="Enter username">
-                <input class="input100" type="text" id="signinId" placeholder="Tên ??ng nh?p..." name="username" autofocus>
+                <input class="input100" type="text" id="signinId" placeholder="TÃªn ÄÄƒng nh?p..." name="username" autofocus>
                 <span class="focus-input100" data-placeholder="?"></span>
             </div>
 
@@ -74,7 +76,7 @@
 <!--    <div id="cssmenu">
         <ul>
             <li><p style="color: whitesmoke;">Welcome ${sessionScope.username}</p><br></li>
-            <li><a href="${pageContext.request.contextPath }/myprolife" style="color: red;text-decoration: none;">Thông tin cá nhân</a><br>
+            <li><a href="${pageContext.request.contextPath }/myprolife" style="color: red;text-decoration: none;">ThÃ´ng tin cÃ¡ nhÃ¢n</a><br>
             <li><a href="${pageContext.request.contextPath }/gethistory" style="color: red;text-decoration: none;">L?ch s? get Link</a><br></li>
 <%  if (session.getAttribute("role").equals(3)) {%>
 
@@ -83,7 +85,7 @@
 
 <% if (session.getAttribute("role").equals(1)) {%>
 
-<li><a href="${pageContext.request.contextPath }/logout" style="color: red;text-decoration: none;">Qu?n lý</a><br></li>
+<li><a href="${pageContext.request.contextPath }/logout" style="color: red;text-decoration: none;">Qu?n lÃ½</a><br></li>
 <% } %>
 
 <li><a href="${pageContext.request.contextPath }/logout" style="color: red; text-decoration: none;">Logout</a></li>

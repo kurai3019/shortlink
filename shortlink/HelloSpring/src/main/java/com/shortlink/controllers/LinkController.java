@@ -2,6 +2,8 @@ package com.shortlink.controllers;
 
 import com.shortlink.DAO.LinkDAO;
 import com.shortlink.DAO.ShortUrlDaoimpl;
+import com.shortlink.entities.Users;
+import com.shortlink.entities.Vipcode;
 import com.shortlink.model.shortlLink;
 import java.io.IOException;
 import static java.lang.Math.random;
@@ -33,7 +35,13 @@ public class LinkController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map,HttpSession session) {
         map.addAttribute("hello", "Hello Spring from Netbeans!!");
-        if ((session.getAttribute("username")) != null && (session.getAttribute("email") != null)) {
+        if (session.getAttribute("username") != null) {
+            int sumlink = linkDAO.thongkeuserlink((Integer) session.getAttribute("userid"));
+            int sumview = linkDAO.thongkeuserview((Integer) session.getAttribute("userid"));
+            String kq = linkDAO.xephang((Integer) session.getAttribute("userid"));
+            map.addAttribute("kq", kq);
+            map.addAttribute("sumview", sumview);
+            map.addAttribute("sumlink", sumlink);
             return "shortLink";
         } else {
             return "login";
@@ -79,6 +87,57 @@ public class LinkController {
 
         map.addAttribute("link", "Link của bạn:<a href=" + "http://localhost:8084/" + tokenstring + ">http://localhost:8084/" + tokenstring + "</a>");
         return "shortLink";
+    }
+        @RequestMapping(value = "/addcodevip", method = RequestMethod.POST)
+    public String addcodevip(@RequestParam(value = "codevip", required = false) String code,
+            ModelMap map, HttpSession session) throws URISyntaxException {
+         for (int i = 1;i < code.length(); i++){
+            if (code.charAt(i) == '@' || code.charAt(i) == '"'){
+                map.addAttribute("vipmess", "Code vip không được chứa ký tự đặc biệt");
+                return "myProlife";
+            }
+        };     
+             if ((Integer) session.getAttribute("role") == 1) {
+                map.addAttribute("vipmess", "Admin không thể sử dụng code vip");
+                return "myProlife";
+                }
+        Vipcode vipcode = linkDAO.addvipcode(code);
+        if (vipcode.getDate() != 0){
+              linkDAO.updatestatuscode(vipcode.getId());
+              if ((Integer) session.getAttribute("role") == 3) {
+                  linkDAO.updatedateviplinkcustom(vipcode.getDate(), (Integer) session.getAttribute("userid"));
+                  linkDAO.updatedatevipuser(vipcode.getDate(), (Integer) session.getAttribute("userid"));
+                  map.addAttribute("vipmess", "Bạn đã được cộng thêm "+vipcode.getDate()+" ngày vip");
+
+                }
+              else{
+                  linkDAO.updatedateviplinkcustomtoday(vipcode.getDate(), (Integer) session.getAttribute("userid"));
+                  linkDAO.updatedatevipusertoday(vipcode.getDate(), (Integer) session.getAttribute("userid"));
+                  map.addAttribute("vipmess", "Bạn đã trở thành vip "+vipcode.getDate()+" ngày");
+              }
+          Users user = linkDAO.update((Integer) session.getAttribute("userid"));
+         if (user != null) {
+
+            session.setAttribute("username", user.getUsername());
+            session.setAttribute("role", user.getRoleId());
+            session.setAttribute("userid", user.getUserId());
+            session.setAttribute("fullname", user.getFullname());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("createdate", user.getStringDate());
+            session.setAttribute("vipdate", user.getStringDatevip());
+
+            
+            }
+              
+            
+        }
+        else{
+                  map.addAttribute("vipmess", "Code không tồn tại hoặc đã được sử dụng");
+
+        }
+        
+        return "myProlife";
+
     }
 
     @RequestMapping(value = "/{shortLink}", method = RequestMethod.GET)

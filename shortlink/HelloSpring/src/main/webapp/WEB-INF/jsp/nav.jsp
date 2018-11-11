@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
                    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -11,9 +12,10 @@
                         <li class="nav-item nav-profile dropdown">
                             
                             <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                <%  if (session.getAttribute("role").equals(3)) {%> Thành viên vip <%}
+                                <%  if (session.getAttribute("role").equals(3)) {%>       <img style="width: 30px; height: 30px;margin-right: 10px;" src="../../../resources/images/vip.jpg" alt="Avatar" class="avatar"> NgÃ y háº¿t háº¡n:  <b style="color:red; margin-left: 10px;"> ${sessionScope.vipdate}</b>
+<%} 
                                                if (session.getAttribute("role").equals(1)) {%> Admin <%}
-                                                   if (session.getAttribute("role").equals(2)) {%> Thành viên  <%}%>
+                                                   if (session.getAttribute("role").equals(2)) {%> ThÃ nh viÃªn   <%}%>
                                                    
                                 <div class="nav-profile-img" style ="margin-left: 10px;">
                                     
@@ -83,7 +85,7 @@
 
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/myprolife">
+                            <a class="nav-link" href="${pageContext.request.contextPath }/myprolife?#">
                                 <span class="menu-title">My profile</span>
                                 <i class="mdi mdi-face-profile"></i>
                             </a>

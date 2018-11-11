@@ -20,18 +20,28 @@ public class Users {
     Integer roleId;
     Date createDate;
     String stringDate;
+    String stringDatevip;
     Boolean status;
 
-       public Users(Integer userid,String username, String fullname,String mail,int role,String stringDate) {
+       public Users(Integer userid,String username, String fullname,String mail,int role,String stringDate,String stringDatevip) {
         this.userId = userid;
         this.username = username;
         this.fullname = fullname;
         this.email = mail;
         this.roleId = role;
         this.stringDate = stringDate;
-
+        this.stringDatevip = stringDatevip;
     }
 
+    public String getStringDatevip() {
+        return stringDatevip;
+    }
+
+    public void setStringDatevip(String stringDatevip) {
+        this.stringDatevip = stringDatevip;
+    }
+       
+    
     public String getStringDate() {
         return stringDate;
     }

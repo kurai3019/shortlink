@@ -7,6 +7,7 @@ package com.shortlink.DAO;
 
 import com.shortlink.entities.Links;
 import com.shortlink.entities.Users;
+import com.shortlink.entities.Vipcode;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -47,12 +48,17 @@ public class loginDAOImp implements loginDAO {
                 String mail = rs.getString("Email");
                 int role = rs.getInt("Role_Id");
                 Date createdate = rs.getDate("Create_Date");
+                Date datevip = rs.getDate("Expiry_Date_Vip");
                 Format formatter = new SimpleDateFormat("dd/MM/YYYY");
                 String s = null;
+                String st = null;
                 if (createdate != null) {
                     s = formatter.format(createdate);
                 }
-                Users user = new Users(userid, name, fullname, mail, role, s);
+                if (datevip != null) {
+                    st = formatter.format(datevip);
+                }
+                Users user = new Users(userid, name, fullname, mail, role, s,st);
                 result.add(user);
 
             }
@@ -62,9 +68,9 @@ public class loginDAOImp implements loginDAO {
             e.printStackTrace();
         }
         return null;
-    }
+    };
+   
 
-    ;
 
     @Override
     public List<Links> linkHistory(String userid) {
@@ -213,18 +219,23 @@ public class loginDAOImp implements loginDAO {
             List<Users> result = new ArrayList<Users>();
 
             while (rs.next()) {
-                int userid = rs.getInt("user_id");
-                String name = rs.getString("user_Name");
-                String fullname = rs.getString("user_fullname");
-                String mail = rs.getString("email");
-                int role = rs.getInt("role_id");
-                Date createdate = rs.getDate("create_date");
+                int userid = rs.getInt("User_id");
+                String name = rs.getString("User_Name");
+                String fullname = rs.getString("User_FullName");
+                String mail = rs.getString("Email");
+                int role = rs.getInt("Role_Id");
+                Date createdate = rs.getDate("Create_Date");
+                Date datevip = rs.getDate("Expiry_Date_Vip");
                 Format formatter = new SimpleDateFormat("dd/MM/YYYY");
                 String s = null;
+                String st = null;
                 if (createdate != null) {
                     s = formatter.format(createdate);
                 }
-                Users user = new Users(userid, name, fullname, mail, role, s);
+                if (datevip != null) {
+                    st = formatter.format(datevip);
+                }
+                Users user = new Users(userid, name, fullname, mail, role, s,st);
                 result.add(user);
 
             }

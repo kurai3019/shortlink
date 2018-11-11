@@ -5,6 +5,9 @@
  */
 package com.shortlink.DAO;
 
+import com.shortlink.entities.Users;
+import com.shortlink.entities.Vipcode;
+
 /**
  *
  * @author Administrator
@@ -15,6 +18,15 @@ public interface LinkDAO {
     String AddView(String URLa);
     Boolean checkRandomKey(String RandomKey);
     Boolean checkBackList(String urlCut);
-
+    int thongkeuserlink(int userid);
+    int thongkeuserview(int userid);
+    String xephang(int userid);
+    Vipcode addvipcode(String code);
+    String updatedatevipusertoday(int userid,int date);
+    String updatestatuscode(int codeid);
+    String updatedatevipuser(int date,int userid);
+    String updatedateviplinkcustom(int date,int userid) ;
+    String updatedateviplinkcustomtoday(int date,int userid) ;
+    Users update(int userida);
     
 }
