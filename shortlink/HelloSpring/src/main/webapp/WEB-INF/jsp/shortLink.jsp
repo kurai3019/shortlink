@@ -21,205 +21,16 @@
         </head>
 
         <body>
-        <% if (session.getAttribute("username") == null) { %>
 
-        <div class="s01">
-
-            <form onsubmit="return ValidURL();"  action="add" method = "POST"  modelAttribute="message">
-                <div class="inner-form">
-
-                    <div class="input-field first-wrap">
-                        <input type="text" id="input_url" placeholder="Link cần rút gọn" name="url">
-                    </div>
-                </div>
-                <div class="a" style="margin-top: 20px;">
-                    <button type="submit" class="login100-form-btn">Rút gọn link</button>
-                </div>
-                <a id="lba"></a>
-                <div id="ErrMer"></div>
-                <div id="hideLink">${link}</div>
-            </form>
-
-
-
-
-
-            <div class="wrap-login100">
-                <form class="login100-form validate-form" action="login" method = "POST"  modelAttribute="message" id="login-from">
-                    <span class="login100-form-logo">
-                        <i class="zmdi zmdi-landscape"></i>
-                    </span>
-
-                    <span class="login100-form-title p-b-34 p-t-27">
-                        Log in
-                    </span>
-                    <div id='hideMe'> ${error}</div>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter username">
-                        <input class="input100" type="text" id="signinId" placeholder="Tên đăng nhập..." name="username" autofocus>
-                        <span class="focus-input100" data-placeholder=""></span>
-                    </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <input class="input100" type="password" id="signinId" placeholder="Mật khẩu..." name="password" autofocus>
-                        <span class="focus-input100" data-placeholder=""></span>
-                    </div>
-
-                    <div class="contact100-form-checkbox">
-                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                        
-                               <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/login-google&response_type=code
-        &client_id=671943132404-962ea5mc3ob79m12ac53nlqc1cmm39l9.apps.googleusercontent.com&approval_prompt=force">Login With Google</a> 
-                        
-                        <label class="label-checkbox100" for="ckb1">
-                            Remember me
-                        </label>
-                    </div>
-
-                    <div class="container-login100-form-btn">
-                        <button id="Sign" type="submit" class="login100-form-btn">Login</button>
-
-                        <button id="Sign" type="button" class="login100-form-btn"><a href="${pageContext.request.contextPath }/register">Register</a></button>
-
-                    </div>
-
-                    <div class="text-center p-t-90">
-                        <a class="txt1" href="#">
-                            Forgot Password?
-                        </a>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <% } else {%>
-
-        <!--    <div id="cssmenu">
-                <ul>
-                    <li><p style="color: whitesmoke;">Welcome ${sessionScope.username}</p><br></li>
-                    <li><a href="${pageContext.request.contextPath }/myprolife" style="color: red;text-decoration: none;">Thông tin cá nhân</a><br>
-                    <li><a href="${pageContext.request.contextPath }/gethistory" style="color: red;text-decoration: none;">Lịch sử get Link</a><br></li>
-        <%  if (session.getAttribute("role").equals(3)) {%>
-    
-    <li><a href="${pageContext.request.contextPath }/logout" style="color: red;text-decoration: none;">Tạo link</a><br></li>
-        <% } %>                                
-    
-        <% if (session.getAttribute("role").equals(1)) {%>
-    
-        <li><a href="${pageContext.request.contextPath }/logout" style="color: red;text-decoration: none;">Quản lý</a><br></li>
-        <% } %>
-    
-    <li><a href="${pageContext.request.contextPath }/logout" style="color: red; text-decoration: none;">Logout</a></li>
-    
-    <p>Chao mung, </p>${sessionScope.username}
-    </ul>
-    </div>-->
-
-
+        <jsp:include page="menu.jsp"></jsp:include>
 
         <div class="container-scroller">
-            <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-                <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo" href="index.html"><img src="resources/images/logo.svg" alt="logo"></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="resources/images/logo-mini.svg" alt="logo"></a>
-                </div>
-                <div class="navbar-menu-wrapper d-flex align-items-stretch">
 
-                    <ul class="navbar-nav navbar-nav-right">
-                        <li class="nav-item nav-profile dropdown">
-                            <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                <div class="nav-profile-img">
-                                    <img src="resources/images/faces/face1.jpg" alt="image">
-                                    <span class="availability-status online"></span>             
-                                </div>
-                                <div class="nav-profile-text">
-                                    <p class="mb-1 text-black">${sessionScope.username}</p>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="mdi mdi-cached mr-2 text-success"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">
-                                    <i class="mdi mdi-logout mr-2 text-primary"></i>
-                                    Signout
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item d-none d-lg-block full-screen-link">
-                            <a class="nav-link">
-                                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-                            </a>
-                        </li>
-
-
-
-                        <li class="nav-item nav-logout d-none d-lg-block">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/logout">
-                                <i class="mdi mdi-power"></i>
-                            </a>
-                        </li>
-
-                    </ul>
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                        <span class="mdi mdi-menu"></span>
-                    </button>
-                </div>
-            </nav>
-            <div class="container-fluid page-body-wrapper">
-                <!-- partial:partials/_sidebar.html -->
-                <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                    <ul class="nav">
-                        <li class="nav-item nav-profile">
-                            <a href="#" class="nav-link">
-                                <div class="nav-profile-image">
-                                    <img src="resources/images/faces/face1.jpg" alt="profile">
-                                    <span class="login-status online"></span> <!--change to offline or busy as needed-->              
-                                </div>
-                                <div class="nav-profile-text d-flex flex-column">
-                                    <span class="font-weight-bold mb-2">${sessionScope.username}</span>
-                                </div>
-                                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/home"><span class="menu-title">Get link</span><i class="mdi mdi-link-variant"></i></a><br>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="${pageContext.request.contextPath }/gethistory">
-                                <span class="menu-title">History</span>
-                                <i class="mdi mdi-history"></i>
-                            </a>
-
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/myprolife">
-                                <span class="menu-title">My profile</span>
-                                <i class="mdi mdi-face-profile"></i>
-                            </a>
-                        </li>
-                        <% if (session.getAttribute("role").equals(1)) {%>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/home">
-                                <span class="menu-title">Manager</span>
-                                <i class="mdi mdi-tie"></i>
-                            </a>
-                        </li>
-                        <% } %>
-                        <%  if (session.getAttribute("role").equals(3)) {%>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/home">
-                                <span class="menu-title">Log out</span>
-                                <i class="mdi mdi-logout"></i>
-                            </a>
-                        </li>
-                        <% } %>
-
-
-                    </ul>
-                </nav>
+    <jsp:include page="nav.jsp"></jsp:include>
+    
+    
+           <% if (session.getAttribute("username") != null) { %>
+            
                 <!-- partial -->
                 <div class="main-panel">
                     <div class="row">
@@ -288,13 +99,13 @@
                     </footer>
                     <!-- partial -->
                 </div>
-                <!-- main-panel ends -->
+                        
+                        
+                        
+                        
+                        
             </div>
-        </div>
         <% }%>
-
-
-
         <jsp:include page="footerHTML.jsp"></jsp:include>
     </body>
 </html>

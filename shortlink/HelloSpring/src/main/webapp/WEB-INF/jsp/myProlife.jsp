@@ -1,129 +1,36 @@
-<%-- 
-    Document   : myProlife
-    Created on : Oct 7, 2018, 8:57:00 PM
-    Author     : Đạt
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../../resources/css/main_search.css" rel="stylesheet" type="text/css"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="author" content="colorlib.com">
-        <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <jsp:include page="headerHTML.jsp"/>
-    </head>
-    <body>
+
+        <jsp:include page="headerHTML.jsp"></jsp:include>
+
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="author" content="colorlib.com">
+            <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title> Spring </title>
+
+        </head>
+
+        <body>
+
+        <jsp:include page="menu.jsp"></jsp:include>
+
         <div class="container-scroller">
-            <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-                <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                    <a class="navbar-brand brand-logo" href="index.html"><img src="resources/images/logo.svg" alt="logo"></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="resources/images/logo-mini.svg" alt="logo"></a>
-                </div>
-                <div class="navbar-menu-wrapper d-flex align-items-stretch">
 
-                    <ul class="navbar-nav navbar-nav-right">
-                        <li class="nav-item nav-profile dropdown">
-                            <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                <div class="nav-profile-img">
-                                    <img src="resources/images/faces/face1.jpg" alt="image">
-                                    <span class="availability-status online"></span>             
-                                </div>
-                                <div class="nav-profile-text">
-                                    <p class="mb-1 text-black">${sessionScope.username}</p>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="mdi mdi-cached mr-2 text-success"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">
-                                    <i class="mdi mdi-logout mr-2 text-primary"></i>
-                                    Signout
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item d-none d-lg-block full-screen-link">
-                            <a class="nav-link">
-                                <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-                            </a>
-                        </li>
-
-
-
-                        <li class="nav-item nav-logout d-none d-lg-block">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/logout">
-                                <i class="mdi mdi-power"></i>
-                            </a>
-                        </li>
-
-                    </ul>
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-                        <span class="mdi mdi-menu"></span>
-                    </button>
-                </div>
-            </nav>
-            <div class="container-fluid page-body-wrapper">
-                <!-- partial:partials/_sidebar.html -->
-                <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                    <ul class="nav">
-                        <li class="nav-item nav-profile">
-                            <a href="#" class="nav-link">
-                                <div class="nav-profile-image">
-                                    <img src="resources/images/faces/face1.jpg" alt="profile">
-                                    <span class="login-status online"></span> <!--change to offline or busy as needed-->              
-                                </div>
-                                <div class="nav-profile-text d-flex flex-column">
-                                    <span class="font-weight-bold mb-2">${sessionScope.username}</span>
-                                </div>
-                                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/home"><span class="menu-title">Get link</span><i class="mdi mdi-link-variant"></i></a><br>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="${pageContext.request.contextPath }/gethistory">
-                                <span class="menu-title">History</span>
-                                <i class="mdi mdi-history"></i>
-                            </a>
-
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/home">
-                                <span class="menu-title">My profile</span>
-                                <i class="mdi mdi-face-profile"></i>
-                            </a>
-                        </li>
-                        <% if (session.getAttribute("role").equals(1)) {%>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/home">
-                                <span class="menu-title">Manager</span>
-                                <i class="mdi mdi-tie"></i>
-                            </a>
-                        </li>
-                        <% } %>
-                        <%  if (session.getAttribute("role").equals(3)) {%>
-                        <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/home">
-                                <span class="menu-title">Log out</span>
-                                <i class="mdi mdi-logout"></i>
-                            </a>
-                        </li>
-                        <% } %>
-
-
-                    </ul>
-                </nav>
+    <jsp:include page="nav.jsp"></jsp:include>
+    
+    
+           <% if (session.getAttribute("username") != null) { %>
+            
                 <!-- partial -->
                 <div class="main-panel">
 
@@ -173,9 +80,13 @@
                     </footer>
                     <!-- partial -->
                 </div>
-                <!-- main-panel ends -->
+                        
+                        
+                        
+                        
+                        
             </div>
-        </div>
-        <jsp:include page="footerHTML.jsp"/>
+        <% }%>
+        <jsp:include page="footerHTML.jsp"></jsp:include>
     </body>
 </html>
