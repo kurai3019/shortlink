@@ -52,7 +52,7 @@ public class LoginController {
             HttpSession session,
             ModelMap map) {
         for (int i = 1;i < username.length(); i++){
-            if (username.charAt(i) == '@' || username.charAt(i) == '"'){
+            if (username.charAt(i) == '@' || username.charAt(i) == '"' ){
                 map.addAttribute("error", "Tên tài khoản không được chứa ký tự đặc biệt");
                 return "login";
             }

@@ -7,6 +7,7 @@ package com.shortlink.controllers;
 
 import com.shortlink.DAO.ShortUrlDaoimpl;
 import com.shortlink.model.shortlLink;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class VipLinkController {
 
     @RequestMapping(value = "/vip/custompage")
-    public String Custompage(ModelMap model) {
+    public String Custompage(ModelMap model,HttpSession session) {
+      if ((Integer) session.getAttribute("role") != 2) {
+          return "505";
+        }
         return "/VIP/Custompage";
     }
 

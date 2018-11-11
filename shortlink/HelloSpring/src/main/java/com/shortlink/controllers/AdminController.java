@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -100,7 +101,10 @@ public class AdminController {
     }
     
     @RequestMapping(value = "/admin/shtlink")
-    public String adminshtlink() {
+    public String adminshtlink(HttpSession session) {
+     if ((Integer) session.getAttribute("role") != 1) {
+          return "505";
+        }
         return "/admin/MntShtLInk";
     }
     
@@ -171,7 +175,10 @@ public class AdminController {
     }
     
     @RequestMapping(value = "/admin/user")
-    public String adminuser() {
+    public String adminuser(HttpSession session) {
+        if ((Integer) session.getAttribute("role") != 1) {
+          return "505";
+        }
         return "/admin/MntUser";
     }
     
@@ -235,7 +242,10 @@ public class AdminController {
     }
     
     @RequestMapping(value = "/admin/blacklist")
-    public String adminBlklist() {
+    public String adminBlklist(HttpSession session) {
+        if ((Integer) session.getAttribute("role") != 1) {
+          return "505";
+        }
         return "/admin/MntBlacklist";
     }
     
@@ -245,7 +255,10 @@ public class AdminController {
     }
     
     @RequestMapping(value = "/admin/config")
-    public String configPage(HttpServletResponse response) throws IOException {
+    public String configPage(HttpServletResponse response,HttpSession session) throws IOException {
+        if ((Integer) session.getAttribute("role") != 1) {
+          return "505";
+        }
         return "/admin/configPage";
     }
     
@@ -285,7 +298,10 @@ public class AdminController {
     }
     
     @RequestMapping(value = "/admin/giftcode")
-    public String giftcode(HttpServletResponse response) throws IOException {
+    public String giftcode(HttpServletResponse response,HttpSession session) throws IOException {
+        if ((Integer) session.getAttribute("role") != 1) {
+          return "505";
+        }
         return "/admin/giftcodePage";
     }
     

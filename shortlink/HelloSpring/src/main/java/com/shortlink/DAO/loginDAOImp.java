@@ -33,11 +33,12 @@ public class loginDAOImp implements loginDAO {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
             Connection con = DriverManager.getConnection(url, "sa", "123");
-            String sql = "select * from Users where User_Name = '" + username + "' and User_PassWord='" + password + "' and status=1";
+            String sql = "select * from Users where User_Name = ? and User_PassWord= ? and status=1";
 
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, username);
+            stm.setString(2, password);
+            ResultSet rs = stm.executeQuery();
             String link = null;
             List<Users> result = new ArrayList<Users>();
 

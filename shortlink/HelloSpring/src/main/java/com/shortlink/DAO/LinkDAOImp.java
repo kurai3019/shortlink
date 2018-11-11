@@ -102,11 +102,11 @@ public class LinkDAOImp implements LinkDAO{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
             Connection con = DriverManager.getConnection(url, "sa", "123");
-            String sql = "select * from GiftCode where Gift_Status = 1 and Gift_Code = '"+code+"'";
+            String sql = "select * from GiftCode where Gift_Status = 1 and Gift_Code = ?";
 
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setString(1, code);
+            ResultSet rs = stm.executeQuery();
             Vipcode result = new Vipcode();
 
             while (rs.next()) {
