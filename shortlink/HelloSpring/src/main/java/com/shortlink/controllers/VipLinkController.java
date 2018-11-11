@@ -22,7 +22,7 @@ public class VipLinkController {
 
     @RequestMapping(value = "/vip/custompage")
     public String Custompage(ModelMap model,HttpSession session) {
-      if ((Integer) session.getAttribute("role") != 2) {
+      if ((Integer) session.getAttribute("role") != 3) {
           return "505";
         }
         return "/VIP/Custompage";
