@@ -98,7 +98,7 @@
                             </a>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/admin/user"">
+                            <a class="nav-link" href="${pageContext.request.contextPath }/admin/user">
                                 <span class="menu-title">Users management</span>
                                 <i class="mdi mdi-tie"></i>
                             </a>
@@ -110,13 +110,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/home">
+                            <a class="nav-link" href="${pageContext.request.contextPath }/admin/giftcode">
                                 <span class="menu-title">Code management</span>
                                 <i class="mdi mdi-tie"></i>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/home">
+                            <a class="nav-link" href="${pageContext.request.contextPath }/admin/config">
                                 <span class="menu-title">Config management</span>
                                 <i class="mdi mdi-tie"></i>
                             </a>
