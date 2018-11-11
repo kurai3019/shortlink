@@ -27,7 +27,10 @@
         tbody tr td{
             text-align:center;
             background-color: #c1c1c1;
-        }
+        }.jsgrid-grid-header,
+            .jsgrid-grid-body{
+                overflow: auto;
+            }
     </style>
 
     <body>
