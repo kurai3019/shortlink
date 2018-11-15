@@ -12,7 +12,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath }/home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath }/register">History</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/register">Register</a>
             </li>
             <!--            <li class="nav-item dropdown dmenu">
                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -130,14 +130,11 @@
 
 
 <!-- Footer -->
-<footer style="background-color: #c5cae9; width: 100%; height: 80px;text-align: center;padding-top: 40px;">
-
-    <!-- Copyright -->
-    © 2018 Copyright:
-    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
-
-    <!-- Copyright -->
-
+<footer class="footer">
+    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <b>Nhóm 1 - PRO211</b>. All rights reserved.</span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="mdi mdi-heart text-danger"></i></span>
+    </div>
 </footer>
 <!-- Footer -->
 <script>
