@@ -20,7 +20,10 @@ import java.util.List;
  * @author dell
  */
 public class UserDAOimpl implements UserDAO {
-
+    String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+    String usernamedb ="sa";
+    String passworddb ="123";
+    
     private List<userAdmin> list= new ArrayList();
 
     @Override
@@ -31,8 +34,7 @@ public class UserDAOimpl implements UserDAO {
        // }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -65,8 +67,7 @@ public class UserDAOimpl implements UserDAO {
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update Users set"
                     + "      User_Name=?, "
                     + "      Email=?, "
@@ -106,8 +107,7 @@ public class UserDAOimpl implements UserDAO {
        // }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "delete Users where User_id=" + id;
             Statement stmt = con.createStatement();
 //            ResultSet rs = stmt.executeQuery(sql);
@@ -129,8 +129,7 @@ public class UserDAOimpl implements UserDAO {
     public Boolean insertUser(userAdmin user) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "insert into Users("
                     + "      User_Name,"
                     + "      Email,"

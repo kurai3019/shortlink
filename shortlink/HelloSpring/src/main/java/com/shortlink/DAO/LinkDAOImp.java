@@ -25,13 +25,15 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class LinkDAOImp implements LinkDAO{
-
+    String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+    String usernamedb ="sa";
+    String passworddb ="123";
+    
     @Override
     public String getLink(String urla,String randomkey,String user) {
                 try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "insert into Link(Link_URL,Link_Code,Create_Date,Status,Link_Type,Link_View,Create_User,Expiry_Date) \n" +
                             "select ?,?,GetDate(),1,0,0,?,GetDate()+value from Config\n" +
                             "where ID = 3";
@@ -55,8 +57,7 @@ public class LinkDAOImp implements LinkDAO{
         public String loadURL(String URLa){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select Link_URL from link where link_code = '"+URLa+"' and Expiry_Date > GETDATE()";
             
             Statement stm = con.createStatement();
@@ -76,8 +77,7 @@ public class LinkDAOImp implements LinkDAO{
     public int thongkeuserview(int userid){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select COUNT(link.Link_Code) sumlink,count(link.Link_View) sumview from Users join Link on USERs.User_id = link.Create_User where users.User_id = "+userid;
             
             Statement stm = con.createStatement();
@@ -100,8 +100,7 @@ public class LinkDAOImp implements LinkDAO{
         public Vipcode addvipcode(String code) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select * from GiftCode where Gift_Status = 1 and Gift_Code = ?";
 
             PreparedStatement stm = con.prepareStatement(sql);
@@ -124,8 +123,7 @@ public class LinkDAOImp implements LinkDAO{
             public Users update(int userida) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select * from Users where User_id = '" + userida + "' and status=1";
 
             Statement stm = con.createStatement();
@@ -165,8 +163,7 @@ public class LinkDAOImp implements LinkDAO{
       public String updatedatevipusertoday(int userid,int date) {
                 try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update Users set Role_Id = 3, Expiry_Date_Vip = GetDate() + ? where user_id = ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, date);
@@ -187,8 +184,7 @@ public class LinkDAOImp implements LinkDAO{
      public String updatestatuscode(int codeid) {
                 try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update GiftCode set Gift_Status = 0 where ID = ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, codeid);
@@ -208,8 +204,7 @@ public class LinkDAOImp implements LinkDAO{
     public String updatedatevipuser(int date,int userid) {
                 try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update Users set Role_Id = 3, Expiry_Date_Vip = DATEADD (Day, ?, Expiry_Date_Vip) where user_id = ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, date);
@@ -230,8 +225,7 @@ public class LinkDAOImp implements LinkDAO{
         public String updatedateviplinkcustom(int date,int userid) {
                 try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update link set Expiry_Date = DATEADD (Day, ?, Expiry_Date_Vip) where Link_Type = 1 and USER_ID = ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, date);
@@ -252,8 +246,7 @@ public class LinkDAOImp implements LinkDAO{
      public String updatedateviplinkcustomtoday(int date,int userid) {
                 try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update link set Expiry_Date = GetDate() + ? where Link_Type = 1 and USER_ID = ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, date);
@@ -274,8 +267,7 @@ public class LinkDAOImp implements LinkDAO{
         public int thongkeuserlink(int userid){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select COUNT(link.Link_Code) sumlink,count(link.Link_View) sumview from Users join Link on USERs.User_id = link.Create_User where users.User_id = "+userid;
             
             Statement stm = con.createStatement();
@@ -298,8 +290,7 @@ public class LinkDAOImp implements LinkDAO{
     public String xephang(int userid){
         try{
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select users.User_id, count(link.Link_Code) sumlink,count(link.Link_View) sumview from Users left join Link on USERs.User_id = link.Create_User group by users.User_id order by sumview desc";
 
             Statement stm = con.createStatement();
@@ -328,8 +319,7 @@ public class LinkDAOImp implements LinkDAO{
         public String AddView(String URLa){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update Link set Link_View=Link_View + 1 where Link_Code = '"+URLa+"'";
             
             Statement stm = con.createStatement();
@@ -351,8 +341,7 @@ public class LinkDAOImp implements LinkDAO{
     public Boolean checkRandomKey(String RandomKey) {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select Link_Code from link where link_code = '"+RandomKey+"'";
             
             Statement stm = con.createStatement();
@@ -374,8 +363,7 @@ public class LinkDAOImp implements LinkDAO{
     public Boolean checkBackList(String urlCut) {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select URL from BlackList where URL = '"+urlCut+"'";
             
             Statement stm = con.createStatement();

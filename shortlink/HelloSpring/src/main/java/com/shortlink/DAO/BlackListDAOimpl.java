@@ -21,7 +21,10 @@ import java.util.List;
 public class BlackListDAOimpl implements BlackListDAO {
 
     private List<blackList> list = new ArrayList();
-
+    String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+    String usernamedb = "sa";
+    String passworddb ="123";
+    
     @Override
     public List<blackList> getBlacklist(int bl) {
         String sql = "select * from BlackList";
@@ -30,8 +33,7 @@ public class BlackListDAOimpl implements BlackListDAO {
         // }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -57,8 +59,7 @@ public class BlackListDAOimpl implements BlackListDAO {
     public Boolean updateBl(blackList bl) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update BlackList set"
                     + " URL=?,"
                     + " Create_User=?, Create_Date=?,"
@@ -89,8 +90,7 @@ public class BlackListDAOimpl implements BlackListDAO {
     public Boolean deleteBl(int bl) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "delete BlackList where ID=" + bl;
             Statement stmt = con.createStatement();
 //            ResultSet rs = stmt.executeQuery(sql);
@@ -112,8 +112,7 @@ public class BlackListDAOimpl implements BlackListDAO {
     public Boolean insertBl(blackList bl) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "insert into BlackList("
                     + "URL,"
                     + "Create_User, Create_Date,"

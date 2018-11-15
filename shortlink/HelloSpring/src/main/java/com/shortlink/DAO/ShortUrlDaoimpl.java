@@ -21,7 +21,9 @@ import java.util.List;
  * @author dell
  */
 public class ShortUrlDaoimpl implements ShortUrlDao {
-
+    String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+    String usernamedb ="sa";
+    String passworddb ="123";
     private List<shortlLink> list = new ArrayList();
 
     @Override
@@ -32,8 +34,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -66,8 +67,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         //}
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update Link set"
                     + " Link_Code= ?,"
                     + " Link_URL= ?, Create_Date=?,"
@@ -105,8 +105,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "delete Link where Link_ID= ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, Link_ID);
@@ -126,8 +125,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
     public Boolean insertLink(shortlLink sLink) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "insert into Link(Link_Code,"
                     + "Link_URL, Create_Date,"
                     + "Create_User,Expiry_Date,Status, Link_View,"
@@ -160,8 +158,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
                 + " from Link where Link_Type=" + linkType + " and Create_User=" + createUser;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -182,8 +179,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
     public Boolean changeLinkVip(shortlLink sLink) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update Link set"
                     + " Link_Code= ?,"
                     + " Link_URL= ? "
@@ -207,8 +203,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
     public Boolean expiryDateVip(shortlLink sLink) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update Link set"
                     + " Expiry_Date= ?"
                     + " where Link_ID= ?";
@@ -231,8 +226,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
     public Boolean createLinkVip(shortlLink sLink) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "insert into Link(Link_Code,"
                     + "Link_URL, Create_Date,"
                     + "Create_User, Expiry_Date, Status"

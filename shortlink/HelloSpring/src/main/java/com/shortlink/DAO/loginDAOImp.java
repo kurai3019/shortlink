@@ -26,13 +26,15 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class loginDAOImp implements loginDAO {
-
+    String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+    String usernamedb ="sa";
+    String passworddb ="123";
+    
     @Override
     public Users login(String username, String password) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select * from Users where User_Name = ? and User_PassWord= ? and status=1";
 
             PreparedStatement stm = con.prepareStatement(sql);
@@ -77,8 +79,7 @@ public class loginDAOImp implements loginDAO {
     public List<Links> linkHistory(String userid) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select * from Link where Create_User=" + userid + " and status = 1";
 
             Statement stm = con.createStatement();
@@ -115,8 +116,7 @@ public class loginDAOImp implements loginDAO {
     public boolean checkVipEx(String username) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select * from Users \n"
                     + "where User_Name='" + username + "' and Role_Id = 3  and Expiry_Date_Vip < GETDATE()";
 
@@ -138,8 +138,7 @@ public class loginDAOImp implements loginDAO {
     public boolean checkUserNameAndPassWord(String username,String Password) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "123");
             String sql = "select * from Users \n"
                     + "where User_Name='" + username + "' and User_PassWord = '"+Password+"'";
 
@@ -161,8 +160,7 @@ public class loginDAOImp implements loginDAO {
     public boolean checkEmail(String username) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "123");
             String sql = "select * from Users \n"
                     + "where User_Name='" + username + "' and User_PassWord is null";
 
@@ -186,8 +184,7 @@ public class loginDAOImp implements loginDAO {
     public boolean checkForgotRandomKey(String forgotRandomKey) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "123");
             String sql = "select * from Users \n"
                     + "where ForgotRandom_Key='" + forgotRandomKey + "'";
 
@@ -209,8 +206,7 @@ public class loginDAOImp implements loginDAO {
     public boolean changeEX(String username) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update Users \n"
                     + "set Role_Id = 2\n"
                     + "where User_Name='" + username + "' and Role_Id = 3  and Expiry_Date_Vip < GETDATE()";
@@ -231,8 +227,7 @@ public class loginDAOImp implements loginDAO {
     public boolean updateForgotPassWord(String EmailForgot,String ForgotRandomKey) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "123");
             String sql = "update Users \n"
                     + "set ForgotRandom_Key ='" + ForgotRandomKey + "',ForgotRandom_Date = getDate()+( Select Value from Config where ID =4) \n "
                     + "where User_Name='" + EmailForgot + "'";
@@ -253,8 +248,7 @@ public class loginDAOImp implements loginDAO {
     public boolean updateChangePassWord(String mkOld,String mkNewms,String username) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "123");
             String sql = "update Users \n"
                     + "set user_password ='" + mkNewms + "' \n "
                     + "where User_Name='" + username + "'";
@@ -275,8 +269,7 @@ public class loginDAOImp implements loginDAO {
     public boolean updateChangePassWord1(String mkNewms,String username) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "123");
             String sql = "update Users \n"
                     + "set user_password ='" + mkNewms + "' \n "
                     + "where User_Name='" + username + "'";
@@ -298,8 +291,7 @@ public class loginDAOImp implements loginDAO {
     public String insertLoginByGoogle(String email, String userName, String userFullName) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "insert into Users(Email,Create_Date,Status,Role_Id,User_Name,User_FullName) "
                     + "values (?,GETDATE(),1,2,?,?);";
 
@@ -325,8 +317,7 @@ public class loginDAOImp implements loginDAO {
     public boolean checkLoginByGoogle(String email) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select * from Users \n"
                     + "where Email='" + email + "' ";
 
@@ -347,8 +338,7 @@ public class loginDAOImp implements loginDAO {
     public Users loginByGoogle(String email) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select * from Users where Email = '" + email + "' and status=1";
 
             Statement stm = con.createStatement();
@@ -395,8 +385,7 @@ public class loginDAOImp implements loginDAO {
     public String insertRegisterByMaual(String userNameRegister, String userPassWordRegister, String userFullNameRegister, String emailRegister) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "insert into Users(User_Name,Email,Status,Role_Id,User_PassWord,User_FullName,Create_Date) "
                     + "values (?,?,1,2,?,?,GETDATE());";
 
@@ -423,8 +412,7 @@ public class loginDAOImp implements loginDAO {
     public boolean checkRegisterByMaual(String userNameRegister) {
            try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "123");
             String sql = "select * from Users \n"
                     + "where User_Name='" + userNameRegister + "'";
 

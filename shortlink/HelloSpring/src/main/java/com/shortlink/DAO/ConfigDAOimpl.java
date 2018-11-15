@@ -21,12 +21,14 @@ import java.util.List;
 public class ConfigDAOimpl implements ConfigDAO {
 
     private List<Config> list = new ArrayList();
-
+    String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+    String usernamedb = "sa";
+    String passworddb ="123";
+    
     public List<Config> getconfig() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from Config");
             while (rs.next()) {
@@ -47,8 +49,7 @@ public class ConfigDAOimpl implements ConfigDAO {
         //}
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update Config set"
                     + " Config_Name= ?,"
                     + " Value= ?"
@@ -75,8 +76,7 @@ public class ConfigDAOimpl implements ConfigDAO {
         // }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "delete Config where ID= ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, config);
@@ -95,8 +95,7 @@ public class ConfigDAOimpl implements ConfigDAO {
     public Boolean insertLink(Config config) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "insert into Config(Config_Name,"
                     + " Value) values(?,?)";
             PreparedStatement stm = con.prepareStatement(sql);

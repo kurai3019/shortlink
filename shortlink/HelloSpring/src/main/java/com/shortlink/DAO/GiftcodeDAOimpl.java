@@ -21,12 +21,14 @@ import java.util.List;
 public class GiftcodeDAOimpl implements GiftcodeDAO {
 
     private List<Giftcode> list = new ArrayList();
+    String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+    String usernamedb ="sa";
+    String passworddb ="123";
 
     public List<Giftcode> getgiftcode() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from GiftCode");
             while (rs.next()) {
@@ -43,8 +45,7 @@ public class GiftcodeDAOimpl implements GiftcodeDAO {
     public Boolean updategiftcode(Giftcode giftcode) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update GiftCode set"
                     + " [Gift_Code]=?"
                     + " ,[Gift_Name]=?"
@@ -72,8 +73,7 @@ public class GiftcodeDAOimpl implements GiftcodeDAO {
     public Boolean deletegiftcode(int giftcode) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             PreparedStatement stm = con.prepareStatement("delete GiftCode where ID= ?");
             stm.setInt(1, giftcode);
             if (stm.executeUpdate() > 0) {
@@ -91,8 +91,7 @@ public class GiftcodeDAOimpl implements GiftcodeDAO {
     public Boolean insertgiftcode(Giftcode giftcode) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "insert into GiftCode(Gift_Code,"
                     + " Gift_Name, Gift_Status, Gift_Date_Vip) values(?,?,?,?)";
             PreparedStatement stm = con.prepareStatement(sql);
