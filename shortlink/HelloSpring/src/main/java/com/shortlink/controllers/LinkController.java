@@ -84,8 +84,13 @@ public class LinkController {
         }
         String userid = session.getAttribute("userid").toString();
         linkDAO.getLink(url, tokenstring, userid);
-
         map.addAttribute("link", "http://localhost:8084/" + tokenstring );
+        int link = linkDAO.thongkeuserlink((Integer) session.getAttribute("userid"));
+        int view = linkDAO.thongkeuserview((Integer) session.getAttribute("userid"));
+        String kq = linkDAO.xephang((Integer) session.getAttribute("userid"));
+        map.addAttribute("kq", kq);
+        map.addAttribute("sumview", view);
+        map.addAttribute("sumlink", link);
         return "shortLink";
     }
         @RequestMapping(value = "/addcodevip", method = RequestMethod.POST)
