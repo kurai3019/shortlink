@@ -160,7 +160,7 @@ public class LinkDAOImp implements LinkDAO{
         }
         return null;
     };
-      public String updatedatevipusertoday(int userid,int date) {
+      public String updatedatevipusertoday(int date,int userid) {
                 try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(url, usernamedb, passworddb);

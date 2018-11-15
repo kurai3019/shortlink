@@ -229,7 +229,7 @@ public class loginDAOImp implements loginDAO {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(url, usernamedb, "123");
             String sql = "update Users \n"
-                    + "set ForgotRandom_Key ='" + ForgotRandomKey + "',ForgotRandom_Date = getDate()+( Select Value from Config where ID =4) \n "
+                    + "set ForgotRandom_Key ='" + ForgotRandomKey + "',ForgotRandom_Date = getDate()+( Select Value from Config where ID =5) \n "
                     + "where User_Name='" + EmailForgot + "'";
             PreparedStatement stm = con.prepareStatement(sql);
             if (stm.executeUpdate() > 0) {
