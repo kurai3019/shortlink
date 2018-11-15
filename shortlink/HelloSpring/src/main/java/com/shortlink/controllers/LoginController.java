@@ -20,11 +20,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -54,14 +52,14 @@ public class LoginController {
         for (int i = 1;i < username.length(); i++){
             if (username.charAt(i) == '@' || username.charAt(i) == '"' ){
                 map.addAttribute("error", "Tên tài khoản không được chứa ký tự đặc biệt");
-                return "login";
+                return "shortLink";
             }
         };
         
         for (int i = 1;i < password.length(); i++){
             if (password.charAt(i) == '@' || password.charAt(i) == '"'){
                 map.addAttribute("error", "Tên tài khoản không được chứa ký tự đặc biệt");
-                return "login";
+                return "shortLink";
             }
         };
         
@@ -93,7 +91,7 @@ public class LoginController {
             return "shortLink";
         } else {
             map.addAttribute("error", "Sai tài khoản hoặc mật khẫu");
-            return "login";
+            return "shortLink";
         }
 
     }
@@ -117,7 +115,7 @@ public class LoginController {
         session.removeAttribute("email");
         session.removeAttribute("fullname");
         session.removeAttribute("createdate");
-            return "login";
+            return "shortLink";
 
         }
     }
@@ -133,7 +131,7 @@ public class LoginController {
 
         map.addAttribute("error", "Logout Thành công");
 
-        return "login";
+        return "shortLink";
     }
 
     @RequestMapping(value = "myprolife", method = RequestMethod.GET)
@@ -219,7 +217,7 @@ public class LoginController {
                 return "shortLink";
             } else {
                 map.addAttribute("error", "Sai tài khoản hoặc mật khẫu");
-                return "login";
+                return "shortLink";
             }
 
         } else {

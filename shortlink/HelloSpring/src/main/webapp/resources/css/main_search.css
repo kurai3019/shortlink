@@ -454,7 +454,6 @@ legend {
 }
 
 .s01 {
-  min-height: 100vh;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
@@ -462,10 +461,10 @@ legend {
   -ms-flex-align: center;
       align-items: center;
   font-family: 'Poppins', sans-serif;
-  background: url("../../resources/img/page-background.png");
   background-size: cover;
   background-position: center center;
   padding: 15px;
+  background-color: activecaption;
 }
 
 .s01 form {

@@ -44,7 +44,7 @@ public class LinkController {
             map.addAttribute("sumlink", sumlink);
             return "shortLink";
         } else {
-            return "login";
+            return "shortLink";
 
         }    }
 

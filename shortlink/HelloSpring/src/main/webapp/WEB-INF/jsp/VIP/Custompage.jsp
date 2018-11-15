@@ -6,7 +6,7 @@
     <head>
         <base href="${pageContext.servletContext.contextPath}/">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="../../../resources/js/jquery-1.8.3.js" type="text/javascript"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="resources/js/jquery-1.8.3.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" type="text/javascript"></script>
         <style>
             body {font-family: Arial, Helvetica, sans-serif;
@@ -221,7 +221,7 @@
     </head>
     <body>
         <sql:setDataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                           url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink;user=sa;password=123"
+                           url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink;user=sa;password="
                            var="con"/>
 
         <sql:query dataSource="${con}" var="rs">
@@ -232,7 +232,7 @@
             ,[Create_Date]
             ,[Expiry_Date]
             ,[Link_View]
-            from Link where Link_Type=1 and Create_User=${userid}
+            from Link where Link_Type=0 and Create_User=${userid}
         </sql:query>
 
 

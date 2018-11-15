@@ -26,7 +26,7 @@ public class ConfigDAOimpl implements ConfigDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from Config");
             while (rs.next()) {
@@ -48,7 +48,7 @@ public class ConfigDAOimpl implements ConfigDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "update Config set"
                     + " Config_Name= ?,"
                     + " Value= ?"
@@ -76,7 +76,7 @@ public class ConfigDAOimpl implements ConfigDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "delete Config where ID= ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, config);
@@ -96,7 +96,7 @@ public class ConfigDAOimpl implements ConfigDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "insert into Config(Config_Name,"
                     + " Value) values(?,?)";
             PreparedStatement stm = con.prepareStatement(sql);

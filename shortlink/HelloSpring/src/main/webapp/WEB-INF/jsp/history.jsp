@@ -11,68 +11,83 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>History</title>
-                <jsp:include page="headerHTML.jsp"/>
+        <jsp:include page="headerHTML.jsp"/>
+        <style>
+            th {
+                font-family: Lato-Bold;
+                font-size: 18px;
+                color: #fff;
+                line-height: 1.4;
 
+                background-color: #6c7ae0;
+            }
+
+            td {
+                font-family: Lato-Regular;
+                font-size: 15px;
+                color: #808080;
+                line-height: 1.4;
+            }
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
 
-        <div class="container-scroller">
+            <div class="container-scroller">
 
-    <jsp:include page="nav.jsp"></jsp:include>
-    
-    
-           <% if (session.getAttribute("username") != null) { %>
-                <!-- partial -->
-                <div class="main-panel">
-                    <div class="s01">    
-                        <div class="table100 ver1 m-b-110">
+            <jsp:include page="nav.jsp"></jsp:include>
 
-                            <div class="table100-head">
-                                <table>
-                                    <thead>
-                                        <tr class="row100 head">
-                                            <th class="cell100 column1">Link rút gọn</th>
-                                            <th class="cell100 column2">URL</th>
-                                            <th class="cell100 column3">Ngày Tạo</th>
-                                            <th class="cell100 column4">Lượt xem</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
 
-                            <div class="table100-body js-pscroll ps ps--active-y">
-                                <table>
-                                    <tbody>
-                                        <c:forEach var="his" items="${listHistory}">
-                                            <tr class="row100 body">
-                                                <td class="cell100 column1">http://localhost:8084/${his.code}</td>
-                                                <td class="cell100 column2">${his.url}</td>
-                                                <td class="cell100 column3">${his.datestring}</td>
-                                                <td class="cell100 column4">${his.view}</td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                                <div class="ps__rail-x" style="left: 0px; bottom: -576.8px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 576.8px; height: 585px; right: 5px;"><div class="ps__thumb-y" tabindex="0" style="top: 290px; height: 294px;"></div></div></div>
-                        </div>
+            <% if (session.getAttribute("username") != null) { %>
+            <!-- partial -->
+            <div class="main-panel">
+
+
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Link rút gọn</th>
+                            <th>URL</th>
+                            <th>Ngày Tạo</th>
+                            <th>Lượt xem</th>
+                        </tr>
+                    </thead>
+
+
+
+
+
+                    <tbody>
+                        <c:forEach var="his" items="${listHistory}">
+                            <tr class="row100 body">
+                                <td>http://localhost:8084/${his.code}</td>
+                                <td>${his.url}</td>
+                                <td>${his.datestring}</td>
+                                <td>${his.view}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <div class="ps__rail-x" style="left: 0px; bottom: -576.8px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 576.8px; height: 585px; right: 5px;"><div class="ps__thumb-y" tabindex="0" style="top: 290px; height: 294px;"></div></div>
+
+
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap Dash</a>. All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="mdi mdi-heart text-danger"></i></span>
                     </div>
+                </footer>
 
-
-                    <!-- content-wrapper ends -->
-                    <!-- partial:partials/_footer.html -->
-                    <footer class="footer">
-                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap Dash</a>. All rights reserved.</span>
-                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="mdi mdi-heart text-danger"></i></span>
-                        </div>
-                    </footer>
-                    <!-- partial -->
-                </div>
-                <!-- main-panel ends -->
-            </div>   
-                        <% }%>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+            
+                <!-- partial -->
+            </div>
+            <% }%>
+            <!-- main-panel ends -->   
+           
 
             <!--===============================================================================================-->	
             <script src="../../resources/vendor/jquery/jquery-3.2.1.min.js"></script>

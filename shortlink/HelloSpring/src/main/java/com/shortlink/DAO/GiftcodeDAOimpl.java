@@ -5,7 +5,6 @@
  */
 package com.shortlink.DAO;
 
-import com.shortlink.model.Config;
 import com.shortlink.model.Giftcode;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,7 +26,7 @@ public class GiftcodeDAOimpl implements GiftcodeDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from GiftCode");
             while (rs.next()) {
@@ -45,7 +44,7 @@ public class GiftcodeDAOimpl implements GiftcodeDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "update GiftCode set"
                     + " [Gift_Code]=?"
                     + " ,[Gift_Name]=?"
@@ -74,7 +73,7 @@ public class GiftcodeDAOimpl implements GiftcodeDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             PreparedStatement stm = con.prepareStatement("delete GiftCode where ID= ?");
             stm.setInt(1, giftcode);
             if (stm.executeUpdate() > 0) {
@@ -93,7 +92,7 @@ public class GiftcodeDAOimpl implements GiftcodeDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "insert into GiftCode(Gift_Code,"
                     + " Gift_Name, Gift_Status, Gift_Date_Vip) values(?,?,?,?)";
             PreparedStatement stm = con.prepareStatement(sql);

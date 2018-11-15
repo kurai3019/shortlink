@@ -31,7 +31,7 @@ public class BlackListDAOimpl implements BlackListDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -58,7 +58,7 @@ public class BlackListDAOimpl implements BlackListDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "update BlackList set"
                     + " URL=?,"
                     + " Create_User=?, Create_Date=?,"
@@ -90,7 +90,7 @@ public class BlackListDAOimpl implements BlackListDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "delete BlackList where ID=" + bl;
             Statement stmt = con.createStatement();
 //            ResultSet rs = stmt.executeQuery(sql);
@@ -113,7 +113,7 @@ public class BlackListDAOimpl implements BlackListDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "insert into BlackList("
                     + "URL,"
                     + "Create_User, Create_Date,"

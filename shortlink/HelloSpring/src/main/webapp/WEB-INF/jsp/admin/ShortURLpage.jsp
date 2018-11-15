@@ -36,7 +36,7 @@
     <body>
 
         <sql:setDataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                           url="jdbc:sqlserver://ADMIN:1433;databaseName=ShortLink;user=sa;password=123"
+                           url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink;user=sa;password=''"
                            var="con"/>
 
         <sql:query dataSource="${con}" var="rs">

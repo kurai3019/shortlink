@@ -12,7 +12,7 @@
                         <li class="nav-item nav-profile dropdown">
                             
                             <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                <%  if (session.getAttribute("role").equals(3)) {%>       <img style="width: 30px; height: 30px;margin-right: 10px;" src="../../../resources/images/vip.jpg" alt="Avatar" class="avatar"> Ngày hết hạn:  <b style="color:red; margin-left: 10px;"> ${sessionScope.vipdate}</b>
+                                <%  if (session.getAttribute("role").equals(3)) {%>       <img style="width: 30px; height: 30px;margin-right: 10px;" src="resources/images/vip.jpg" alt="Avatar" class="avatar"> Ngày hết hạn:  <b style="color:red; margin-left: 10px;"> ${sessionScope.vipdate}</b>
 <%} 
                                                if (session.getAttribute("role").equals(1)) {%> Admin <%}
                                                    if (session.getAttribute("role").equals(2)) {%> Thành viên   <%}%>

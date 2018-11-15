@@ -56,4 +56,4 @@
 <!-- Custom js for this page-->
 <script src="resources/js/dashboard.js"></script>
 <!-- End custom js for this page-->
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -70,6 +70,7 @@
 <link rel="stylesheet" type="text/css" href="../../resources/css/util_table.css">
 <link rel="stylesheet" type="text/css" href="../../resources/css/main_table.css">
 <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="../../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="../../resources/css/style.css" rel="stylesheet" type="text/css"/>
 
 

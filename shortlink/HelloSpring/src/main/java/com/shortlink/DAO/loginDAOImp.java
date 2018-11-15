@@ -32,7 +32,7 @@ public class loginDAOImp implements loginDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "select * from Users where User_Name = ? and User_PassWord= ? and status=1";
 
             PreparedStatement stm = con.prepareStatement(sql);
@@ -78,7 +78,7 @@ public class loginDAOImp implements loginDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "select * from Link where Create_User=" + userid + " and status = 1";
 
             Statement stm = con.createStatement();
@@ -116,7 +116,7 @@ public class loginDAOImp implements loginDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "select * from Users \n"
                     + "where User_Name='" + username + "' and Role_Id = 3  and Expiry_Date_Vip < GETDATE()";
 
@@ -139,7 +139,7 @@ public class loginDAOImp implements loginDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "update Users \n"
                     + "set Role_Id = 2\n"
                     + "where User_Name='" + username + "' and Role_Id = 3  and Expiry_Date_Vip < GETDATE()";
@@ -161,7 +161,7 @@ public class loginDAOImp implements loginDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "insert into Users(Email,Create_Date,Status,Role_Id,User_Name,User_FullName) "
                     + "values (?,GETDATE(),1,2,?,?);";
 
@@ -188,7 +188,7 @@ public class loginDAOImp implements loginDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "select * from Users \n"
                     + "where Email='" + email + "' ";
 
@@ -210,7 +210,7 @@ public class loginDAOImp implements loginDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "select * from Users where Email = '" + email + "' and status=1";
 
             Statement stm = con.createStatement();
@@ -252,7 +252,7 @@ public class loginDAOImp implements loginDAO {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "insert into Users(User_Name,Email,Status,Role_Id,User_PassWord,User_FullName,Create_Date) "
                     + "values (?,?,1,2,?,?,GETDATE());";
 

@@ -33,7 +33,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -67,7 +67,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "update Link set"
                     + " Link_Code= ?,"
                     + " Link_URL= ?, Create_Date=?,"
@@ -106,7 +106,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "delete Link where Link_ID= ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, Link_ID);
@@ -127,7 +127,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "insert into Link(Link_Code,"
                     + "Link_URL, Create_Date,"
                     + "Create_User,Expiry_Date,Status, Link_View,"
@@ -161,7 +161,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -183,7 +183,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "update Link set"
                     + " Link_Code= ?,"
                     + " Link_URL= ? "
@@ -208,7 +208,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "update Link set"
                     + " Expiry_Date= ?"
                     + " where Link_ID= ?";
@@ -232,7 +232,7 @@ public class ShortUrlDaoimpl implements ShortUrlDao {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
-            Connection con = DriverManager.getConnection(url, "sa", "123");
+            Connection con = DriverManager.getConnection(url, "sa", "");
             String sql = "insert into Link(Link_Code,"
                     + "Link_URL, Create_Date,"
                     + "Create_User, Expiry_Date, Status"
