@@ -18,8 +18,15 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title> Spring </title>
             <style>
-                
+                .form-control-borderless {
+                    border: none;
+                }
 
+                .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+                    border: none;
+                    outline: none;
+                    box-shadow: none;
+                }
                 .dropdown{
                     border-radius:0;
                     border:0;
@@ -37,8 +44,8 @@
                 .dropdown-menu a{
                     color:#fff;
                 } 
-                
-                
+
+
                 /*phần tử phủ toàn màn hình*/
                 #over {
                     display: none;
@@ -216,8 +223,22 @@
                             <button type="submit" class="login100-form-btn">Rút gọn link</button>
                         </div>
                         <a id="lba"></a>
-                        <div id="ErrMer"></div>
-                        <div id="hideLink">${link}</div>
+                        <div id="ErrMer" style="color:red;">
+
+                        </div>
+                        
+                            <div id="hideLink" style="color: red;">
+                                <span class="mdi mdi-link-variant"></span>
+                                <input class="form-control form-control-lg form-control-borderless" disabled="0" value="${link}"></input>
+
+                                <div class="btn btn-lg btn-success">
+                                    <i class="mdi mdi-paperclip"></i><a href="${link}" target="_blank"><input class="btn btn-lg btn-success" value="Nhấn để chuyển sang link"></a>
+                                </div>
+
+                                <div class="btn btn-lg btn-success">
+                                    <i class="fa fa-clone"><input class="btn btn-lg btn-success" value="Copy" id="copy"></i>
+                                </div>
+                            </div>
                     </form>
                 </div>
 
@@ -226,7 +247,7 @@
                 <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap Dash</a>. All rights reserved.</span>
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <b>Nhóm 1 - PRO211</b>. All rights reserved.</span>
                         <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="mdi mdi-heart text-danger"></i></span>
                     </div>
                 </footer>

@@ -217,7 +217,7 @@ span.psw {
     <form class="modal-content animate" action="/addcodevip?#" method = "POST">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img style="width: 100px; height: 100px;" src="../../../resources/images/vip.jpg" alt="Avatar" class="avatar">
+      <img style="width: 100px; height: 100px;" src="resources/images/vip.jpg" alt="Avatar" class="avatar">
     </div>
       <label for="uname" style="margin-left: 20px;"><b>Code vip</b></label>
       <input style="background-color: #f0f0f5;" type="text" placeholder="Nhập code vip" name="codevip" required>

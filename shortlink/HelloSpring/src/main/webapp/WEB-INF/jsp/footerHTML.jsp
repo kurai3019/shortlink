@@ -5,12 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-
-
-
+<!DOCTYPE html>
 <script src='<c:url value="resources/js/jquery-3.2.1.min.js"/>'></script>
 <!--===============================================================================================-->
 <script src='<c:url value="resources/vendor/jquery/jquery-3.2.1.min.js"/>'></script>

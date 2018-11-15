@@ -78,14 +78,14 @@ public class LinkController {
         }
         if (session.getAttribute("userid") == null) {
             linkDAO.getLink(url, tokenstring, null);
-            map.addAttribute("link", "Link của bạn:<a href=" + "http://localhost:8084/" + tokenstring + ">http://localhost:8084/" + tokenstring + "</a>");
+            map.addAttribute("link", "http://localhost:8084/" + tokenstring);
             return "shortLink";
 
         }
         String userid = session.getAttribute("userid").toString();
         linkDAO.getLink(url, tokenstring, userid);
 
-        map.addAttribute("link", "Link của bạn:<a href=" + "http://localhost:8084/" + tokenstring + ">http://localhost:8084/" + tokenstring + "</a>");
+        map.addAttribute("link", "http://localhost:8084/" + tokenstring );
         return "shortLink";
     }
         @RequestMapping(value = "/addcodevip", method = RequestMethod.POST)

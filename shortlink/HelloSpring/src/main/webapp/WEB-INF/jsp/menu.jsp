@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <% if (session.getAttribute("username") == null) { %>
@@ -8,40 +9,38 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">History</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/register">History</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">My prolife</a>
-            </li>
-            
-<!--            <li class="nav-item dropdown dmenu">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Dropdown link
-                </a>
-                <div class="dropdown-menu sm-menu">
-                    <a class="dropdown-item" href="#">Link 1</a>
-                    <a class="dropdown-item" href="#">Link 2</a>
-                    <a class="dropdown-item" href="#">Link 3</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown dmenu">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Dropdown link
-                </a>
-                <div class="dropdown-menu sm-menu">
-                    <a class="dropdown-item" href="#">Link 1</a>
-                    <a class="dropdown-item" href="#">Link 2</a>
-                    <a class="dropdown-item" href="#">Link 3</a>
-                    <a class="dropdown-item" href="#">Link 4</a>
-                    <a class="dropdown-item" href="#">Link 5</a>
-                    <a class="dropdown-item" href="#">Link 6</a>
-                </div>-->
-            </li>
+            <!--            <li class="nav-item dropdown dmenu">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                Dropdown link
+                            </a>
+                            <div class="dropdown-menu sm-menu">
+                                <a class="dropdown-item" href="#">Link 1</a>
+                                <a class="dropdown-item" href="#">Link 2</a>
+                                <a class="dropdown-item" href="#">Link 3</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown dmenu">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                Dropdown link
+                            </a>
+                            <div class="dropdown-menu sm-menu">
+                                <a class="dropdown-item" href="#">Link 1</a>
+                                <a class="dropdown-item" href="#">Link 2</a>
+                                <a class="dropdown-item" href="#">Link 3</a>
+                                <a class="dropdown-item" href="#">Link 4</a>
+                                <a class="dropdown-item" href="#">Link 5</a>
+                                <a class="dropdown-item" href="#">Link 6</a>
+                            </div>-->
+            <div id='hideMe'> ${error}</div>
         </ul>
+
         <form class="form-inline my-2 my-lg-0">
+
             <a href="#login-box" class="login-window button">Đăng nhập</a>
 
         </form>
@@ -58,7 +57,7 @@
             <span class="login100-form-title p-b-34 p-t-27">
                 Log in
             </span>
-            <div id='hideMe'> ${error}</div>
+
 
             <div class="wrap-input100 validate-input" data-validate="Enter username">
                 <input class="input100" type="text" id="signinId" placeholder="Tên đăng nhập..." name="username" autofocus>
@@ -84,9 +83,6 @@
 
             <div class="container-login100-form-btn">
                 <button id="Sign" type="submit" class="login100-form-btn">Login</button>
-
-                <button id="Sign" type="button" class="login100-form-btn"><a href="${pageContext.request.contextPath }/register">Register</a></button>
-
             </div>
 
             <div class="text-center p-t-90">
@@ -108,12 +104,44 @@
             <button type="submit" class="login100-form-btn">Rút gọn link</button>
         </div>
         <a id="lba"></a>
-        <div id="ErrMer"></div>
-        <div id="hideLink">${link}</div>
+        <div id="ErrMer" style="color:red;">
+
+        </div>
+        <c:if test="${link!=null}">
+            <div id="hideLink" style="color: red;">
+                <span class="mdi mdi-link-variant"></span>
+                <input class="form-control form-control-lg form-control-borderless" disabled="0" value="${link}"></input>
+
+                <div class="btn btn-lg btn-success">
+                    <i class="mdi mdi-paperclip"></i><a href="${link}" target="_blank"><input class="btn btn-lg btn-success" value="Nhấn để chuyển sang link"></a>
+                </div>
+
+                <div class="btn btn-lg btn-success">
+                    <i class="fa fa-clone"><input class="btn btn-lg btn-success" value="Copy" id="copy"></i>
+                </div>
+            </div>
+        </c:if>
     </form>
 </div>
-<div class="imgages"></div>
+
+
+
+
+
+
+<!-- Footer -->
+<footer style="background-color: #c5cae9; width: 100%; height: 80px;text-align: center;padding-top: 40px;">
+
+    <!-- Copyright -->
+    © 2018 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 <script>
+    $('#copy').clone(true);
     $(document).ready(function () {
         $('.navbar-light .dmenu').hover(function () {
             $(this).find('.sm-menu').first().stop(true, true).slideDown(150);

@@ -34,10 +34,10 @@ public class LoginController {
 
     @Autowired
     private loginDAO loginDAO;
-    
+
     @Autowired
     private LinkDAO linkDAO;
-    
+
     @Autowired
     private GoogleUtils googleUtils;
 
@@ -49,20 +49,24 @@ public class LoginController {
             @RequestParam("password") String password,
             HttpSession session,
             ModelMap map) {
-        for (int i = 1;i < username.length(); i++){
-            if (username.charAt(i) == '@' || username.charAt(i) == '"' ){
-                map.addAttribute("error", "Tên tài khoản không được chứa ký tự đặc biệt");
+        for (int i = 1; i < username.length(); i++) {
+            if (username.charAt(i) == '@' || username.charAt(i) == '"') {
+                map.addAttribute("error", "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                        + "  Tên tài khoản không được chứa ký tự đặc biệt!\n"
+                        + "</div>");
                 return "shortLink";
             }
         };
-        
-        for (int i = 1;i < password.length(); i++){
-            if (password.charAt(i) == '@' || password.charAt(i) == '"'){
-                map.addAttribute("error", "Tên tài khoản không được chứa ký tự đặc biệt");
+
+        for (int i = 1; i < password.length(); i++) {
+            if (password.charAt(i) == '@' || password.charAt(i) == '"') {
+                map.addAttribute("error", "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                        + "  Tên tài khoản không được chứa ký tự đặc biệt!\n"
+                        + "</div>");
                 return "shortLink";
             }
         };
-        
+
         Users user = loginDAO.login(username, password);
         if (user != null) {
             if (user.getRoleId() == 3) {
@@ -80,7 +84,7 @@ public class LoginController {
             session.setAttribute("email", user.getEmail());
             session.setAttribute("createdate", user.getStringDate());
             session.setAttribute("vipdate", user.getStringDatevip());
-            
+
             int link = linkDAO.thongkeuserlink(user.getUserId());
             int view = linkDAO.thongkeuserview(user.getUserId());
             String kq = linkDAO.xephang(user.getUserId());
@@ -90,7 +94,9 @@ public class LoginController {
 
             return "shortLink";
         } else {
-            map.addAttribute("error", "Sai tài khoản hoặc mật khẫu");
+            map.addAttribute("error", "<div class=\"alert alert-danger\" role=\"alert\">\n"
+                        + "  Sai tài khoản và mật khẩu!\n"
+                        + "</div>");
             return "shortLink";
         }
 
@@ -109,12 +115,12 @@ public class LoginController {
             map.addAttribute("sumlink", link);
             return "shortLink";
         } else {
-        session.removeAttribute("username");
-        session.removeAttribute("role");
-        session.removeAttribute("userid");
-        session.removeAttribute("email");
-        session.removeAttribute("fullname");
-        session.removeAttribute("createdate");
+            session.removeAttribute("username");
+            session.removeAttribute("role");
+            session.removeAttribute("userid");
+            session.removeAttribute("email");
+            session.removeAttribute("fullname");
+            session.removeAttribute("createdate");
             return "shortLink";
 
         }
@@ -129,7 +135,9 @@ public class LoginController {
         session.removeAttribute("fullname");
         session.removeAttribute("createdate");
 
-        map.addAttribute("error", "Logout Thành công");
+        map.addAttribute("error", "<div class=\"alert alert-success\" role=\"alert\">\n"
+                + "  Logout Thành công!\n"
+                + "</div>");
 
         return "shortLink";
     }
@@ -231,8 +239,7 @@ public class LoginController {
     public String register(HttpSession session, ModelMap map) {
         return "dangki";
     }
-    
- 
+
     @RequestMapping(value = "/registerEvent", method = RequestMethod.POST)
     public String registerEvent(
             HttpSession session,
@@ -247,12 +254,10 @@ public class LoginController {
         String b = userPassWordRegister;
         String c = userFullNameRegister;
         String d = emailRegister;
-        
-        loginDAO.insertRegisterByMaual(a,b,c,d);
-        
-        
-      
-             return "dangki";
+
+        loginDAO.insertRegisterByMaual(a, b, c, d);
+
+        return "dangki";
     }
 
 //    @RequestMapping("/login-facebook")

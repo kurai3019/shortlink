@@ -23,38 +23,6 @@
         <!-- /css -->
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <style>
-            .signup_1{
-
-                background:url(../../resources/images/banner.jpg) no-repeat;
-                background-attachment:fixed;
-                background-position:center;
-                background-size:cover;
-                -webkit-background-size:cover;
-                -moz-background-size:cover;
-                -o-background-size:cover;
-                font-family: 'Raleway', sans-serif;
-                font-weight:300;
-
-            }
-
-            .dropdown{
-                border-radius:0;
-                border:0;
-            }
-            .dropdown-menu{
-                background: #0c73cc;
-                border:0;
-                top:80%;
-                border-radius:0px 0px 5px 5px;
-            }
-            .dropdown-item:hover{
-                background:#085ca5;
-                color:#fff;
-            }
-            .dropdown-menu a{
-                color:#fff;
-            } 
-
 
             /*phần tử phủ toàn màn hình*/
             #over {
@@ -168,55 +136,9 @@
 
         </style>
     </head>
-    <body>
-        <nav class="navbar navbar-expand-sm   navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#">Waris</a>
-
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact us</a>
-                    </li>
-                    <li class="nav-item dropdown dmenu">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Dropdown link
-                        </a>
-                        <div class="dropdown-menu sm-menu">
-                            <a class="dropdown-item" href="#">Link 1</a>
-                            <a class="dropdown-item" href="#">Link 2</a>
-                            <a class="dropdown-item" href="#">Link 3</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown dmenu">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            Dropdown link
-                        </a>
-                        <div class="dropdown-menu sm-menu">
-                            <a class="dropdown-item" href="#">Link 1</a>
-                            <a class="dropdown-item" href="#">Link 2</a>
-                            <a class="dropdown-item" href="#">Link 3</a>
-                            <a class="dropdown-item" href="#">Link 4</a>
-                            <a class="dropdown-item" href="#">Link 5</a>
-                            <a class="dropdown-item" href="#">Link 6</a>
-                        </div>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <a href="#login-box" class="login-window button">Đăng nhập</a>
-
-                </form>
-            </div>
-        </nav>
-        <div class="signup_1">
+    <body style="background:url(../../resources/images/banner.jpg) no-repeat;">
+        
+        
 
             <div class="content-w3ls">
                 <div class="content-agile1">
@@ -243,10 +165,6 @@
                         <div class="form-control agileinfo">	
                             <input type="password" class="lock" name="confirm-password" placeholder="Confirm Password" id="password2" required="">
                         </div>	
-
-                        <input type="submit" id="btnDangKi" class="register" value="test">
-
-
                         <input type="submit" class="register" value="Register">
                     </form>
 
@@ -260,18 +178,7 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <!-- Footer -->
-            <footer style="background-color: #c5cae9; width: 100%; height: 80px;text-align: center;padding-top: 40px;">
 
-                <!-- Copyright -->
-                © 2018 Copyright:
-                <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
-
-                <!-- Copyright -->
-
-            </footer>
-            <!-- Footer -->
-        </div>
         <script type="text/javascript">
             window.onload = function () {
                 document.getElementById("password1").onchange = validatePassword;

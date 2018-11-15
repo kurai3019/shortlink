@@ -47,11 +47,10 @@
 
                 <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th>Link rút gọn</th>
-                            <th>URL</th>
-                            <th>Ngày Tạo</th>
-                            <th>Lượt xem</th>
+                        <tr class="row100 head">
+                            <th class="cell100 column1">Link rút gọn</th>
+                            <th class="cell100 column1">Ngày Tạo</th>
+                            <th class="cell100 column1">Lượt xem</th>
                         </tr>
                     </thead>
 
@@ -61,17 +60,15 @@
 
                     <tbody>
                         <c:forEach var="his" items="${listHistory}">
-                            <tr class="row100 body">
+                            <tr>
                                 <td>http://localhost:8084/${his.code}</td>
-                                <td>${his.url}</td>
                                 <td>${his.datestring}</td>
                                 <td>${his.view}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-                <div class="ps__rail-x" style="left: 0px; bottom: -576.8px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 576.8px; height: 585px; right: 5px;"><div class="ps__thumb-y" tabindex="0" style="top: 290px; height: 294px;"></div></div>
-
+                
 
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -82,22 +79,14 @@
 
                 <!-- content-wrapper ends -->
                 <!-- partial:partials/_footer.html -->
-            
+
                 <!-- partial -->
             </div>
             <% }%>
             <!-- main-panel ends -->   
-           
 
-            <!--===============================================================================================-->	
-            <script src="../../resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-            <!--===============================================================================================-->
-            <script src="../../resources/vendor/bootstrap/js/popper.js"></script>
-            <script src="../../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-            <!--===============================================================================================-->
-            <script src="../../resources/vendor/select2/select2.min.js"></script>
-            <!--===============================================================================================-->
-            <script src="../../resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+
             <script>
                 $('.js-pscroll').each(function () {
                     var ps = new PerfectScrollbar(this);
@@ -106,7 +95,7 @@
                         ps.update();
                     })
                 });
-
+                
 
             </script>
             <!--===============================================================================================-->

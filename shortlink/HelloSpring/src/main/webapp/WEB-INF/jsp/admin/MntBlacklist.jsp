@@ -41,8 +41,8 @@
                font-family: Courier New, Courier, monospace">
             Management Blacklist - Admin</p>
         <div id="jsGrid"></div>
-
-        <div id="jsGrid"></div></center>
+        <div id="jsGrid"></div>
+    </center>
 
     <script>
         $('document').ready(function () {

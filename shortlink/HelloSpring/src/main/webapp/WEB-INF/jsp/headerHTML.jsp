@@ -72,5 +72,6 @@
 <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
 <link href="../../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="../../resources/css/style.css" rel="stylesheet" type="text/css"/>
-
+<link href="../../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="../../resources/css/style.css" rel="stylesheet" type="text/css"/>
 

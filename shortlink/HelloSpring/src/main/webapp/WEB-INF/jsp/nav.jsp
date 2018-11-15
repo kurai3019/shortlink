@@ -74,7 +74,7 @@
                                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
                             </a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath }/home"><span class="menu-title">Get link</span><i class="mdi mdi-link-variant"></i></a><br>
                         </li>
                         <li class="nav-item">
