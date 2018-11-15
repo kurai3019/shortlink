@@ -146,7 +146,7 @@
                     <p class="agileits2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
                 <div class="content-agile2">
-                    <form action="" method="post">
+                    <form action="registerEvent" method="post">
 
                         <div class="form-control w3layouts"> 
                             <input type="text" id="firstname" name="userFullNameRegister" placeholder="First Name" title="Please enter your First Name" required="">
@@ -165,6 +165,11 @@
                         <div class="form-control agileinfo">	
                             <input type="password" class="lock" name="confirm-password" placeholder="Confirm Password" id="password2" required="">
                         </div>	
+                        
+                        
+                        <div id='hideMe' style="margin-left:20px;color: red"><strong> ${error}</strong></div>
+                        <div id='hideMe' style="margin-left:20px;color: blue"><strong> ${success}</strong></div>
+                         
                         <input type="submit" class="register" value="Register">
                     </form>
 
