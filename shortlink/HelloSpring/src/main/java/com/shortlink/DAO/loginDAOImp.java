@@ -92,13 +92,18 @@ public class loginDAOImp implements loginDAO {
                 String linkcode = rs.getString("Link_Code");
                 String linkurl = rs.getString("link_URL");
                 Date createdate = rs.getDate("Create_Date");
+                Date exdate = rs.getDate("Expiry_Date");
                 int linkview = rs.getInt("Link_View");
                 Format formatter = new SimpleDateFormat("dd/MM/YYYY");
                 String s = null;
+                String sd = null;
                 if (createdate != null) {
                     s = formatter.format(createdate);
                 }
-                Links history = new Links(linkcode, linkurl, s, linkview);
+                if (exdate != null) {
+                    sd = formatter.format(exdate);
+                }
+                Links history = new Links(linkcode, linkurl, s, linkview,sd);
                 result.add(history);
 
             }
