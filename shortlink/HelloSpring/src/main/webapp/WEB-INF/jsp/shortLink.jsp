@@ -226,32 +226,29 @@
                         <div id="ErrMer" style="color:red;">
 
                         </div>
-                        
-                            <div id="hideLink" style="color: red;">
-                                <span class="mdi mdi-link-variant"></span>
-                                <input class="form-control form-control-lg form-control-borderless" disabled="0" value="${link}"></input>
 
-                                <div class="btn btn-lg btn-success">
-                                    <i class="mdi mdi-paperclip"></i><a href="${link}" target="_blank"><input class="btn btn-lg btn-success" value="Nhấn để chuyển sang link"></a>
-                                </div>
+                        <div id="hideLink" style="color: red;">
+                            <span class="mdi mdi-link-variant"></span>
+                            <input class="form-control form-control-lg form-control-borderless" disabled="0" value="${link}"></input>
 
-                                <div class="btn btn-lg btn-success">
-                                    <i class="fa fa-clone"><input class="btn btn-lg btn-success" value="Copy" id="copy"></i>
-                                </div>
+                            <div class="btn btn-lg btn-success">
+                                <i class="mdi mdi-paperclip"></i><a href="${link}" target="_blank"><input class="btn btn-lg btn-success" value="Nhấn để chuyển sang link"></a>
                             </div>
+
+                            <div class="btn btn-lg btn-success">
+                                <i class="fa fa-clone"><input class="btn btn-lg btn-success" value="Copy" id="copy"></i>
+                            </div>
+                        </div>
                     </form>
                 </div>
-
-
-                <!-- content-wrapper ends -->
-                <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
                         <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <b>PRO211</b>. All rights reserved.</span>
                         <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="mdi mdi-heart text-danger"></i></span>
                     </div>
                 </footer>
-                <!-- partial -->
+
+
             </div>
 
 
