@@ -7,7 +7,7 @@
                     <a class="navbar-brand brand-logo-mini" href="index.html"><img src="resources/images/logo-mini.svg" alt="logo"></a>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-stretch">
-
+  <span class="font-weight-bold mb-2" style="color: blue">${success}</span>
                     <ul class="navbar-nav navbar-nav-right">
                         <li class="nav-item nav-profile dropdown">
                             
@@ -22,6 +22,7 @@
                                     <img src="resources/images/faces/face1.jpg" alt="image">
                                     <span class="availability-status online"></span>             
                                 </div>
+                               
                                 <div class="nav-profile-text">
                                     <p class="mb-1 text-black">${sessionScope.username}</p>
                                 </div>
@@ -69,6 +70,7 @@
                                     <span class="login-status online"></span> <!--change to offline or busy as needed-->              
                                 </div>
                                 <div class="nav-profile-text d-flex flex-column">
+                                    
                                     <span class="font-weight-bold mb-2">${sessionScope.username}</span>
                                 </div>
                                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>

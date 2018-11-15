@@ -163,7 +163,7 @@ span.psw {
                             <form class="forms-sample" action="#">
                                 <div class="form-group">
                                     <i class="mdi mdi-account">Username</i>
-                                    <input type="text" class="form-control" id="exampleInputName1" value="${sessionScope.username}" disabled>
+                                    <input type="text" class="form-control" id="exampleInputName1" value="${sessionScope.username}" name="username" disabled>
                                 </div>
                                 <div class="form-group">
                                     <i class="mdi mdi-mail-ru">Email</i> 
@@ -186,9 +186,20 @@ span.psw {
 
                                 
                                 <button onclick="document.getElementById('id01').style.display='block'" >Nạp code vip</button>
-                                <button >Đổi mật khẩu
-</button>
-                                
+                                <button onclick="document.getElementById('id02').style.display='block'">Đổi mật khẩu</button>
+                                 <p id="error1">${error1}</p>
+                            <p id="error2">${error2}</p>
+                            <p id="success1">${success1}</p>
+                            <p id="success2">${success2}</p>
+                          
+                        <div class="alert alert-danger" role="alert" >
+                            <strong>${error1}</strong> ${error2}
+                        </div>
+                       
+                            
+                        <div class="alert alert-success" role="alert" >
+                            <strong>${success1}</strong> ${success2}
+                        </div>
                             </form>
                         </div>
                     </div>
@@ -227,6 +238,24 @@ span.psw {
   </form>
 </div>
 
+                                
+                                <div id="id02" class="modal">
+  
+    <form class="modal-content animate" action="/changePassword?#" method = "POST">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
+    </div>
+      <label for="uname" style="margin-left: 20px;"><b>Nhập mật khẩu cũ</b></label>
+      <input style="background-color: #f0f0f5;" type="text" placeholder="Nhập mật khẩu cũ" name="mkOld" required>
+      <label for="uname" style="margin-left: 20px;"><b>Nhập mật khẩu mới</b></label>
+      <input style="background-color: #f0f0f5;" type="text" placeholder="Nhập mật khẩu mới" name="mkNewms" required>
+      <input type="text" class="form-control" id="exampleInputName1" value="${sessionScope.username}" name="username1" hidden>
+
+
+      <button type="submit">Đổi</button>
+  </form>
+</div>
 <script>
 // Get the modal
 window.onload = function()

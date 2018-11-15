@@ -45,7 +45,7 @@
 
 
             <div class="wrap-login100">
-                <form class="login100-form validate-form" action="login" method = "POST"  modelAttribute="message" id="login-from">
+                <form class="login100-form validate-form" action="login" method = "post"  modelAttribute="message" id="login-from">
                     <span class="login100-form-logo">
                         <i class="zmdi zmdi-landscape"></i>
                     </span>
@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="text-center p-t-90">
-                        <a class="txt1" href="#">
+                        <a class="txt1" href="${pageContext.request.contextPath}/forgotPassword">
                             Forgot Password?
                         </a>
                     </div>

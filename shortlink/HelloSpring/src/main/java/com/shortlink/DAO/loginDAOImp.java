@@ -133,6 +133,77 @@ public class loginDAOImp implements loginDAO {
         }
         return false;
     }
+    
+     @Override
+    public boolean checkUserNameAndPassWord(String username,String Password) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "select * from Users \n"
+                    + "where User_Name='" + username + "' and User_PassWord = '"+Password+"'";
+
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                return true;
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+         @Override
+    public boolean checkEmail(String username) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "select * from Users \n"
+                    + "where User_Name='" + username + "' and User_PassWord is null";
+
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                return true;
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    
+    
+    @Override
+    public boolean checkForgotRandomKey(String forgotRandomKey) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "select * from Users \n"
+                    + "where ForgotRandom_Key='" + forgotRandomKey + "'";
+
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                return true;
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     @Override
     public boolean changeEX(String username) {
@@ -155,6 +226,73 @@ public class loginDAOImp implements loginDAO {
         }
         return true;
     }
+    
+     @Override
+    public boolean updateForgotPassWord(String EmailForgot,String ForgotRandomKey) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "update Users \n"
+                    + "set ForgotRandom_Key ='" + ForgotRandomKey + "',ForgotRandom_Date = getDate()+( Select Value from Config where ID =4) \n "
+                    + "where User_Name='" + EmailForgot + "'";
+            PreparedStatement stm = con.prepareStatement(sql);
+            if (stm.executeUpdate() > 0) {
+                return true;
+            }
+            stm.close();
+            con.close();
+        } catch (Exception e1) {
+            System.out.println(e1);
+            return true;
+        }
+        return true;
+    }
+    
+     @Override
+    public boolean updateChangePassWord(String mkOld,String mkNewms,String username) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "update Users \n"
+                    + "set user_password ='" + mkNewms + "' \n "
+                    + "where User_Name='" + username + "'";
+            PreparedStatement stm = con.prepareStatement(sql);
+            if (stm.executeUpdate() > 0) {
+                return true;
+            }
+            stm.close();
+            con.close();
+        } catch (Exception e1) {
+            System.out.println(e1);
+            return true;
+        }
+        return true;
+    }
+    
+    @Override
+    public boolean updateChangePassWord1(String mkNewms,String username) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "update Users \n"
+                    + "set user_password ='" + mkNewms + "' \n "
+                    + "where User_Name='" + username + "'";
+            PreparedStatement stm = con.prepareStatement(sql);
+            if (stm.executeUpdate() > 0) {
+                return true;
+            }
+            stm.close();
+            con.close();
+        } catch (Exception e1) {
+            System.out.println(e1);
+            return false;
+        }
+        return true;
+    }
+    
 
     @Override
     public String insertLoginByGoogle(String email, String userName, String userFullName) {
@@ -225,20 +363,23 @@ public class loginDAOImp implements loginDAO {
                 String fullname = rs.getString("User_FullName");
                 String mail = rs.getString("Email");
                 int role = rs.getInt("Role_Id");
+                String fotgotPassWord = rs.getString("ForgotRandom_Key");
+                Date forgotRandomDate = rs.getDate("ForgotRandom_Date");
                 Date createdate = rs.getDate("Create_Date");
                 Date datevip = rs.getDate("Expiry_Date_Vip");
                 Format formatter = new SimpleDateFormat("dd/MM/YYYY");
                 String s = null;
                 String st = null;
+                
                 if (createdate != null) {
                     s = formatter.format(createdate);
                 }
                 if (datevip != null) {
                     st = formatter.format(datevip);
                 }
-                Users user = new Users(userid, name, fullname, mail, role, s,st);
+                Users user = new Users(userid, name, fullname, mail, role,s,st,fotgotPassWord,forgotRandomDate);
                 result.add(user);
-
+      
             }
 
             return result.get(0);
@@ -246,6 +387,9 @@ public class loginDAOImp implements loginDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public loginDAOImp() {
     }
 
     public String insertRegisterByMaual(String userNameRegister, String userPassWordRegister, String userFullNameRegister, String emailRegister) {
@@ -276,8 +420,30 @@ public class loginDAOImp implements loginDAO {
         return "Lỗi rồi";
     }
 
-    public boolean checkRegisterByMaual(String userNameRegister, String userFullNameRegister, String emailRegister) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public boolean checkRegisterByMaual(String userNameRegister) {
+           try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
+            Connection con = DriverManager.getConnection(url, "sa", "123");
+            String sql = "select * from Users \n"
+                    + "where User_Name='" + userNameRegister + "'";
 
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                return true;
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    
+
+     
+    
 }
