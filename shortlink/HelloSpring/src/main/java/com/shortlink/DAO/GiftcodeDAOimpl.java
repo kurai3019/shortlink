@@ -23,7 +23,7 @@ public class GiftcodeDAOimpl implements GiftcodeDAO {
     private List<Giftcode> list = new ArrayList();
     String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
     String usernamedb ="sa";
-    String passworddb ="123";
+    String passworddb ="";
 
     public List<Giftcode> getgiftcode() {
         try {

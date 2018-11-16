@@ -49,6 +49,7 @@
                     <thead>
                         <tr class="row100 head">
                             <th class="cell100 column1">Link rút gọn</th>
+			    <th class="cell100 column2">URL</th>
                             <th class="cell100 column1">Ngày Tạo</th>
                             <th class="cell100 column1">Ngày Hết hạn</th>
                             <th class="cell100 column1">Lượt xem</th>
@@ -61,11 +62,13 @@
 
                     <tbody>
                         <c:forEach var="his" items="${listHistory}">
-                            <tr>
-                                <td>http://localhost:8084/${his.code}</td>
-                                <td>${his.datestring}</td>
-                                <td>${his.dateex}</td>
-                                <td>${his.view}</td>
+                                        <tr class="row100 body">
+                                            <td class="cell100 column1">http://localhost:8084/${his.code}</td>
+                                            <td class="cell100 column2">${his.url}</td>
+                                            <td class="cell100 column3">${his.datestring}</td>
+					    <td class="cell100 column3">${his.dateex}</td>
+                                            <td class="cell100 column4">${his.view}</td>
+
                             </tr>
                         </c:forEach>
                     </tbody>

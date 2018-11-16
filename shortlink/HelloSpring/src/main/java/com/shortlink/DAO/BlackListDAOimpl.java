@@ -23,7 +23,7 @@ public class BlackListDAOimpl implements BlackListDAO {
     private List<blackList> list = new ArrayList();
     String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
     String usernamedb = "sa";
-    String passworddb ="123";
+    String passworddb ="";
     
     @Override
     public List<blackList> getBlacklist(int bl) {

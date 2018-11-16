@@ -27,7 +27,7 @@ import org.springframework.stereotype.Repository;
 public class LinkDAOImp implements LinkDAO{
     String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
     String usernamedb ="sa";
-    String passworddb ="123";
+    String passworddb ="";
     
     @Override
     public String getLink(String urla,String randomkey,String user) {

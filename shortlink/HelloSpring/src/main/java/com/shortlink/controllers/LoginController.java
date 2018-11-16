@@ -13,7 +13,7 @@ import com.shortlink.common.RestFB;
 import com.shortlink.entities.Links;
 import com.shortlink.entities.Users;
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.util.List;
 import java.util.Random;
 import javax.mail.internet.MimeMessage;
@@ -21,15 +21,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.InputStreamSource;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -372,12 +377,11 @@ public class LoginController {
             String b = password;
             boolean a = loginDAO.updateChangePassWord1(password, username);
             if(a == false){
-            map.addAttribute("error1", "Lỗi checkkeyEvent");
-            map.addAttribute("error2", "Lối ");
+            map.addAttribute("error1", "<div class=\"alert alert-danger\" role=\"alert\">Lỗi checkkeyEvent</div>");
+            map.addAttribute("error2", "<div class=\"alert alert-danger\" role=\"alert\">Lối</div> ");
             return "forgotPassword";
             }else{
-            map.addAttribute("success1", "Thành công");
-            map.addAttribute("success2", "Đổi mật khẩu thành công ! bạn có thể đăng nhập bằng mật khẩu mới");
+            map.addAttribute("success2", "<div class=\"alert alert-success\" role=\"alert\">Đổi mật khẩu thành công</div>");
             return "forgotPasswordChange";
             } 
     };
