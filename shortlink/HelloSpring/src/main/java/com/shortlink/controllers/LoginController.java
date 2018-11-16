@@ -236,7 +236,7 @@ public class LoginController {
                 map.addAttribute("sumlink", link);
                 return "shortLink";
             } else {
-                map.addAttribute("error", "Sai tài khoản hoặc mật khẫu");
+                map.addAttribute("error", "<div class=\"alert alert-danger\" role=\"alert\">Sai tài khoản hoặc mật khẫu</div>");
                 return "shortLink";
             }
 
@@ -279,7 +279,7 @@ public class LoginController {
         } else {
             loginDAO.insertRegisterByMaual(a, b, c, d);
             Users user = loginDAO.login(a, b);
-            map.addAttribute("success", "Welcome " + c + "");
+//            map.addAttribute("success", "Welcome " + c + "");
 
             session.setAttribute("username", user.getUsername());
             session.setAttribute("role", user.getRoleId());
@@ -334,7 +334,20 @@ public class LoginController {
             
             Users user = loginDAO.loginByGoogle(emailTo);       
             String d = user.getUsername();
-            loginDAO.updateForgotPassWord(d, forgotRandomKeyString);
+                        String hoicham = "?";
+            emailToRecipient = request.getParameter("emailTo");
+            emailMessage = "http://localhost:8084/checkkey"+hoicham+"userid="+d+"&key="+forgotRandomKeyString+"";
+            mailSenderObj.send(new MimeMessagePreparator() {
+                public void prepare(MimeMessage mimeMessage) throws Exception {
+
+                    MimeMessageHelper mimeMsgHelperObj = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+                    mimeMsgHelperObj.setTo(emailToRecipient);
+                    mimeMsgHelperObj.setFrom(emailFromRecipient);
+                    mimeMsgHelperObj.setText(emailMessage);
+                    mimeMsgHelperObj.setSubject("Quên Mật Khẩu - ShortLink");
+                
+                            }
+            });
 
             map.addAttribute("emailTo111", emailTo);
             map.addAttribute("success1", "Thành công");
@@ -378,10 +391,9 @@ public class LoginController {
             boolean a = loginDAO.updateChangePassWord1(password, username);
             if(a == false){
             map.addAttribute("error1", "<div class=\"alert alert-danger\" role=\"alert\">Lỗi checkkeyEvent</div>");
-            map.addAttribute("error2", "<div class=\"alert alert-danger\" role=\"alert\">Lối</div> ");
             return "forgotPassword";
             }else{
-            map.addAttribute("success2", "<div class=\"alert alert-success\" role=\"alert\">Đổi mật khẩu thành công</div>");
+            map.addAttribute("success1", "<div class=\"alert alert-success\" role=\"alert\">Đổi mật khẩu thành công</div>");
             return "forgotPasswordChange";
             } 
     };
@@ -396,21 +408,21 @@ public class LoginController {
     ) {
         
         boolean a1 = loginDAO.checkEmail(username1);
-        boolean b1 = true;
-         if (a1 == b1) {
+        boolean b1 = false;
+         if (a1 == false) {
         boolean a = loginDAO.checkUserNameAndPassWord(username1, mkOld);
         boolean b = true;
          if (a == b) {
              loginDAO.updateChangePassWord(mkOld, mkNewms, username1);
-             map.addAttribute("success1", "Thành Công");
-          map.addAttribute("success2", "đổi mật khẩu thành công");
+//             map.addAttribute("success1", "Thành Công");
+          map.addAttribute("success2", "Đổi mật khẩu thành công");
          }else{
-          map.addAttribute("error1", "Lỗi kiểm tra");
-          map.addAttribute("error2", "Sai mật khẩu");
+//          map.addAttribute("error1", "Lỗi kiểm tra");
+          map.addAttribute("error2", "<div class=\"alert alert-danger\" role=\"alert\"> Sai mật khẩu cũ </div>");
          }  }
          else{
-          map.addAttribute("error1", "Lỗi kiểm tra");
-          map.addAttribute("error2", "Bạn đang đang nhập gmail không đổi mật khẩu được");
+//          map.addAttribute("error1", "Lỗi kiểm tra");
+          map.addAttribute("error2", "<div class=\"alert alert-danger\" role=\"alert\"> Bạn đang đang nhập gmail không đổi mật khẩu được </div>");
          }
        return "myProlife";
     }

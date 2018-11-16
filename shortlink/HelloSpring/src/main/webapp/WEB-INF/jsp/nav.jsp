@@ -77,49 +77,49 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath }/home"><span class="menu-title">Get link</span><i class="mdi mdi-link-variant"></i></a><br>
+                            <a class="nav-link" href="${pageContext.request.contextPath }/home"><span class="menu-title">Rút gọn link</span><i class="mdi mdi-link-variant"></i></a><br>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"  href="${pageContext.request.contextPath }/gethistory">
-                                <span class="menu-title">History</span>
+                                <span class="menu-title">Lịch sử</span>
                                 <i class="mdi mdi-history"></i>
                             </a>
 
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath }/myprolife?#">
-                                <span class="menu-title">My profile</span>
+                                <span class="menu-title">Cá nhân</span>
                                 <i class="mdi mdi-face-profile"></i>
                             </a>
                         </li>
                         <% if (session.getAttribute("role").equals(1)) {%>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath }/admin/blacklist">
-                                <span class="menu-title">Blacklist management</span>
+                                <span class="menu-title">Quản lý danh sách host chặn</span>
                                 <i class="mdi mdi-tie"></i>
                             </a>
                         </li>
                          <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath }/admin/user">
-                                <span class="menu-title">Users management</span>
+                                <span class="menu-title">Quản lý thành viên</span>
                                 <i class="mdi mdi-tie"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath }/admin/shtlink">
-                                <span class="menu-title">Shortlink management</span>
+                                <span class="menu-title">Quản lý link</span>
                                 <i class="mdi mdi-tie"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath }/admin/giftcode">
-                                <span class="menu-title">Code management</span>
+                                <span class="menu-title">Quản lý giftcode</span>
                                 <i class="mdi mdi-tie"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath }/admin/config">
-                                <span class="menu-title">Config management</span>
+                                <span class="menu-title">Cấu hình</span>
                                 <i class="mdi mdi-tie"></i>
                             </a>
                         </li>

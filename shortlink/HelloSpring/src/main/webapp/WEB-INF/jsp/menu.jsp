@@ -9,10 +9,10 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath }/home">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/home">Trang chủ <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath }/register">Register</a>
+                <a class="nav-link" href="${pageContext.request.contextPath }/register">Đăng ký thành viên</a>
             </li>
             <!--            <li class="nav-item dropdown dmenu">
                             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -112,13 +112,13 @@
                 <span class="mdi mdi-link-variant"></span>
                 <input class="form-control form-control-lg form-control-borderless" disabled="0" value="${link}"></input>
 
-                <div class="btn btn-lg btn-success">
-                    <i class="mdi mdi-paperclip"></i><a href="${link}" target="_blank"><input class="btn btn-lg btn-success" value="Nhấn để chuyển sang link"></a>
-                </div>
+                            <div class="btn btn-lg btn-success">
+                                <i class="mdi mdi-paperclip"></i><a href="${link}" target="_blank"><input class="btn btn-lg btn-success" value="Nhấn để chuyển sang link" disabled style="font-family: arial;"></a>
+                            </div>
 
-                <div class="btn btn-lg btn-success">
-                    <i class="fa fa-clone"><input class="btn btn-lg btn-success" value="Copy" id="copy"></i>
-                </div>
+                            <div class="btn btn-lg btn-success">
+                                <i class="fa fa-clone"><input class="btn btn-lg btn-success" value="Copy" id="copy" disabled style="font-family: arial;"></i>
+                            </div>
             </div>
         </c:if>
     </form>

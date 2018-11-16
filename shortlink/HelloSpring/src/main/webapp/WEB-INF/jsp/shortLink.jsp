@@ -232,11 +232,11 @@
                             <input class="form-control form-control-lg form-control-borderless" disabled="0" value="${link}"></input>
 
                             <div class="btn btn-lg btn-success">
-                                <i class="mdi mdi-paperclip"></i><a href="${link}" target="_blank"><input class="btn btn-lg btn-success" value="Nhấn để chuyển sang link"></a>
+                                <i class="mdi mdi-paperclip"></i><a href="${link}" target="_blank"><input class="btn btn-lg btn-success" value="Nhấn để chuyển sang link" disabled style="font-family: arial;"></a>
                             </div>
 
                             <div class="btn btn-lg btn-success">
-                                <i class="fa fa-clone"><input class="btn btn-lg btn-success" value="Copy" id="copy"></i>
+                                <i class="fa fa-clone"><input class="btn btn-lg btn-success" value="Copy" id="copy" disabled style="font-family: arial;"></i>
                             </div>
                         </div>
                     </form>

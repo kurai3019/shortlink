@@ -30,7 +30,14 @@
                     border: 1px solid #ccc;
                     box-sizing: border-box;
                 }
-
+                input[type=password] {
+                    width: 100%;
+                    padding: 12px 20px;
+                    margin: 8px 0;
+                    display: inline-block;
+                    border: 1px solid #ccc;
+                    box-sizing: border-box;
+                }
                 /* Set a style for all buttons */
                 button {
                     background-color: #4CAF50;
@@ -239,9 +246,9 @@
 
                 </div>
                 <label for="uname" style="margin-left: 20px;"><b>Nhập mật khẩu cũ</b></label>
-                <input style="background-color: #f0f0f5;" type="text" placeholder="Nhập mật khẩu cũ" name="mkOld" required maxlength="50">
+                <input style="background-color: #f0f0f5;" type="password" placeholder="Nhập mật khẩu cũ" name="mkOld" required maxlength="50">
                 <label for="uname" style="margin-left: 20px;"><b>Nhập mật khẩu mới</b></label>
-                <input style="background-color: #f0f0f5;" type="text" placeholder="Nhập mật khẩu mới" name="mkNewms" required>
+                <input style="background-color: #f0f0f5;" type="password" placeholder="Nhập mật khẩu mới" name="mkNewms" required>
                 <input type="text" class="form-control" id="exampleInputName1" value="${sessionScope.username}" name="username1" hidden maxlength="50">
 
 

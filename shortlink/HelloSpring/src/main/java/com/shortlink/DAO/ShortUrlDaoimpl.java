@@ -23,7 +23,7 @@ import java.util.List;
 public class ShortUrlDaoimpl implements ShortUrlDao {
     String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
     String usernamedb ="sa";
-    String passworddb ="123";
+    String passworddb ="";
     private List<shortlLink> list = new ArrayList();
 
     @Override
