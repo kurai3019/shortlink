@@ -226,7 +226,7 @@ public class LinkDAOImp implements LinkDAO{
                 try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
-            String sql = "update link set Expiry_Date = DATEADD (Day, ?, Expiry_Date_Vip) where Link_Type = 1 and USER_ID = ?";
+            String sql = "update link set Expiry_Date = DATEADD (Day, ?, Expiry_Date) where Link_Type = 1 and create_user = ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, date);
             stm.setInt(2, userid);
@@ -247,7 +247,7 @@ public class LinkDAOImp implements LinkDAO{
                 try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
-            String sql = "update link set Expiry_Date = GetDate() + ? where Link_Type = 1 and USER_ID = ?";
+            String sql = "update link set Expiry_Date = GetDate() + ? where Link_Type = 1 and create_user = ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, date);
             stm.setInt(2, userid);

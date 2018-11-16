@@ -232,7 +232,7 @@
             ,[Create_Date]
             ,[Expiry_Date]
             ,[Link_View]
-            from Link where Link_Type=0 and Create_User=${userid}
+            from Link where Link_Type=1 and Create_User=${userid}
         </sql:query>
 
 

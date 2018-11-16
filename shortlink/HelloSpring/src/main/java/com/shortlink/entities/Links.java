@@ -16,6 +16,7 @@ public class Links {
     String url;
     Date date;
     String datestring;
+    String dateex;
     String createuser;
     Integer view;
     public Links(){}
@@ -67,12 +68,23 @@ public class Links {
     public void setView(Integer view) {
         this.view = view;
     }
+
+    public String getDateex() {
+        return dateex;
+    }
+
+    public void setDateex(String dateex) {
+        this.dateex = dateex;
+    }
+    
   
-       public Links(String code, String url, String datestring,int view) {
+       public Links(String code, String url, String datestring,int view,String dateex) {
         this.code = code;
         this.url = url;
         this.datestring = datestring;
         this.view = view;
+        this.dateex = dateex;
+
 
     }
        

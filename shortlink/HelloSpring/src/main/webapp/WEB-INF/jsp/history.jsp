@@ -50,6 +50,7 @@
                         <tr class="row100 head">
                             <th class="cell100 column1">Link rút gọn</th>
                             <th class="cell100 column1">Ngày Tạo</th>
+                            <th class="cell100 column1">Ngày Hết hạn</th>
                             <th class="cell100 column1">Lượt xem</th>
                         </tr>
                     </thead>
@@ -63,6 +64,7 @@
                             <tr>
                                 <td>http://localhost:8084/${his.code}</td>
                                 <td>${his.datestring}</td>
+                                <td>${his.dateex}</td>
                                 <td>${his.view}</td>
                             </tr>
                         </c:forEach>
