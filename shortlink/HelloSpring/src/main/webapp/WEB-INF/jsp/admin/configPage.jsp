@@ -23,103 +23,114 @@
         <script src="../../../resources/js/jsgrid.field.select.js" type="text/javascript"></script>
         <script src="../../../resources/js/jsgrid.field.checkbox.js" type="text/javascript"></script>
         <script src="../../../resources/js/jsgrid.field.control.js" type="text/javascript"></script>
+        <jsp:include page="../headerHTML.jsp"></jsp:include>
 
-        <style>
-            body{
+            <style>
 
-                background-color: #c7ffaa;
-            }table td,th {
-                word-break: break-all;
-            }.jsgrid-grid-header,
-            .jsgrid-grid-body{
-                overflow: auto;
-            }
-        </style>
-    </head>
-    <body>
-    <center><p style="margin:35px 0px 0px 0px;color:black;background-color: #9fce71;font-size:50px;
-               font-family: Courier New, Courier, monospace">
-            Management Config - Admin</p>
-        <div id="jsGrid"></div>
+                table td,th {
+                    word-break: break-all;
+                }.jsgrid-grid-header,
+                .jsgrid-grid-body{
+                    overflow: auto;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container-scroller">
+            <jsp:include page="../nav.jsp"></jsp:include>
+            <div class="main-panel">
+                <center><p style="margin:35px 0px 0px 0px;color:black;background-color: #9fce71;font-size:50px;
+                           font-family: Courier New, Courier, monospace">
+                        Management Config - Admin</p>
+                    <div id="jsGrid"></div>
 
-        <div id="jsGrid"></div></center>
+                </center>
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <b>PRO211</b>. All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="mdi mdi-heart text-danger"></i></span>
+                    </div>
+                </footer>
+            </div>
+        </div>
 
-    <script>
-        $('document').ready(function () {
-            var linklist = [];
-            $.getJSON('/getconfig', function (listUser) {
-                var db = {
-                    loadData: function (filter) {
 
-                        return $.grep(listUser, function (client) {
-                            return (!filter.id || client.id.indexOf(filter.id) > -1)
-                                    && (!filter.config_Name || client.config_Name.indexOf(filter.config_Name) > -1)
-                                    && (filter.value === undefined || client.value === filter.value);
-                        });
-                    },
-                    insertItem: function (insertingClient) {
-                        $.ajax({
-                            type: "GET",
-                            url: "/insertconfig",
-                            dataType: 'json',
-                            data: insertingClient,
-                            error: function () {
+        <script>
+            $('document').ready(function () {
+                var linklist = [];
+                $.getJSON('/getconfig', function (listUser) {
+                    var db = {
+                        loadData: function (filter) {
+
+                            return $.grep(listUser, function (client) {
+                                return (!filter.id || client.id.indexOf(filter.id) > -1)
+                                        && (!filter.config_Name || client.config_Name.indexOf(filter.config_Name) > -1)
+                                        && (filter.value === undefined || client.value === filter.value);
+                            });
+                        },
+                        insertItem: function (insertingClient) {
+                            $.ajax({
+                                type: "GET",
+                                url: "/insertconfig",
+                                dataType: 'json',
+                                data: insertingClient,
+                                error: function () {
+                                    location.reload();
+                                    alert('Empty Role');
+                                }
+                            }).done(function (data) {
                                 location.reload();
-                                alert('Empty Role');
-                            }
-                        }).done(function (data) {
-                            location.reload();
-                            alert(data.result);
-                        });
-                    },
-                    updateItem: function (updatingClient) {
-                        $.ajax({
-                            type: "GET",
-                            url: "/updateconfig",
-                            dataType: 'json',
-                            data: updatingClient
-                        }).done(function (data) {
-                            location.reload();
-                            alert(data.result);
-                        });
-                    },
-                    deleteItem: function (deletingClient) {
-                        $.ajax({
-                            type: "GET",
-                            url: "/deleteconfig",
-                            dataType: 'json',
-                            data: {id: deletingClient.id}
-                        }).done(function (data) {
-                            location.reload();
-                            alert(data.result);
-                        });
-                    }//end delete
-                };
-                $("#jsGrid").jsGrid({
-                    height: "55%",
-                    width: "90%",
-                    filtering: true,
-                    editing: true,
-                    inserting: true,
-                    sorting: true,
-                    paging: true,
-                    selecting: true,
-                    autoload: true,
-                    pageSize: 6,
-                    pageButtonCount: 5,
-                    deleteConfirm: "Do you really want to delete the client?",
-                    data: listUser,
-                    controller: db,
-                    fields: [
-                        {name: "id", width: 10, title: "Mã ID"},
-                        {name: "config_Name", type: "text", width: 100, title: "Tên"},
-                        {name: "value", type: "number", width: 30, title: "Value"},
-                        {type: "control", width: 10}
-                    ]
+                                alert(data.result);
+                            });
+                        },
+                        updateItem: function (updatingClient) {
+                            $.ajax({
+                                type: "GET",
+                                url: "/updateconfig",
+                                dataType: 'json',
+                                data: updatingClient
+                            }).done(function (data) {
+                                location.reload();
+                                alert(data.result);
+                            });
+                        },
+                        deleteItem: function (deletingClient) {
+                            $.ajax({
+                                type: "GET",
+                                url: "/deleteconfig",
+                                dataType: 'json',
+                                data: {id: deletingClient.id}
+                            }).done(function (data) {
+                                location.reload();
+                                alert(data.result);
+                            });
+                        }//end delete
+                    };
+                    $("#jsGrid").jsGrid({
+                        height: "55%",
+                        width: "90%",
+                        filtering: true,
+                        editing: true,
+                        inserting: true,
+                        sorting: true,
+                        paging: true,
+                        selecting: true,
+                        autoload: true,
+                        pageSize: 6,
+                        pageButtonCount: 5,
+                        deleteConfirm: "Do you really want to delete the client?",
+                        data: listUser,
+                        controller: db,
+                        fields: [
+                            {name: "id", width: 10, title: "Mã ID"},
+                            {name: "config_Name", type: "text", width: 100, title: "Tên"},
+                            {name: "value", type: "number", width: 30, title: "Value"},
+                            {type: "control", width: 10}
+                        ]
+                    });
                 });
-            });
-        }
-        );
-    </script>
-</body>
+            }
+            );
+        </script>
+    </body>
 </html>

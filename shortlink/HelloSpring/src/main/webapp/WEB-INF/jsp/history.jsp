@@ -28,6 +28,13 @@
                 color: #808080;
                 line-height: 1.4;
             }
+            table td,th {
+                word-break: break-all;
+            }
+            .jsgrid-grid-header,
+            .jsgrid-grid-body{
+                overflow: auto;
+            }
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
@@ -45,29 +52,36 @@
 
 
 
-                <table class="table table-bordered">
-                    <thead>
-                        <tr class="row100 head">
-                            <th class="cell100 column1">Link rút gọn</th>
-                            <th class="cell100 column1">Ngày Tạo</th>
-                            <th class="cell100 column1">Lượt xem</th>
-                        </tr>
-                    </thead>
+                <div class="table100 ver1 m-b-110">
 
+                        <div class="table100-head">
+                            <table>
+                                <thead>
+                                    <tr class="row100 head">
+                                        <th class="cell100 column1">Link rút gọn</th>
+                                        <th class="cell100 column2">URL</th>
+                                        <th class="cell100 column3">Ngày Tạo</th>
+                                        <th class="cell100 column4">Lượt xem</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
 
-
-
-
-                    <tbody>
-                        <c:forEach var="his" items="${listHistory}">
-                            <tr>
-                                <td>http://localhost:8084/${his.code}</td>
-                                <td>${his.datestring}</td>
-                                <td>${his.view}</td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+                        <div class="table100-body js-pscroll ps ps--active-y">
+                            <table>
+                                <tbody>
+                                    <c:forEach var="his" items="${listHistory}">
+                                        <tr class="row100 body">
+                                            <td class="cell100 column1">http://localhost:8084/${his.code}</td>
+                                            <td class="cell100 column2">${his.url}</td>
+                                            <td class="cell100 column3">${his.datestring}</td>
+                                            <td class="cell100 column4">${his.view}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                            <div class="ps__rail-x" style="left: 0px; bottom: -576.8px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 576.8px; height: 585px; right: 5px;"><div class="ps__thumb-y" tabindex="0" style="top: 290px; height: 294px;"></div></div></div>
+                    </div>
 
 
                 <footer class="footer">

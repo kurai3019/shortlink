@@ -28,7 +28,7 @@ import org.springframework.stereotype.Repository;
 public class loginDAOImp implements loginDAO {
     String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
     String usernamedb ="sa";
-    String passworddb ="123";
+    String passworddb ="";
     
     @Override
     public Users login(String username, String password) {
@@ -138,7 +138,7 @@ public class loginDAOImp implements loginDAO {
     public boolean checkUserNameAndPassWord(String username,String Password) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection(url, usernamedb, "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "");
             String sql = "select * from Users \n"
                     + "where User_Name='" + username + "' and User_PassWord = '"+Password+"'";
 
@@ -160,7 +160,7 @@ public class loginDAOImp implements loginDAO {
     public boolean checkEmail(String username) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection(url, usernamedb, "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "");
             String sql = "select * from Users \n"
                     + "where User_Name='" + username + "' and User_PassWord is null";
 
@@ -184,7 +184,7 @@ public class loginDAOImp implements loginDAO {
     public boolean checkForgotRandomKey(String forgotRandomKey) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection(url, usernamedb, "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "");
             String sql = "select * from Users \n"
                     + "where ForgotRandom_Key='" + forgotRandomKey + "'";
 
@@ -227,7 +227,7 @@ public class loginDAOImp implements loginDAO {
     public boolean updateForgotPassWord(String EmailForgot,String ForgotRandomKey) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection(url, usernamedb, "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "");
             String sql = "update Users \n"
                     + "set ForgotRandom_Key ='" + ForgotRandomKey + "',ForgotRandom_Date = getDate()+( Select Value from Config where ID =4) \n "
                     + "where User_Name='" + EmailForgot + "'";
@@ -248,7 +248,7 @@ public class loginDAOImp implements loginDAO {
     public boolean updateChangePassWord(String mkOld,String mkNewms,String username) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection(url, usernamedb, "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "");
             String sql = "update Users \n"
                     + "set user_password ='" + mkNewms + "' \n "
                     + "where User_Name='" + username + "'";
@@ -269,7 +269,7 @@ public class loginDAOImp implements loginDAO {
     public boolean updateChangePassWord1(String mkNewms,String username) {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection(url, usernamedb, "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "");
             String sql = "update Users \n"
                     + "set user_password ='" + mkNewms + "' \n "
                     + "where User_Name='" + username + "'";
@@ -412,7 +412,7 @@ public class loginDAOImp implements loginDAO {
     public boolean checkRegisterByMaual(String userNameRegister) {
            try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection(url, usernamedb, "123");
+            Connection con = DriverManager.getConnection(url, usernamedb, "");
             String sql = "select * from Users \n"
                     + "where User_Name='" + userNameRegister + "'";
 

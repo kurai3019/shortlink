@@ -24,12 +24,10 @@
         <script src="../../../resources/js/jsgrid.field.select.js" type="text/javascript"></script>
         <script src="../../../resources/js/jsgrid.field.checkbox.js" type="text/javascript"></script>
         <script src="../../../resources/js/jsgrid.field.control.js" type="text/javascript"></script>
+        <jsp:include page="../headerHTML.jsp"></jsp:include>
 
         <style>
-            body{
-
-                background-color: #fff2f2;
-            }
+            
             table td,th {
                 word-break: break-all;
             }.jsgrid-grid-header,
@@ -39,12 +37,23 @@
         </style>
     </head>
     <body>
-    <center>
-        <p style="margin:35px 0px 0px 0px;color:black;background-color: pink;font-size:50px;
-           font-family: Courier New, Courier, monospace">
-            Management ShortLink - Admin</p>
+    <div class="container-scroller">
+        <jsp:include page="../nav.jsp"></jsp:include>
+        <div class="main-panel">
+            <center><p style="margin:35px 0px 0px 0px;color:black;background-color: pink;font-size:50px;
+                       font-family: Courier New, Courier, monospace">
+                    Management ShortLink - Admin</p>
+                <div id="jsGrid"></div>
 
-        <div id="jsGrid"></div></center>
+            </center>
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <b>PRO211</b>. All rights reserved.</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="mdi mdi-heart text-danger"></i></span>
+                </div>
+            </footer>
+        </div>
+    </div>
 
     <script>
         $('document').ready(function () {

@@ -17,9 +17,7 @@
     </head>
 
     <style>
-        .ShortLink{
-
-        }
+        
         thead {
             align:center;
             background-color: #ffcc99 ;
@@ -36,7 +34,7 @@
     <body>
 
         <sql:setDataSource driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                           url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink;user=sa;password=123"
+                           url="jdbc:sqlserver://localhost:1433;databaseName=ShortLink;user=sa;password="
                            var="con"/>
 
         <sql:query dataSource="${con}" var="rs">
@@ -45,7 +43,7 @@
 
         <h1>List ShortURL</h1>
 
-        <table class="ShortLink" style="width:100%">
+        <table class="ShortLink">
 
             <thead>
                 <tr> 
