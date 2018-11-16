@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="text-center p-t-90">
-                        <a class="txt1" href="${pageContext.request.contextPath}/forgotPassword">
+                        <a class="txt1" href="sadadadasd">
                             Forgot Password?
                         </a>
                     </div>

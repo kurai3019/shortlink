@@ -180,27 +180,27 @@ public class loginDAOImp implements loginDAO {
     
     
     
-    @Override
-    public boolean checkForgotRandomKey(String forgotRandomKey) {
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con = DriverManager.getConnection(url, usernamedb, "123");
-            String sql = "select * from Users \n"
-                    + "where ForgotRandom_Key='" + forgotRandomKey + "'";
-
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-
-            while (rs.next()) {
-                return true;
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+//    @Override
+//    public boolean checkForgotRandomKey(String forgotRandomKey) {
+//        try {
+//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//            Connection con = DriverManager.getConnection(url, usernamedb, "123");
+//            String sql = "select * from Users \n"
+//                    + "where ForgotRandom_Key='" + forgotRandomKey + "'";
+//
+//            Statement stm = con.createStatement();
+//            ResultSet rs = stm.executeQuery(sql);
+//
+//            while (rs.next()) {
+//                return true;
+//
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
 
     @Override
     public boolean changeEX(String username) {
@@ -229,12 +229,13 @@ public class loginDAOImp implements loginDAO {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(url, usernamedb, "123");
             String sql = "update Users \n"
-                    + "set ForgotRandom_Key ='" + ForgotRandomKey + "',ForgotRandom_Date = getDate()+( Select Value from Config where ID =5) \n "
+                    + "set ForgotRandom_Key ='" + ForgotRandomKey + "',ForgotRandom_Date =  DATEADD (MINUTE, ( Select Value from Config where ID =3), getDate())\n "
                     + "where User_Name='" + EmailForgot + "'";
             PreparedStatement stm = con.prepareStatement(sql);
             if (stm.executeUpdate() > 0) {
                 return true;
             }
+           
             stm.close();
             con.close();
         } catch (Exception e1) {
@@ -320,6 +321,27 @@ public class loginDAOImp implements loginDAO {
             Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "select * from Users \n"
                     + "where Email='" + email + "' ";
+
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean checkNgay(String username) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
+            String sql = "select * from Users \n"
+                    + "where User_Name='" + username + "' and getDate() < ForgotRandom_Date ";
 
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);

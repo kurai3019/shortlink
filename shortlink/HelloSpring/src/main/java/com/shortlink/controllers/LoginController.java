@@ -13,7 +13,7 @@ import com.shortlink.common.RestFB;
 import com.shortlink.entities.Links;
 import com.shortlink.entities.Users;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.List;
 import java.util.Random;
 import javax.mail.internet.MimeMessage;
@@ -21,20 +21,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.InputStreamSource;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
+
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -68,7 +63,7 @@ public class LoginController {
                         + "</div>");
                 return "shortLink";
             }
-        };
+        }
 
         for (int i = 1; i < password.length(); i++) {
             if (password.charAt(i) == '@' || password.charAt(i) == '"') {
@@ -77,7 +72,7 @@ public class LoginController {
                         + "</div>");
                 return "shortLink";
             }
-        };
+        }
 
         Users user = loginDAO.login(username, password);
         if (user != null) {
@@ -311,7 +306,7 @@ public class LoginController {
 
     @RequestMapping("/forgotPassword")
     public String forgotPassword(HttpSession session, ModelMap map) {
-
+        
         return "forgotPassword";
     }
 
@@ -324,46 +319,27 @@ public class LoginController {
         String forgotRandomKeyString = null;
         if (a != false) {
            
-            boolean b = true;
-            if(b != false){
+     
             StringBuilder forgotRandomKey = new StringBuilder(10);
             for (int i = 0; i < 10; i++) {
                 forgotRandomKey.append(CHARS.charAt(random.nextInt(CHARS.length())));
             }
             forgotRandomKeyString = forgotRandomKey.toString();
             
-            b = loginDAO.checkForgotRandomKey(forgotRandomKeyString);
-                
-                if(b==false){
-                     String forgotRandomKeyStringTrue = forgotRandomKeyString;
-                     loginDAO.updateForgotPassWord(emailTo, forgotRandomKeyStringTrue);
-                }
             
-            }
-            
-            Users user = loginDAO.loginByGoogle(emailTo);
+            Users user = loginDAO.loginByGoogle(emailTo);       
             String d = user.getUsername();
-            String hoicham = "?";
-            emailToRecipient = request.getParameter("emailTo");
-            emailMessage = "http://localhost:8084/checkkey"+hoicham+"userid="+d+"&key="+forgotRandomKeyString+"";
-            mailSenderObj.send(new MimeMessagePreparator() {
-                public void prepare(MimeMessage mimeMessage) throws Exception {
+            loginDAO.updateForgotPassWord(d, forgotRandomKeyString);
 
-                    MimeMessageHelper mimeMsgHelperObj = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-                    mimeMsgHelperObj.setTo(emailToRecipient);
-                    mimeMsgHelperObj.setFrom(emailFromRecipient);
-                    mimeMsgHelperObj.setText(emailMessage);
-                    mimeMsgHelperObj.setSubject("Quên Mật Khẩu - ShortLink");
-
-                }
-            });
+            map.addAttribute("emailTo111", emailTo);
             map.addAttribute("success1", "Thành công");
             map.addAttribute("success2", "Yêu cầu lấy lại mật khẩu của bạn được chúng tôi gửi về mail : " + emailTo + " ,Vui lòng Check Mail");
-            return "forgotPassword";
+            return "forgotPasswordSuccess";
         } else {
+            map.addAttribute("emailTo111", emailTo);
             map.addAttribute("error1", "Lỗi kiểm tra");
             map.addAttribute("error2", "Email " + emailTo + " chưa được đăng ký hoặc sử dụng trong ShortLink");
-            return "forgotPassword";
+            return "forgotPasswordError";
         }
 
     }
@@ -375,11 +351,15 @@ public class LoginController {
             HttpServletRequest request,
             HttpSession session,
             ModelMap map) {
-            
-            session.setAttribute("username", userid);
-            
         
-            return "forgotPasswordChange";
+            boolean b = loginDAO.checkNgay(userid);
+            if(b==false){
+                         return "forgotPasswordTimeOut";
+            }else{
+                 session.setAttribute("username", userid);
+                 return "forgotPasswordChange";
+            }
+ 
     };
     
      @RequestMapping(value = "checkkeyEvent", method = RequestMethod.POST)
@@ -397,7 +377,7 @@ public class LoginController {
             return "forgotPassword";
             }else{
             map.addAttribute("success1", "Thành công");
-            map.addAttribute("success2", "Đổi mật khẩu thành công");
+            map.addAttribute("success2", "Đổi mật khẩu thành công ! bạn có thể đăng nhập bằng mật khẩu mới");
             return "forgotPasswordChange";
             } 
     };

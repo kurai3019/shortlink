@@ -21,6 +21,7 @@ public interface loginDAO {
     boolean checkVipEx(String username);
     boolean changeEX (String username);
     boolean updateChangePassWord1(String mkNewms,String username);
+    boolean checkNgay(String email);
     
     String insertLoginByGoogle(String email, String userName, String userFullName);
     boolean checkLoginByGoogle(String email);
@@ -28,7 +29,7 @@ public interface loginDAO {
     String insertRegisterByMaual(String userNameRegister, String userPassWordRegister, String userFullNameRegister, String emailRegister);
     boolean checkRegisterByMaual(String userNameRegister );
     
-    boolean checkForgotRandomKey(String forgotRandomKey);
+ //   boolean checkForgotRandomKey(String forgotRandomKey);
     boolean updateForgotPassWord(String EmailForgot,String ForgotRandomKey);
     
     boolean updateChangePassWord(String mkOld,String mkNewms,String username) ;

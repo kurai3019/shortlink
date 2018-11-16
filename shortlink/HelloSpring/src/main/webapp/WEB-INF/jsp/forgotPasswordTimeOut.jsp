@@ -39,21 +39,13 @@
                 ShortLink - Quên Mật Khẩu
             </div>
             <div class="w3-display-middle">
-                <h1 class="w3-jumbo w3-animate-top" style="font-family: 'time new roman';text-align:center">Quên Mật Khẩu</h1>
+                <h1 class="w3-jumbo w3-animate-top" style="font-family: 'time new roman';text-align:center">Đã quá hạn vùng lòng làm lại thao tác</h1>
                 <hr class="w3-border-grey" style="margin:auto;width:40%">
                 <p class="w3-large w3-center">
                 <div class="container mt-3">
-                    <form action="forgotPasswordEvent" method="post">
-                        <div class="input-group mb-3">
-                            <input type="text" name="emailTo" value="" class="form-control" placeholder="Nhập email đã đăng ký vào">
-                            <div class="input-group-append" >
-                                <button class="btn btn-primary" type="submit">OK</button>  
-                                <a href="${pageContext.request.contextPath }/home"><button class="btn btn-danger" type="button" >Cancel</button> </a>                          
-                            </div>
-                        </div>
-
-             
-                    </form>
+                      <a class="txt1" href="${pageContext.request.contextPath }/forgotPassword">
+                    Forgot Password?
+                </a>
                 </div>
                 </p>
             </div>
