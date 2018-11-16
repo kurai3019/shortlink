@@ -291,7 +291,7 @@ public class LinkDAOImp implements LinkDAO{
         try{
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
-            String sql = "select users.User_id, count(link.Link_Code) sumlink,count(link.Link_View) sumview from Users left join Link on USERs.User_id = link.Create_User group by users.User_id order by sumview desc";
+            String sql = "select users.User_id, count(link.Link_Code) sumlink,sum(link.Link_View) sumview from Users left join Link on USERs.User_id = link.Create_User group by users.User_id order by sumview desc";
 
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);
