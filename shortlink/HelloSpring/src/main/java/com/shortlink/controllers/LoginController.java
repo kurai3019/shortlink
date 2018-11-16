@@ -236,7 +236,7 @@ public class LoginController {
                 map.addAttribute("sumlink", link);
                 return "shortLink";
             } else {
-                map.addAttribute("error", "Sai tài khoản hoặc mật khẫu");
+                map.addAttribute("error", "Sai tài khoản hoặc mật khẩu");
                 return "shortLink";
             }
 
@@ -357,12 +357,10 @@ public class LoginController {
 
                 }
             });
-            map.addAttribute("success1", "Thành công");
-            map.addAttribute("success2", "Yêu cầu lấy lại mật khẩu của bạn được chúng tôi gửi về mail : " + emailTo + " ,Vui lòng Check Mail");
+            map.addAttribute("success2", "<div class=\"alert alert-success\" role=\"alert\">Yêu cầu lấy lại mật khẩu của bạn được chúng tôi gửi về mail : " + emailTo + " ,Vui lòng Check Mail</div>");
             return "forgotPassword";
         } else {
-            map.addAttribute("error1", "Lỗi kiểm tra");
-            map.addAttribute("error2", "Email " + emailTo + " chưa được đăng ký hoặc sử dụng trong ShortLink");
+            map.addAttribute("error2", "<div class=\"alert alert-danger\" role=\"alert\">Email " + emailTo + " chưa được đăng ký hoặc sử dụng trong ShortLink</div>");
             return "forgotPassword";
         }
 
@@ -392,12 +390,11 @@ public class LoginController {
             String b = password;
             boolean a = loginDAO.updateChangePassWord1(password, username);
             if(a == false){
-            map.addAttribute("error1", "Lỗi checkkeyEvent");
-            map.addAttribute("error2", "Lối ");
+            map.addAttribute("error1", "<div class=\"alert alert-danger\" role=\"alert\">Lỗi checkkeyEvent</div>");
+            map.addAttribute("error2", "<div class=\"alert alert-danger\" role=\"alert\">Lối</div> ");
             return "forgotPassword";
             }else{
-            map.addAttribute("success1", "Thành công");
-            map.addAttribute("success2", "Đổi mật khẩu thành công");
+            map.addAttribute("success2", "<div class=\"alert alert-success\" role=\"alert\">Đổi mật khẩu thành công</div>");
             return "forgotPasswordChange";
             } 
     };
@@ -418,15 +415,12 @@ public class LoginController {
         boolean b = true;
          if (a == b) {
              loginDAO.updateChangePassWord(mkOld, mkNewms, username1);
-             map.addAttribute("success1", "Thành Công");
-          map.addAttribute("success2", "đổi mật khẩu thành công");
+             map.addAttribute("success2", "<div class=\"alert alert-success\" role=\"alert\">Đổi mật khẩu thành công</div>");
          }else{
-          map.addAttribute("error1", "Lỗi kiểm tra");
-          map.addAttribute("error2", "Sai mật khẩu");
+          map.addAttribute("error2", "<div class=\"alert alert-danger\" role=\"alert\">Sai mật khẩu</div>");
          }  }
          else{
-          map.addAttribute("error1", "Lỗi kiểm tra");
-          map.addAttribute("error2", "Bạn đang đang nhập gmail không đổi mật khẩu được");
+          map.addAttribute("error2", "<div class=\"alert alert-danger\" role=\"alert\">Bạn đang đang nhập gmail không đổi mật khẩu được</div>");
          }
        return "myProlife";
     }
