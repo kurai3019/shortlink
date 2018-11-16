@@ -300,7 +300,7 @@
                             </div>
                             <div class="container">
                                 <label class="label_form" for="txtslink">Short link custom</label>
-                                <input class="input_form" id="name" autocomplete="off" type="text" placeholder="" name="txtslink" required maxlength="50">
+                                <input class="input_form" id="name" autocomplete="off" type="text" placeholder="" name="txtslink" required maxlength="5">
 
                                 <label class="label_form" for="txturl">URL</label>
                                 <input class="input_form" id="URL" autocomplete="off" type="text" placeholder="" name="txturl" required>
@@ -326,7 +326,7 @@
                             </div>
                             <div class="container">
                                 <label class="label_form" for="txtslink">Short link custom</label>
-                                <input class="input_form" id="name" autocomplete="off" type="text" placeholder="" name="txtslink" required maxlength="50">
+                                <input class="input_form" id="name" autocomplete="off" type="text" placeholder="" name="txtslink" required maxlength="5">
 
                                 <label class="label_form" for="txturl">URL</label>
                                 <input class="input_form" id="URL" autocomplete="off" type="text" placeholder="" name="txturl" required>
