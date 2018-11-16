@@ -8,11 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="resources/js/jquery-1.8.3.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" type="text/javascript"></script>
+        <link rel="stylesheet" href='<c:url value="resources/css/style_admin.css"/>'/>
         <style>
-            body {font-family: Arial, Helvetica, sans-serif;
-                  background-color: whitesmoke;
-
-            }
 
             table td,th {
                 word-break: break-all;
@@ -105,7 +102,7 @@
             }
 
             /* The Modal (background) */
-            .modal {
+            .main-panel .modal {
                 display: none; /* Hidden by default */
                 position: fixed; /* Stay in place */
                 z-index: 1; /* Sit on top */
@@ -117,6 +114,7 @@
                 background-color: rgb(0,0,0); /* Fallback color */
                 background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
                 padding-top: 60px;
+                padding-right: 100px;
             }
 
             /* Modal Content/Box */
@@ -234,151 +232,158 @@
             ,[Link_View]
             from Link where Link_Type=1 and Create_User=${userid}
         </sql:query>
+            <div class="container-scroller">
+            <jsp:include page="../nav.jsp"></jsp:include>
+                <div class="main-panel">
+
+                <c:if test="${rs.rowCount == 0}">
+                    <h1 style="margin-top: 100px;"Hiện tại bạn chưa có URL VIP hãy tạo mới!</h1>
+                    <button class="btn-4" onclick="VIPformCreate()">Create New</button>
+
+                </c:if>
 
 
-    <center>
-
-        <c:if test="${rs.rowCount == 0}">
-            <h1 style="margin-top: 100px;"Hiện tại bạn chưa có URL VIP hãy tạo mới!</h1>
-            <button class="btn-4" onclick="VIPformCreate()">Create New</button>
-
-        </c:if>
+                <c:if test="${rs.rowCount > 0}">
 
 
-        <c:if test="${rs.rowCount > 0}">
+                    <table style="margin-top: 100px;border-spacing: 50px 10px ">
+                        <tr>
+                            <th style="color: #93c9ff"><i>Create date</i></th>
+                            <th style="color: red"><i>Expiry date</i></th>
+                            <th style="color: green"><i>View</i></th>
+                        </tr>
+                        <tr>
+                            <td>${rs.rows[0].Create_Date}</td>
+                            <td>${rs.rows[0].Expiry_Date}</td>
+                            <td>${rs.rows[0].Link_View}</td>
+
+                        </tr>
+                    </table>
+                    <hr>
+                    <table border="0" style="text-align: center;margin-top: 50px">
 
 
-            <table style="margin-top: 100px;border-spacing: 50px 10px ">
-                <tr>
-                    <th style="color: #93c9ff"><i>Create date</i></th>
-                    <th style="color: red"><i>Expiry date</i></th>
-                    <th style="color: green"><i>View</i></th>
-                </tr>
-                <tr>
-                    <td>${rs.rows[0].Create_Date}</td>
-                    <td>${rs.rows[0].Expiry_Date}</td>
-                    <td>${rs.rows[0].Link_View}</td>
+                        <tbody>
 
-                </tr>
-            </table>
-            <hr>
-            <table border="0" style="text-align: center;margin-top: 50px">
+                            <tr>
+                                <th style="color: #a67c00">Short link custom</th>
+                                <th style="color: blue"><u>Url</u></th>
+                            </tr>
+                            <tr>
+                                <td><img height="50" width="50" class="avatar" src="../../../resources/images/vip.jpg">
+                                    <a href="${rs.rows[0].Link_URL}" target="_blank">${rs.rows[0].Link_Code}</a></td>
+                                <td style="max-width: 800px;"><a href="${rs.rows[0].Link_URL}" target="_blank">${rs.rows[0].Link_URL}</a></td>
+                                <td>
 
-
-                <tbody>
-
-                    <tr>
-                        <th style="color: #a67c00">Short link custom</th>
-                        <th style="color: blue"><u>Url</u></th>
-                    </tr>
-                    <tr>
-                        <td><img height="50" width="50" class="avatar" src="../../../resources/images/vip.jpg">
-                            <a href="${rs.rows[0].Link_URL}" target="_blank">${rs.rows[0].Link_Code}</a></td>
-                        <td style="max-width: 800px;"><a href="${rs.rows[0].Link_URL}" target="_blank">${rs.rows[0].Link_URL}</a></td>
-                        <td>
-
-                            <button class="btn-4" onclick="VIPformChange()">Change</button>
-                        </td>
+                                    <button class="btn-4" onclick="VIPformChange()">Change</button>
+                                </td>
 
 
-                    </tr>
+                            </tr>
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
 
-        </c:if>
+                </c:if>
+                
 
+            </div>
+<c:if test="${rs.rowCount > 0}">
+                    <div id="id01" class="modal" style="display: none;">
 
-    </center>
-    <c:if test="${rs.rowCount > 0}">
-        <div id="id01" class="modal">
+                        <form class="modal-content animate" action="/vip/change" method="post">
+                            <input type="hidden" value="${rs.rows[0].Link_ID}" name="txtid">
+                            <div class="imgcontainer">
+                                <span onclick="document.getElementById('id01').style.display = 'none'" class="close"
+                                      title="Close">&times;</span>
+                                <img class="avatar" src="../../../resources/images/vip.jpg">
+                            </div>
+                            <div class="container">
+                                <label class="label_form" for="txtslink">Short link custom</label>
+                                <input class="input_form" id="name" autocomplete="off" type="text" placeholder="" name="txtslink" required maxlength="50">
 
-            <form class="modal-content animate" action="/vip/change" method="post">
-                <input type="hidden" value="${rs.rows[0].Link_ID}" name="txtid">
-                <div class="imgcontainer">
-                    <span onclick="document.getElementById('id01').style.display = 'none'" class="close"
-                          title="Close">&times;</span>
-                    <img class="avatar" src="../../../resources/images/vip.jpg">
-                </div>
-                <div class="container">
-                    <label class="label_form" for="txtslink">Short link custom</label>
-                    <input class="input_form" id="name" autocomplete="off" type="text" placeholder="" name="txtslink" required>
-
-                    <label class="label_form" for="txturl">URL</label>
-                    <input class="input_form" id="URL" autocomplete="off" type="text" placeholder="" name="txturl" required>
-
-
-
-                    <button class="btn-3" type="submit">Change</button>
-
-                </div>
-
-            </form>
-        </div>   
-    </c:if>
-    <c:if test="${rs.rowCount == 0}">
-        <div id="id02" class="modal">
-
-            <form class="modal-content animate" action="/vip/create" method="post">
-                <input type="hidden" value="${userid}" name="txtuserid">
-                <div class="imgcontainer">
-                    <span onclick="document.getElementById('id02').style.display = 'none'" class="close"
-                          title="Close">&times;</span>
-                    <img class="avatar" src="../../../resources/images/vip.jpg">
-                </div>
-                <div class="container">
-                    <label class="label_form" for="txtslink">Short link custom</label>
-                    <input class="input_form" id="name" autocomplete="off" type="text" placeholder="" name="txtslink" required>
-
-                    <label class="label_form" for="txturl">URL</label>
-                    <input class="input_form" id="URL" autocomplete="off" type="text" placeholder="" name="txturl" required>
+                                <label class="label_form" for="txturl">URL</label>
+                                <input class="input_form" id="URL" autocomplete="off" type="text" placeholder="" name="txturl" required>
 
 
 
-                    <button class="btn-3" type="submit">Create</button>
+                                <button class="btn-3" type="submit">Change</button>
 
-                </div>
+                            </div>
 
-            </form>
+                        </form>
+                    </div>   
+                </c:if>
+                <c:if test="${rs.rowCount == 0}">
+                    <div id="id02" class="modal" style="display: none;">
+
+                        <form class="modal-content animate" action="/vip/create" method="post">
+                            <input type="hidden" value="${userid}" name="txtuserid">
+                            <div class="imgcontainer">
+                                <span onclick="document.getElementById('id02').style.display = 'none'" class="close"
+                                      title="Close">&times;</span>
+                                <img class="avatar" src="../../../resources/images/vip.jpg">
+                            </div>
+                            <div class="container">
+                                <label class="label_form" for="txtslink">Short link custom</label>
+                                <input class="input_form" id="name" autocomplete="off" type="text" placeholder="" name="txtslink" required maxlength="50">
+
+                                <label class="label_form" for="txturl">URL</label>
+                                <input class="input_form" id="URL" autocomplete="off" type="text" placeholder="" name="txturl" required>
+
+
+
+                                <button class="btn-3" type="submit">Create</button>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </c:if>       
         </div>
-    </c:if>
+        <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <b>PRO211</b>. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="mdi mdi-heart text-danger"></i></span>
+            </div>
+        </footer>
+         
+        <script>
+            <c:if test="${result==true}">
+            alert('Successfully');
+            </c:if>
+            // Get the modal
+            var modal = document.getElementById('id01');
 
-    <script>
-        <c:if test="${result==true}">
-        alert('Successfully');
-        </c:if>
-        // Get the modal
-        var modal = document.getElementById('id01');
-
-        function VIPformChange() {
-            document.getElementById('name').value = "${rs.rows[0].Link_Code}";
-            document.getElementById('URL').value = "${rs.rows[0].Link_URL}";
-            document.getElementById('id01').style.display = "block";
-        }
-        ;
-
-        function VIPformCreate() {
-            document.getElementById('id02').style.display = "block";
-        }
-        ;
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
+            function VIPformChange() {
+                document.getElementById('name').value = "${rs.rows[0].Link_Code}";
+                document.getElementById('URL').value = "${rs.rows[0].Link_URL}";
+                document.getElementById('id01').style.display = "block";
             }
-        };
+            ;
 
-    </script>
-    <script>
+            function VIPformCreate() {
+                document.getElementById('id02').style.display = "block";
+            }
+            ;
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            };
+
+        </script>
+        <script>
 
 
 
-        //  $('document').ready(function () {
-        //    $.getJSON('/getlistBlist', function (listBlist) {
+            //  $('document').ready(function () {
+            //    $.getJSON('/getlistBlist', function (listBlist) {
 
-        //    });
-        //  });
-    </script>
-</body>
+            //    });
+            //  });
+        </script>
+    </body>
 </html>
