@@ -107,6 +107,12 @@ public class LinkController {
                 return "myProlife";
                 }
         Vipcode vipcode = linkDAO.addvipcode(code);
+        if (vipcode == null){
+             map.addAttribute("vipmess", "Code không tồn tại hoặc đã được sử dụng");
+                     return "myProlife";
+
+
+        }
         if (vipcode.getDate() != 0){
               linkDAO.updatestatuscode(vipcode.getId());
               if ((Integer) session.getAttribute("role") == 3) {

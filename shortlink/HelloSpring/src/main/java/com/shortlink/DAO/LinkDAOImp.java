@@ -27,7 +27,7 @@ import org.springframework.stereotype.Repository;
 public class LinkDAOImp implements LinkDAO{
     String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
     String usernamedb ="sa";
-    String passworddb ="";
+    String passworddb ="123";
     
     @Override
     public String getLink(String urla,String randomkey,String user) {
@@ -78,7 +78,7 @@ public class LinkDAOImp implements LinkDAO{
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
-            String sql = "select COUNT(link.Link_Code) sumlink,count(link.Link_View) sumview from Users join Link on USERs.User_id = link.Create_User where users.User_id = "+userid;
+            String sql = "select COUNT(link.Link_Code) sumlink,sum(link.Link_View) sumview from Users join Link on USERs.User_id = link.Create_User where users.User_id = "+userid;
             
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery(sql);

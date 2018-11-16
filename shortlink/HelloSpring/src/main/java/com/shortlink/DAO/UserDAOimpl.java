@@ -22,7 +22,7 @@ import java.util.List;
 public class UserDAOimpl implements UserDAO {
     String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
     String usernamedb ="sa";
-    String passworddb ="";
+    String passworddb ="123";
     
     private List<userAdmin> list= new ArrayList();
 
