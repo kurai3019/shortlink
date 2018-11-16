@@ -199,10 +199,10 @@ public class AdminController {
     public void insertBlist(
             @RequestParam(value = "url", required = false) String url,
             @RequestParam(value = "create_User", required = false) int create_User,
-            @RequestParam(value = "create_Date", required = false) String create_Date,
-            @RequestParam(value = "update_User", required = false) String update_User,
-            @RequestParam(value = "update_Date", required = false) String update_Date,
-            @RequestParam(value = "status", required = false) int status,
+            //@RequestParam(value = "create_Date", required = false) String create_Date,
+            @RequestParam(value = "create_User", required = false) String update_User,
+            //@RequestParam(value = "update_Date", required = false) String update_Date,
+            //@RequestParam(value = "status", required = false) int status,
             HttpServletResponse response
     ) throws IOException {
         PrintWriter out = response.getWriter();
@@ -211,20 +211,20 @@ public class AdminController {
                         new blackList(
                                 url,
                                 create_User,
-                                create_Date,
+                                //create_Date,
                                 update_User,
-                                update_Date,
-                                status)) ? "Done" : "Fail") + "\"}");
+                                //update_Date,
+                                1)) ? "Done" : "Fail") + "\"}");
     }
     
     @RequestMapping(value = "/updateBlist")
     public void updateBlist(
             @RequestParam(value = "id") int User_id,
             @RequestParam(value = "url", required = false) String url,
-            @RequestParam(value = "create_User", required = false) int create_User,
-            @RequestParam(value = "create_Date", required = false) String create_Date,
+            //@RequestParam(value = "create_User", required = false) int create_User,
+            //@RequestParam(value = "create_Date", required = false) String create_Date,
             @RequestParam(value = "update_User", required = false) String update_User,
-            @RequestParam(value = "update_Date", required = false) String update_Date,
+           // @RequestParam(value = "update_Date", required = false) String update_Date,
             @RequestParam(value = "status", required = false) int status,
             HttpServletResponse response
     ) throws IOException {
@@ -234,10 +234,10 @@ public class AdminController {
                         new blackList(
                                 User_id,
                                 url,
-                                create_User,
-                                create_Date,
+                                //create_User,
+                                //create_Date,
                                 update_User,
-                                update_Date,
+                               // update_Date,
                                 status)) ? "Done" : "Fail") + "\"}");
     }
     

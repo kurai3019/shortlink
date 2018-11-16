@@ -28,7 +28,7 @@ import org.springframework.stereotype.Repository;
 public class loginDAOImp implements loginDAO {
     String url = "jdbc:sqlserver://localhost:1433;databaseName=ShortLink";
     String usernamedb ="sa";
-    String passworddb ="";
+    String passworddb ="123";
     
     @Override
     public Users login(String username, String password) {

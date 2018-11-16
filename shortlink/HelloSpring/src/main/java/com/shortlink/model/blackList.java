@@ -22,6 +22,20 @@ public class blackList {
     public blackList() {
     }
 
+    public blackList(int ID, String URL, String Update_User, int Status) {
+        this.ID = ID;
+        this.URL = URL;
+        this.Update_User = Update_User;
+        this.Status = Status;
+    }
+
+    public blackList(String URL, int Create_User, String Update_User, int Status) {
+        this.URL = URL;
+        this.Create_User = Create_User;
+        this.Update_User = Update_User;
+        this.Status = Status;
+    }
+
     public blackList(String URL, int Create_User, String Create_Date, String Update_User, String Update_Date, int Status) {
         this.URL = URL;
         this.Create_User = Create_User;
