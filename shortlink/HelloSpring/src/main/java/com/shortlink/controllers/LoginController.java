@@ -223,11 +223,11 @@ public class LoginController {
                 session.setAttribute("username", user.getUsername());
                 session.setAttribute("role", user.getRoleId());
                 session.setAttribute("userid", user.getUserId());
-                session.setAttribute("fullname", user.getFullname());
-                session.setAttribute("email", user.getEmail());
+                session.setAttribute("fullname", user.getEmail());
+                session.setAttribute("email", user.getFullname());
                 session.setAttribute("createdate", user.getStringDate());
                 session.setAttribute("vipdate", user.getStringDatevip());
-
+                
                 int link = linkDAO.thongkeuserlink((Integer) session.getAttribute("userid"));
                 int view = linkDAO.thongkeuserview((Integer) session.getAttribute("userid"));
                 String kq = linkDAO.xephang((Integer) session.getAttribute("userid"));
