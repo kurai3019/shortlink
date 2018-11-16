@@ -11,7 +11,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,18 +64,18 @@ public class BlackListDAOimpl implements BlackListDAO {
             Connection con = DriverManager.getConnection(url, usernamedb, passworddb);
             String sql = "update BlackList set"
                     + " URL=?,"
-                    + " Create_User=?, Create_Date=?,"
+                    //+ " Create_User=?, Create_Date=?,"
                     + " Update_User=?, Update_Date=?,"
                     + " Status=?"
                     + "     where ID = ?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, bl.getURL());
-            stm.setInt(2, bl.getCreate_User());
-            stm.setString(3, bl.getCreate_Date());
-            stm.setString(4, bl.getUpdate_User());
-            stm.setString(5, bl.getUpdate_Date());
-            stm.setInt(6, bl.getStatus());
-            stm.setInt(7, bl.getID());
+            //stm.setInt(2, bl.getCreate_User());
+            //stm.setString(3, bl.getCreate_Date());
+            stm.setString(2, bl.getUpdate_User());
+            stm.setString(3, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+            stm.setInt(4, bl.getStatus());
+            stm.setInt(5, bl.getID());
             if (stm.executeUpdate() > 0) {
                 return true;
             }
@@ -121,10 +123,10 @@ public class BlackListDAOimpl implements BlackListDAO {
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, bl.getURL());
             stm.setInt(2, bl.getCreate_User());
-            stm.setString(3, bl.getCreate_Date());
+            stm.setString(3, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
             stm.setString(4, bl.getUpdate_User());
-            stm.setString(5, bl.getUpdate_Date());
-            stm.setInt(6, bl.getStatus());
+            stm.setString(5, new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+            stm.setInt(6, 1);
             if (stm.executeUpdate() > 0) {
                 return true;
             }
