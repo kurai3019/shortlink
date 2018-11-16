@@ -223,7 +223,7 @@
                     <img style="width: 100px; height: 100px;" src="resources/images/vip.jpg" alt="Avatar" class="avatar">
                 </div>
                 <label for="uname" style="margin-left: 20px;"><b>Code vip</b></label>
-                <input style="background-color: #f0f0f5;" type="text" placeholder="Nhập code vip" name="codevip" required>
+                <input style="background-color: #f0f0f5;" type="text" placeholder="Nhập code vip" name="codevip" required maxlength="50">
 
 
                 <button type="submit">Nạp code</button>
@@ -239,10 +239,10 @@
 
                 </div>
                 <label for="uname" style="margin-left: 20px;"><b>Nhập mật khẩu cũ</b></label>
-                <input style="background-color: #f0f0f5;" type="text" placeholder="Nhập mật khẩu cũ" name="mkOld" required>
+                <input style="background-color: #f0f0f5;" type="text" placeholder="Nhập mật khẩu cũ" name="mkOld" required maxlength="50">
                 <label for="uname" style="margin-left: 20px;"><b>Nhập mật khẩu mới</b></label>
                 <input style="background-color: #f0f0f5;" type="text" placeholder="Nhập mật khẩu mới" name="mkNewms" required>
-                <input type="text" class="form-control" id="exampleInputName1" value="${sessionScope.username}" name="username1" hidden>
+                <input type="text" class="form-control" id="exampleInputName1" value="${sessionScope.username}" name="username1" hidden maxlength="50">
 
 
                 <button type="submit">Đổi</button>

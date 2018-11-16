@@ -67,7 +67,6 @@
                         </div>
                     </form>
                 </div>
-                </p>
             </div>
 
         </div>
